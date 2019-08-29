@@ -1,13 +1,15 @@
-using DifferentialEquations, Flux, DiffEqFlux, Plots, Distributions, LinearAlgebra
-
 module Anode
-	function Data1D(num_points, target_flip=False, noise_scale=0.1) 
+	using DifferentialEquations, Flux, DiffEqFlux, Plots, Distributions
+	using LinearAlgebra
+	function Data1D(num_points=1000, target_flip=false, noise_scale=0.1) 
 		data = []
 		targets = []
-	
-		noise = Normal(0.0, noise_scale)
-		
-		for _ in 1:num_points
+		if noise_scale > 0.0
+			noise = Normal(0.0, noise_scale)
+			noise_samples = rand(noise, num_points)
+		end
+
+		for i in 1:num_points
 			if rand() > 0.5
 				data_point = 1.0
 				target = 1.0
@@ -21,7 +23,7 @@ module Anode
 			end
 
 			if noise_scale > 0.0
-				data_point += noise.sample()
+				data_point += noise_samples[i]
 			end
 		
 			append!(data, data_point)
@@ -52,4 +54,31 @@ module Anode
 		unit_direction = direction / norm(direction, 2)
 		return distance * unit_direction
 	end
+
+#	function ShiftedSines(dim, shift, num_points_upper, num_points_lower, noise_scale)
+#		data = []
+#		targets = []
+#		
+#		noise = Normal(0.0, noise_scale)
+#		
+#		for i in 1:(num_points_upper + num_points_lower)
+#			if i < num_points_upper
+#				label = 1
+#				y_shift = shift / 2 
+#			else
+#				label = -1
+#				y_shift = - shift / 2
+#			end
+#
+#			x = 2 * rand() - 1
+#			y = sin(π * x) + 
+#
+#
+	function get_noise_samples(n, σ)
+		distribution = Normal(0.0, σ)
+		samples = rand(distribution, n)
+		return samples
+	end
+
+
 end
