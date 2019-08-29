@@ -1,6 +1,7 @@
 module Anode
 	using DifferentialEquations, Flux, DiffEqFlux, Plots, Distributions
 	using LinearAlgebra
+	using StatsBase
 	function Data1D(num_points=1000, target_flip=false, noise_scale=0.1) 
 		data = []
 		targets = []
@@ -110,4 +111,28 @@ module Anode
 		samples = rand(distribution, n)
 		return samples
 	end
+
+	function zipper(x, y)
+		data = []
+		for i in 1:length(y)
+			input = x[i, :]
+			target = y[i]
+			tup = (input, target)
+			push!(data, tup)
+		end
+	return data
+	end
+
+	function callback(test_data, n, loss)
+		tot_n = length(test_data)
+		test_indices = sample(1:tot_n, n, replace=false)
+
+		sum = 0
+		for index in test_indices
+			sum += loss(test_data[index]...)
+		end
+		return Flux.data(sum / n)
+	end
+
+		
 end
