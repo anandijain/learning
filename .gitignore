@@ -2,6 +2,12 @@
 */*.swp
 */*/*.swp
 
+*.svg
+*/*.svg
+*/*/*.svg
+
+
+
 
 neuro/local/
 
