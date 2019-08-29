@@ -4,9 +4,9 @@ module Anode
 	function Data1D(num_points=1000, target_flip=false, noise_scale=0.1) 
 		data = []
 		targets = []
+
 		if noise_scale > 0.0
-			noise = Normal(0.0, noise_scale)
-			noise_samples = rand(noise, num_points)
+			noise_samples = get_noise_samples(num_points, noise_scale)
 		end
 
 		for i in 1:num_points
@@ -33,15 +33,16 @@ module Anode
 		return (data, targets)
 	end
 
-	function ConcentricSphere(dim, inner_range, outer_range, num_points_inner, num_points_outer)
-		data = []
+	function ConcentricSphere(;dim=2, inner_range=(0., .5), outer_range=(1., 1.5), num_points_inner=1000, num_points_outer=2000)
+
+		data = Array{Float64}(undef, (0, dim))
 		targets = []
 		for _ in 1:num_points_inner
-			append!(data, random_point_in_sphere(dim, inner_range[1], inner_range[2]))
+			data = vcat(data, random_point_in_sphere(dim, inner_range[1], inner_range[2]))
 			append!(targets, -1.0)
 		end
 		for _ in 1:num_points_outer
-			append!(data, random_point_in_sphere(dim, outer_range[1], outer_range[2]))
+			data = vcat(data, random_point_in_sphere(dim, outer_range[1], outer_range[2]))
 			append!(targets, 1.0)
 		end
 		return (data, targets)
@@ -49,36 +50,64 @@ module Anode
 
 	function random_point_in_sphere(dim, min_radius, max_radius)
 		unif = rand()
-		distance = (max_radius - min_radius) * (unif * (1/dim)) + min_radius
+		distance = (max_radius - min_radius) * (unif ^ (1/dim)) + min_radius
 		direction = randn(dim)
 		unit_direction = direction / norm(direction, 2)
-		return distance * unit_direction
+		return (distance * unit_direction)'
 	end
 
-#	function ShiftedSines(dim, shift, num_points_upper, num_points_lower, noise_scale)
-#		data = []
-#		targets = []
-#		
-#		noise = Normal(0.0, noise_scale)
-#		
-#		for i in 1:(num_points_upper + num_points_lower)
-#			if i < num_points_upper
-#				label = 1
-#				y_shift = shift / 2 
-#			else
-#				label = -1
-#				y_shift = - shift / 2
-#			end
-#
-#			x = 2 * rand() - 1
-#			y = sin(π * x) + 
-#
-#
+	function ShiftedSines(dim, shift, num_points_upper, num_points_lower, noise_scale)
+		data = []
+		targets = []
+	
+		n = num_points_upper + num_points_lower
+
+		if noise_scale > 0.0
+			noise_samples = get_noise_samples(n, noise_scale)
+		end
+		
+		for i in 1:(num_points_upper + num_points_lower)
+			if i < num_points_upper
+				label = 1
+				y_shift = shift / 2 
+			else
+				label = -1
+				y_shift = - shift / 2
+			end
+
+			x = 2 * rand() - 1
+			y = sin(π * x) + noise_samples[i] + y_shift
+
+			if dim == 1
+				data = vcat(data, y)
+			elseif dim == 2  
+				# to fix
+				data = vcat(data, hcat(x,y)) 
+			else
+				print("to do")
+			end
+
+			append!(targets, label)
+		end
+		return (data, targets) 
+	end
+
+	function LabelColors(labels)
+		colors = []
+		for label in labels
+			if label > 0.0
+				append!(colors, ["red"])
+			else
+				append!(colors, ["blue"])
+			end
+		end
+		return colors
+	end
+
+
 	function get_noise_samples(n, σ)
 		distribution = Normal(0.0, σ)
 		samples = rand(distribution, n)
 		return samples
 	end
-
-
 end
