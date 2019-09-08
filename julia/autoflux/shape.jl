@@ -1,5 +1,6 @@
 # a julia module for creating Flux layers automatically
 
+module Shape
 using Flux
 function log_dims(input_dim, output_dim, factor=2, verbose=false)
     # '''
@@ -35,4 +36,5 @@ function get_layers(layer_dims)
         append!(layers, [Dense(layer_dims[i], layer_dims[i + 1])])
     end
     return layers
+end
 end
