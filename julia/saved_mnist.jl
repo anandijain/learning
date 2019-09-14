@@ -29,20 +29,19 @@ end
 
 # model = get_model()
 # model = params_into_model("./models/myweights.bson")
+
 model = load_model("./models/mymodel.bson")
 
-loss(x, y) = crossentropy(model(x), y)
+function train_model(model)
+	loss(x, y) = crossentropy(model(x), y)
+	accuracy(x, y) = mean(onecold(model(x)) .== onecold(y))
+	evalcb = () -> @show(loss(X, Y))
+	opt = ADAM()
+	dataset = Iterators.repeated((X, Y), 200)
+	Flux.train!(loss, params(model), dataset, opt, cb=throttle(evalcb, 10))
+	println(accuracy(X, Y))
+end
 
-accuracy(x, y) = mean(onecold(model(x)) .== onecold(y))
-
-evalcb = () -> @show(loss(X, Y))
-opt = ADAM()
-
-dataset = Iterators.repeated((X, Y), 200)
-
-Flux.train!(loss, params(model), dataset, opt, cb=throttle(evalcb, 10))
-
-accuracy(X, Y)
 
 function save_weights(fn, model)
 	weights = Tracker.data.(params(model))
@@ -54,6 +53,6 @@ function save_model(fn, model)
 end
 
 
-save_weights("myweights.bson", model)
-save_model("mymodel.bson", model)
+save_weights("./models/myweights.bson", model)
+save_model("./models/mymodel.bson", model)
 
