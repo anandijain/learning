@@ -3,12 +3,15 @@ using Statistics
 using Flux: onehotbatch, onecold, crossentropy, throttle, @epochs
 using BSON: @save, @load
 
-imgs = Flux.Data.MNIST.images()
-X = hcat(float.(reshape.(imgs, :))...)
-
-labels = Flux.Data.MNIST.labels()
-Y = onehotbatch(labels, 0:9)
-
+function get_mnist()
+	imgs = Flux.Data.MNIST.images()
+	X = hcat(float.(reshape.(imgs, :))...)
+	
+	labels = Flux.Data.MNIST.labels()
+	Y = onehotbatch(labels, 0:9)
+	return X, Y
+end
+	
 function get_model()
 	model = Chain(Dense(784, 100, relu), Dense(100, 10), softmax)
 	return model
@@ -26,22 +29,15 @@ function load_model(fn)
 	return model
 end
 
-
-# model = get_model()
-# model = params_into_model("./models/myweights.bson")
-
-model = load_model("./models/mymodel.bson")
+accuracy(x, y) = mean(onecold(model(x)) .== onecold(y))
 
 function train_model(model)
 	loss(x, y) = crossentropy(model(x), y)
-	accuracy(x, y) = mean(onecold(model(x)) .== onecold(y))
 	evalcb = () -> @show(loss(X, Y))
 	opt = ADAM()
 	dataset = Iterators.repeated((X, Y), 200)
 	Flux.train!(loss, params(model), dataset, opt, cb=throttle(evalcb, 10))
-	println(accuracy(X, Y))
 end
-
 
 function save_weights(fn, model)
 	weights = Tracker.data.(params(model))
@@ -52,7 +48,16 @@ function save_model(fn, model)
 	@save fn model
 end
 
+function main()
+	model_path = "./models/mymodel.bson"
+	weights_path = "./models/myweights.bson"
+	X, Y = get_mnist()
+	model = load_model(model_path)
+	# model = params_into_model("./models/myweights.bson")
+	train_model(model)
+	println(accuracy(X, Y))
+	save_weights(weights_path, model)
+	save_model(model_path, model)
+end
 
-save_weights("./models/myweights.bson", model)
-save_model("./models/mymodel.bson", model)
-
+main()
