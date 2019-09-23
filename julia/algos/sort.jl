@@ -1,6 +1,7 @@
 module Sort
 
 using Random
+using Test: @test
 # hand writing classic algorithms for learning
 
 
@@ -18,19 +19,13 @@ function bubble_sort(arr)
 	return arr
 end
 
-function merge_sort_iter(arr)
-	# iterative implementation of merge_sort
-	return 0
-
-end
-
 function merge_sort_recur(arr)
 	# recursive implementation
 	n = length(arr)
 	if n > 1
 		mid = div(n, 2)
 		left = arr[1:mid]
-		right = arr[mid:end]
+		right = arr[mid + 1:end]
 		
 		len_left = length(left)
 		len_right = length(right)
@@ -64,8 +59,8 @@ function merge_sort_recur(arr)
 			j += 1
 			k += 1
 		end
-
-
+	end
+	return arr
 end
 
 function is_sorted(arr)::Bool
@@ -84,13 +79,23 @@ end
 function test_bubble(n=100;v=false)
 	test_arr = randperm(n)
 	sorted_arr = bubble_sort(test_arr)
-	if v
-		println(test_arr)
-		println(sorted_arr)
-	end
 	ret = is_sorted(sorted_arr)
 	println(ret)
 end
+
+
+function test_all(n=100;v=false)
+	test_arr = randperm(n)
+	
+	# algos = [(test_arr) -> bubble_sort(test_arr), () -> merge_sort_recur(test_arr)]
+	println("bubble")
+	@test is_sorted(bubble_sort(test_arr))
+	
+	println("merge_recur")
+	@test is_sorted(merge_sort_recur(test_arr))
+
+end
+	
 
 
 end
