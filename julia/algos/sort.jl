@@ -1,5 +1,6 @@
 module Sort
 
+using Base: @time
 using Random
 using Test: @test
 # hand writing classic algorithms for learning
@@ -84,15 +85,17 @@ function test_bubble(n=100;v=false)
 end
 
 
-function test_all(n=100;v=false)
+function test_all(n=10000;v=false)
 	test_arr = randperm(n)
 	
 	# algos = [(test_arr) -> bubble_sort(test_arr), () -> merge_sort_recur(test_arr)]
 	println("bubble")
-	@test is_sorted(bubble_sort(test_arr))
+	@time ret = bubble_sort(test_arr)
+	@test is_sorted(ret)
 	
 	println("merge_recur")
-	@test is_sorted(merge_sort_recur(test_arr))
+	@time ret2 = merge_sort_recur(test_arr)
+	@test is_sorted(ret2)
 
 end
 	
