@@ -2,6 +2,7 @@ using Flux
 using Statistics
 using Flux: onehotbatch, onecold, crossentropy, throttle, @epochs
 using BSON: @save, @load
+using BenchmarkTools
 
 function get_mnist()
 	imgs = Flux.Data.MNIST.images()
@@ -35,7 +36,7 @@ function train_model(model)
 	loss(x, y) = crossentropy(model(x), y)
 	evalcb = () -> @show(loss(X, Y))
 	opt = ADAM()
-	dataset = Iterators.repeated((X, Y), 200)
+	# dataset = Iterators.repeated((X, Y), 200)
 	Flux.train!(loss, params(model), dataset, opt, cb=throttle(evalcb, 10))
 end
 
@@ -49,15 +50,15 @@ function save_model(fn, model)
 end
 
 function main()
-	model_path = "./models/mymodel.bson"
-	weights_path = "./models/myweights.bson"
+	#model_path = "./models/mymodel.bson"
+	#weights_path = "./models/myweights.bson"
 	X, Y = get_mnist()
 	model = load_model(model_path)
 	# model = params_into_model("./models/myweights.bson")
 	train_model(model)
 	println(accuracy(X, Y))
-	save_weights(weights_path, model)
-	save_model(model_path, model)
+	#save_weights(weights_path, model)
+	# save_model(model_path, model)
 end
 
 main()
