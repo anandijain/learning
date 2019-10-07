@@ -1,5 +1,17 @@
-Goal forall X Y : Prop, X -> Y -> X.
+Definition pierce := forall (p q : Prop), 
+  ((p -> q) -> p) -> p.
 
+Definition lem := forall p, p \/ ~p.
+
+Theorem pierce_equiv_lem: pierce <-> lem.
 Proof.
-  intros X Y A B
+  unfold pierce, lem.
+  firstorder.
+  apply H with (q := ~ (p \/ ~ p)).
+  firstorder.
+  destruct (H p).
+  assumption.
+  tauto.
+Qed.
+
   
