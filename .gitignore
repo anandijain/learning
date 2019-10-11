@@ -1,6 +1,8 @@
 *.swp
 *.svg
 *.jpg
+*.mp4
+*.png
 
 .ipynb_checkpoints/
 */.ipynb_checkpoints/
