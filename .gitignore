@@ -1,15 +1,17 @@
 *.swp
-*/*.swp
-*/*/*.swp
-
 *.svg
-*/*.svg
-*/*/*.svg
+*.jpg
 
 .ipynb_checkpoints/
 */.ipynb_checkpoints/
 */*/.ipynb_checkpoints/
 */*/*/.ipynb_checkpoints/
+
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*/*/*/__pycache__/
+
 
 data/
 
