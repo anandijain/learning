@@ -149,6 +149,7 @@ class LSTM(nn.Module):
         y_pred = self.linear(lstm_out[-1].view(self.batch_size, -1))
         return y_pred.view(-1)
 
+
 def get_data():
 	fn = dir + 'stocks.npy'
 	if not os.path.isfile(fn):
@@ -165,7 +166,7 @@ if __name__ == "__main__":
 
 	init_model_folder(save_folder)
 
-	data = get_data()
+	# data = get_data()
 	dataset = LSTMLoader(data, window_len=window)
 	data_loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
 	x, y = dataloader_shapes(data_loader)
@@ -181,7 +182,7 @@ if __name__ == "__main__":
 	model = attempt_load(model, save_path)
 	model.to(device)
 
-	loss_fn = torch.nn.MSELoss()
+	loss_fn = torch.nn.CrossEntropyLoss()
 	learning_rate = 1e-2
 	optimiser = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
@@ -191,7 +192,6 @@ if __name__ == "__main__":
 		# Clear stored gradient
 		torch.save(model.state_dict(), save_path)
 		model.hidden = model.init_hidden()
-		print(f'new stock: {fileset.file}, num: {data_idx}')
 
 		for i, (x, y) in enumerate(data_loader):
 		    optimiser.zero_grad()
