@@ -1,0 +1,12 @@
+given speach or text, convert to python program:
+
+eg:
+	```write a function called hello that prints hello world ten times```
+
+returns
+
+def hello():
+	for i in range(10):
+		print('hello world')
+
+
