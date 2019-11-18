@@ -4,6 +4,7 @@
 *.mp4
 *.png
 *.log
+*.js
 
 .ipynb_checkpoints/
 */.ipynb_checkpoints/
