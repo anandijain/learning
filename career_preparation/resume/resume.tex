@@ -1,0 +1,155 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Graduate Curriculum Vitae
+% LaTeX Template
+% Version 1.2 (3/28/15)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Rensselaer Polytechnic Institute 
+% (http://www.rpi.edu/dept/arc/training/latex/resumes/)
+%
+% Modified by:
+% Daniel L Marks <xleafr@gmail.com> 3/28/2015
+%
+% Important note:
+% This template requires the res.cls file to be in the same directory as the
+% .tex file. The res.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%-------------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% You can have multiple style options the legal options ones are:
+%
+%   centered:	the name and address are centered at the top of the page 
+%				(default)
+%
+%   line:		the name is the left with a horizontal line then the address to
+%				the right
+%
+%   overlapped:	the section titles overlap the body text (default)
+%
+%   margin:		the section titles are to the left of the body text
+%		
+%   11pt:		use 11 point fonts instead of 10 point fonts
+%
+%   12pt:		use 12 point fonts instead of 10 point fonts
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[margin]{res}  
+
+% Default font is the helvetica postscript font
+\usepackage{helvet}
+
+% Increase text height
+\textheight=700pt
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+%	NAME AND ADDRESS SECTION
+%-------------------------------------------------------------------------------
+\name{Anand Jain}
+
+% Note that addresses can be used for other contact information:
+% -phone numbers
+% -email addresses
+% -linked-in profile
+
+\address{
+github, linkedin : anandijain\\
+site: anandj.net\\
+}
+\address{anandj@uchicago.edu \\(408)597-4214\\}
+
+% Uncomment to add a third address
+%\address{Address 3 line 1\\Address 3 line 2\\Address 3 line 3}
+%-------------------------------------------------------------------------------
+
+\begin{resume}
+
+%-------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%-------------------------------------------------------------------------------
+\section{EDUCATION}
+\textbf{University of Chicago}
+{\sl B.S.}, Computer Science. \hfill \textbf{Expected Jun, 2021}\\
+\textbf{Santa Clara High School} \hfill \textbf{2017}
+%-------------------------------------------------------------------------------
+%	COMPUTER SKILLS SECTION
+%-------------------------------------------------------------------------------
+\section{SKILLS}
+\textbf{Languages} Python, Julia, C, Bash\\
+\textbf{Packages}  PyTorch, Gym, TensorFlow $\geq v2$, Sklearn, Pandas \\
+\textbf{Spoken Languages} English - Fluent, Hindi, Spanish, Chinese - Classroom
+
+%-------------------------------------------------------------------------------
+% Modify the format of each position
+\begin{format}
+\title{l}\\
+\dates{l}\location{r}\\
+\body\\
+\end{format}
+%-------------------------------------------------------------------------------
+\section{EXPERIENCE}
+\textbf{Fermilab LSST Intern\hfill Jun 24 - Aug 31}\\
+\textbullet{Researched the applications of neural differential equations to astronomy\\}
+\textbullet{Used the PLAsTiCC Astronomical Kaggle dataset to train a neural network to approximate the differential equation of different astronomical objects' light curves}\\
+\textbullet{Worked with peers and mentors to create a high level API for fast prototyping and ensemble training of neural networks for astronomy datasets, primarily in PyTorch}
+\begin{itemize}
+    \item \textbf{Technology/Tools:} TorchDiffEq, DifferentialEquations.jl, PyTorch, TensorFlow, Matplotlib, Astropy
+\end{itemize}
+\section{PROJECTS}
+\textbf{Sips: Odds Tracking on GCP\hfill Oct 2018 - Now}\\
+\textbullet{Built a python package that tracks sports statistics and odds\\}
+\textbullet{Learned about cloud deployment by spinning up free-tier VMs on GCP\\}
+\textbullet{Have collected over 1 GBs of live odds data from football, basketball and hockey}\\
+\textbullet{Long-Short Term Memory (LSTM) classifer for directional movement of moneyline}
+\begin{itemize}
+\item \textbf{Technology/Tools:} Python, Requests, Beautiful Soup, PyTorch
+\end{itemize}
+\begin{itemize}
+\item \textbf{Link :} github.com/anandijain/sips
+\end{itemize}
+\textbf{Gym-Sips: RL Gym Environment\hfill Feb 2019 - Now}\\
+\textbullet{Created a set of custom reinforcement learning environments using the OpenAI Gym package for the output of Sips\\}
+\textbullet{Attempted to use a Deep-Q network to learn a state value function.\\}
+\textbullet{Goal: I'd like to update my envs to be compatible with TF-agents and run the different algorithms supported and see if the agent learns any better}
+
+
+\begin{itemize}
+\item \textbf{Technology/Tools:} Python, Gym, PyTorch
+\end{itemize}
+\begin{itemize}
+\item \textbf{Link :} github.com/anandijain/gym-sips
+\end{itemize}
+
+
+\section{COURSES}
+\par
+\normalfont{\textbullet{Algorithms}}
+\normalfont{\textbullet{Discrete Math}}
+\normalfont{\textbullet{Abstract Linear Algebra}}
+\normalfont{\textbullet{Mathematical Logic}}
+\normalfont{\textbullet{Inventing Interactive Devices}}
+\normalfont{\textbullet{Electronics}}
+\normalfont{\textbullet{Computer Systems}}
+\section{ACTIVITIES}
+
+\textbf{UCQuantum\hfill Aug 2019 - Now}\\
+\textbullet{Unofficial club applying to become an official RSO for UChicago undergrads interested in quantum computing}\\
+\textbullet{We have 50 facebook group members and roughly 15 active members}\\
+\textbullet{Initial meetings have been learning/teaching the basics: superposition, entanglement, quantum logic gates, unitary matrices, and superdense coding}\\
+\textbullet{We are planning to host talks, hackathons, and lab tours with faculty on campus}\\
+%-------------------------------------------------------------------------------
+
+
+\end{resume}
+\(\)\end{document}
