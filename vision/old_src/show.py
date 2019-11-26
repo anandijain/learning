@@ -3,10 +3,11 @@ import numpy as np
 import time
 
 # IMG_PATH = 'images/cvtest.jpg'
-VID_PATH = 'images/album_cover.mp4'
+VID_PATH = "images/album_cover.mp4"
 
 W = 1920
 H = 1080
+
 
 def process_frame(img):
     # gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
@@ -20,7 +21,7 @@ def process_frame(img):
     # for i in corners:
     #     x,y = i.ravel()
     #     res = cv2.circle(img, (x,y), 10, 255, -1)
-    cv2.imshow('img', res)
+    cv2.imshow("img", res)
     # print(res.shape)
 
 
@@ -32,7 +33,7 @@ if __name__ == "__main__":
 
     while cap.isOpened():
         ret, frame = cap.read()
-        frame_number = cap.get(cv2.CAP_PROP_POS_FRAMES)   
+        frame_number = cap.get(cv2.CAP_PROP_POS_FRAMES)
         print(frame_number)
         if ret == True:
             process_frame(frame)
@@ -40,5 +41,3 @@ if __name__ == "__main__":
         else:
             cap.release()
             cv2.destroyAllWindows()
-
-     

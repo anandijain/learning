@@ -1,4 +1,4 @@
-'''
+"""
 variational autoencoder for multiline games
 
 want to split by pre game and in game too
@@ -6,7 +6,7 @@ want to split by pre game and in game too
 todo scheme:
 
 - get padded quarters
-'''
+"""
 import pandas as pd
 import torch
 import torch.nn as nn
@@ -18,10 +18,10 @@ import sips
 
 
 class Net(nn.Module):
-    '''
+    """
     This network is defined recursively.
     |layers| ~ log_2(input_dim)
-    '''
+    """
 
     def __init__(self, input_dim):
         super(Net, self).__init__()
@@ -60,12 +60,12 @@ class Net(nn.Module):
         return x
 
     def __repr__(self):
-        print(f'encoder: {self.enc}')
-        print(f'decoder: {self.dec}')
-        return 'network'
+        print(f"encoder: {self.enc}")
+        print(f"decoder: {self.dec}")
+        return "network"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     data_loader = sips.h.loaders.VAELoader()
     net = Net(data_loader.length).double()
 

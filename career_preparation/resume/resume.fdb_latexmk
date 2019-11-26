@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1573954638 "/home/sippycups/misc/resume/resume.tex" "/home/sippycups/misc/resume/resume.pdf" "resume" 1573954638
+["pdflatex"] 1574689202 "/home/sippycups/learning/career_preparation/resume/resume.tex" "/home/sippycups/learning/career_preparation/resume/resume.pdf" "resume" 1574689203
   "/etc/texmf/web2c/texmf.cnf" 1547233837 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/sippycups/misc/resume/resume.aux" 1573953371 8 a94a2480d3289e625eea47cd1b285758 ""
-  "/home/sippycups/misc/resume/resume.tex" 1573954638 6234 3d6e1b55a837d01b7870528856a7bb8b ""
+  "/home/sippycups/learning/career_preparation/resume/resume.aux" 1573953371 8 a94a2480d3289e625eea47cd1b285758 ""
+  "/home/sippycups/learning/career_preparation/resume/resume.tex" 1574689202 6234 3d6e1b55a837d01b7870528856a7bb8b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1480098701 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1480098701 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -25,9 +25,11 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1573462043 4128719 a75eff0b09ab09714c94a63211b704de ""
   "res.cls" 1573462297 26968 f8cf96ef2831067f0ba534adb1a580cf ""
   "resume.aux" 1573953371 8 a94a2480d3289e625eea47cd1b285758 ""
-  "resume.tex" 1573954638 6234 3d6e1b55a837d01b7870528856a7bb8b ""
+  "resume.tex" 1574689202 6234 3d6e1b55a837d01b7870528856a7bb8b ""
   (generated)
+  "/home/sippycups/misc/resume/resume.log"
+  "/home/sippycups/learning/career_preparation/resume/resume.pdf"
+  "/home/sippycups/learning/career_preparation/resume/resume.log"
+  "/home/sippycups/misc/resume/resume.pdf"
   "resume.log"
   "resume.pdf"
-  "/home/sippycups/misc/resume/resume.log"
-  "/home/sippycups/misc/resume/resume.pdf"
