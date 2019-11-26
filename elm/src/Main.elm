@@ -6,6 +6,7 @@ import Html.Events exposing (onClick)
 import Html exposing (Html, button, div, text, pre)
 import Json.Decode as D
 
+import Competition
 
 -- MAIN
 
@@ -29,29 +30,27 @@ type Model
 
 init : () -> (Model, Cmd Msg)
 init _ =
-  ( Loading
-  , Http.get
-      { url = "https://elm-lang.org/assets/public-opinion.txt"
-      , expect = Http.expectString GotText
-      }
-  )
-
+  (Loading, getSport)
 
 
 -- UPDATE
 
 
 type Msg
-  = GotText (Result Http.Error String)
+  = MorePlease
+  | GotSport (Result Http.Error String)
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    GotText result ->
+    MorePlease ->
+      (Loading, getSport)
+
+    GotSport result ->
       case result of
-        Ok fullText ->
-          (Success fullText, Cmd.none)
+        Ok url ->
+          (Success url, Cmd.none)
 
         Err _ ->
           (Failure, Cmd.none)
@@ -67,17 +66,42 @@ subscriptions model =
 
 
 
+
 -- VIEW
 
 
 view : Model -> Html Msg
 view model =
+  div []
+    [ h2 [] [ text "Random Cats" ]
+    , viewMoneylines model
+    ]
+
+
+viewMoneylines : Model -> Html Msg
+viewMoneylines model =
   case model of
     Failure ->
-      text "I was unable to load your book."
+      div []
+        [ text "I could not load a random cat for some reason. "
+        , button [ onClick MorePlease ] [ text "Try Again!" ]
+        ]
 
     Loading ->
       text "Loading..."
 
-    Success fullText ->
-      pre [] [ text fullText ]
+    Success url ->
+      div []
+        [ button [ onClick MorePlease, style "display" "block" ] [ text "More Please!" ]
+        , img [ src url ] []
+        ]
+
+
+-- HTTP
+
+getSport : Cmd Msg
+getSport = 
+  Http.get
+    { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball/nba"
+    , expect = Http.expectJson GotNBA decodeCompetiton
+    }

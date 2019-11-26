@@ -7,19 +7,12 @@
 *.js
 
 .ipynb_checkpoints/
-*/.ipynb_checkpoints/
-*/*/.ipynb_checkpoints/
-*/*/*/.ipynb_checkpoints/
-
 __pycache__/
-*/__pycache__/
-*/*/__pycache__/
-*/*/*/__pycache__/
+
 
 random/py3.8/
-
 data/
-
+assets/
 
 
 neuro/local/
