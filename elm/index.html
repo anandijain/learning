@@ -4762,7 +4762,7 @@ var $elm$json$Json$Decode$errorToStringHelp = F2(
 				case 'OneOf':
 					var errors = error.a;
 					if (!errors.b) {
-						return 'Ran into a Json.Decode.oneOf with no possibilities' + function () {
+						return 'Ran into a D.oneOf with no possibilities' + function () {
 							if (!context.b) {
 								return '!';
 							} else {
@@ -4783,9 +4783,9 @@ var $elm$json$Json$Decode$errorToStringHelp = F2(
 						} else {
 							var starter = function () {
 								if (!context.b) {
-									return 'Json.Decode.oneOf';
+									return 'D.oneOf';
 								} else {
-									return 'The Json.Decode.oneOf at json' + A2(
+									return 'The D.oneOf at json' + A2(
 										$elm$core$String$join,
 										'',
 										$elm$core$List$reverse(context));

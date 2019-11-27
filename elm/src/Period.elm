@@ -1,8 +1,8 @@
 module Period exposing(Period, decodePeriod, encodePeriod)
 
-import Json.Encode
-import Json.Decode
-import Json.Decode.Pipeline
+import Json.Encode as E
+import Json.Decode as D
+import Json.Decode.Pipeline exposing(required)
 
 type alias Period =
     { id : String
@@ -12,21 +12,21 @@ type alias Period =
     , main : Bool
     }
 
-decodePeriod : Json.Decode.Decoder Period
+decodePeriod : D.Decoder Period
 decodePeriod =
-    Json.Decode.succeed Period
-        |> Json.Decode.Pipeline.required "id" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "description" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "abbreviation" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "live" (Json.Decode.bool)
-        |> Json.Decode.Pipeline.required "main" (Json.Decode.bool)
+    D.succeed Period
+        |> required "id" (D.string)
+        |> required "description" (D.string)
+        |> required "abbreviation" (D.string)
+        |> required "live" (D.bool)
+        |> required "main" (D.bool)
 
-encodePeriod : Period -> Json.Encode.Value
+encodePeriod : Period -> E.Value
 encodePeriod record =
-    Json.Encode.object
-        [ ("id",  Json.Encode.string <| record.id)
-        , ("description",  Json.Encode.string <| record.description)
-        , ("abbreviation",  Json.Encode.string <| record.abbreviation)
-        , ("live",  Json.Encode.bool <| record.live)
-        , ("main",  Json.Encode.bool <| record.main)
+    E.object
+        [ ("id",  E.string <| record.id)
+        , ("description",  E.string <| record.description)
+        , ("abbreviation",  E.string <| record.abbreviation)
+        , ("live",  E.bool <| record.live)
+        , ("main",  E.bool <| record.main)
         ]

@@ -10,7 +10,7 @@ import Dict
 
 import Json.Decode exposing (Decoder, field, string, index, decodeString)
 
-import Competition
+import Competition exposing(Competition, decodeCompetition, encodeCompetition)
 
 -- MAIN
 
@@ -116,16 +116,3 @@ getSport =
 getId : Decoder String
 getId =
   index 0 (field "events" (index 0 (field "id" string)))
-  -- map field "id" string
-
--- comp_record =
---   { path = 
---     { field = 15
---     , order = 20
---     }, 
---   events = 
---     [ { id = 250}
---     , { id = 500} ]
---   }
-
-
