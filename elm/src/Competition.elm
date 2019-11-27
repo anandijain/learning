@@ -4,12 +4,12 @@ import Json.Encode
 import Json.Decode
 import Json.Decode.Pipeline
 
-import Path
-import Event
+import Path exposing(Path, decodePath, encodePath)
+import Event exposing(Event, decodeEvent, encodeEvent)
 
 type alias Competition =
-    { path : List Path
-    , events : List Event
+    { path : List Path.Path
+    , events : List Event.Event
     }
 
 decodeCompetition : Json.Decode.Decoder Competition
@@ -21,6 +21,6 @@ decodeCompetition =
 encodeCompetition : Competition -> Json.Encode.Value
 encodeCompetition record =
     Json.Encode.object
-        [ ("path",  Json.Encode.list <| List.map encodePath <| record.path)
-        , ("events",  Json.Encode.list <| List.map encodeEvent <| record.events)
+        [ ("path",  Json.Encode.list encodePath record.path)
+        , ("events",  Json.Encode.list encodeEvent record.events)
         ]

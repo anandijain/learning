@@ -1,11 +1,14 @@
 module Market exposing(Market, decodeMarket, encodeMarket)
 
+
 import Json.Encode
 import Json.Decode
 import Json.Decode.Pipeline
 
-import Outcome
-import Period
+
+import Outcome exposing(Outcome, decodeOutcome, encodeOutcome)
+import Period exposing(Period, decodePeriod, encodePeriod)
+
 
 type alias Market =
     { id : String
@@ -19,13 +22,6 @@ type alias Market =
     , outcomes : List Outcome
     }
 
-type alias MarketPeriod =
-    { id : String
-    , description : String
-    , abbreviation : String
-    , live : Bool
-    , main : Bool
-    }
 
 decodeMarket : Json.Decode.Decoder Market
 decodeMarket =
@@ -37,17 +33,9 @@ decodeMarket =
         |> Json.Decode.Pipeline.required "status" (Json.Decode.string)
         |> Json.Decode.Pipeline.required "singleOnly" (Json.Decode.bool)
         |> Json.Decode.Pipeline.required "notes" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "period" (decodeMarketPeriod)
+        |> Json.Decode.Pipeline.required "period" (decodePeriod)
         |> Json.Decode.Pipeline.required "outcomes" (Json.Decode.list decodeOutcome)
 
-decodeMarketPeriod : Json.Decode.Decoder MarketPeriod
-decodeMarketPeriod =
-    Json.Decode.succeed MarketPeriod
-        |> Json.Decode.Pipeline.required "id" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "description" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "abbreviation" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "live" (Json.Decode.bool)
-        |> Json.Decode.Pipeline.required "main" (Json.Decode.bool)
 
 encodeMarket : Market -> Json.Encode.Value
 encodeMarket record =
@@ -60,5 +48,5 @@ encodeMarket record =
         , ("singleOnly",  Json.Encode.bool <| record.singleOnly)
         , ("notes",  Json.Encode.string <| record.notes)
         , ("period",  encodePeriod <| record.period)
-        , ("outcomes",  Json.Encode.list <| List.map encodeOutcome <| record.outcomes)
+        , ("outcomes", Json.Encode.list encodeOutcome record.outcomes)  -- worrisome
         ]

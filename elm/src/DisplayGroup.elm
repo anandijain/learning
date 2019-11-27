@@ -4,7 +4,7 @@ import Json.Encode
 import Json.Decode
 import Json.Decode.Pipeline
 
-import Market
+import Market exposing(Market, decodeMarket, encodeMarket)
 
 type alias DisplayGroup =
     { id : String
@@ -32,6 +32,6 @@ encodeDisplayGroup record =
         , ("description",  Json.Encode.string <| record.description)
         , ("defaultType",  Json.Encode.bool <| record.defaultType)
         , ("alternateType",  Json.Encode.bool <| record.alternateType)
-        , ("markets",  Json.Encode.list <| List.map encodeMarket <| record.markets)
+        , ("markets",  Json.Encode.list encodeMarket record.markets)
         , ("order",  Json.Encode.int <| record.order)
         ]
