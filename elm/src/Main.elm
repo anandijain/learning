@@ -3,8 +3,12 @@ module Main exposing (..)
 import Browser
 import Http
 import Html.Events exposing (onClick)
-import Html exposing (Html, button, div, text, pre)
-import Json.Decode as D
+import Html exposing (..)
+import Html.Attributes exposing(..)
+import Maybe
+import Dict
+
+import Json.Decode exposing (Decoder, field, string, index, decodeString)
 
 import Competition
 
@@ -38,7 +42,7 @@ init _ =
 
 type Msg
   = MorePlease
-  | GotSport (Result Http.Error String)
+  | GotJson (Result Http.Error String)
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -47,10 +51,10 @@ update msg model =
     MorePlease ->
       (Loading, getSport)
 
-    GotSport result ->
+    GotJson result ->
       case result of
-        Ok url ->
-          (Success url, Cmd.none)
+        Ok fullJson ->
+          (Success fullJson, Cmd.none)
 
         Err _ ->
           (Failure, Cmd.none)
@@ -66,14 +70,13 @@ subscriptions model =
 
 
 
-
 -- VIEW
 
 
 view : Model -> Html Msg
 view model =
   div []
-    [ h2 [] [ text "Random Cats" ]
+    [ h2 [] [ text "Moneylines" ]
     , viewMoneylines model
     ]
 
@@ -82,26 +85,47 @@ viewMoneylines : Model -> Html Msg
 viewMoneylines model =
   case model of
     Failure ->
-      div []
-        [ text "I could not load a random cat for some reason. "
-        , button [ onClick MorePlease ] [ text "Try Again!" ]
-        ]
+      text "could not load"
 
     Loading ->
       text "Loading..."
 
-    Success url ->
-      div []
-        [ button [ onClick MorePlease, style "display" "block" ] [ text "More Please!" ]
-        , img [ src url ] []
-        ]
+    Success fullJson ->
+       text fullJson 
+        
+
 
 
 -- HTTP
+
+
+
+-- simpleDecoder : Decoder String
+-- simpleDecoder =
+--   field "events"
+
+
 
 getSport : Cmd Msg
 getSport = 
   Http.get
     { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball/nba"
-    , expect = Http.expectJson GotNBA decodeCompetiton
+    , expect = Http.expectJson GotJson getId
     }
+
+getId : Decoder String
+getId =
+  index 0 (field "events" (index 0 (field "id" string)))
+  -- map field "id" string
+
+-- comp_record =
+--   { path = 
+--     { field = 15
+--     , order = 20
+--     }, 
+--   events = 
+--     [ { id = 250}
+--     , { id = 500} ]
+--   }
+
+

@@ -4,13 +4,13 @@ import Json.Encode
 import Json.Decode
 import Json.Decode.Pipeline
 
-import Price
+import Price exposing(Price, decodePrice, encodePrice)
 
 type alias Outcome =
     { id : String
     , description : String
     , status : String
-    , type : String
+    , outcomeType : String
     , competitorId : String
     , price : Price
     }
@@ -33,7 +33,7 @@ encodeOutcome record =
         [ ("id",  Json.Encode.string <| record.id)
         , ("description",  Json.Encode.string <| record.description)
         , ("status",  Json.Encode.string <| record.status)
-        , ("type",  Json.Encode.string <| record.type)
+        , ("type",  Json.Encode.string <| record.outcomeType)
         , ("competitorId",  Json.Encode.string <| record.competitorId)
         , ("price",  encodePrice <| record.price)
         ]

@@ -4,20 +4,20 @@ import Json.Encode
 import Json.Decode
 import Json.Decode.Pipeline
 
-type alias Price =
+type alias Path =
     { id : String
     , link : String
     , description : String
-    , type : String
+    , pathType : String
     , sportCode : String
     , order : Int
     , leaf : Bool
     , current : Bool
     }
 
-decodePrice : Json.Decode.Decoder Price
-decodePrice =
-    Json.Decode.succeed Price
+decodePath : Json.Decode.Decoder Path
+decodePath =
+    Json.Decode.succeed Path
         |> Json.Decode.Pipeline.required "id" (Json.Decode.string)
         |> Json.Decode.Pipeline.required "link" (Json.Decode.string)
         |> Json.Decode.Pipeline.required "description" (Json.Decode.string)
@@ -27,13 +27,13 @@ decodePrice =
         |> Json.Decode.Pipeline.required "leaf" (Json.Decode.bool)
         |> Json.Decode.Pipeline.required "current" (Json.Decode.bool)
 
-encodePrice : Price -> Json.Encode.Value
-encodePrice record =
+encodePath : Path -> Json.Encode.Value
+encodePath record =
     Json.Encode.object
         [ ("id",  Json.Encode.string <| record.id)
         , ("link",  Json.Encode.string <| record.link)
         , ("description",  Json.Encode.string <| record.description)
-        , ("type",  Json.Encode.string <| record.type)
+        , ("type",  Json.Encode.string <| record.pathType)
         , ("sportCode",  Json.Encode.string <| record.sportCode)
         , ("order",  Json.Encode.int <| record.order)
         , ("leaf",  Json.Encode.bool <| record.leaf)

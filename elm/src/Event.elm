@@ -1,14 +1,16 @@
+module Event exposing(Event, decodeEvent, encodeEvent)
+
 import Json.Encode
 import Json.Decode
 import Json.Decode.Pipeline
 
-import Competitor
-import DisplayGroup
+import Competitor exposing(Competitor, decodeCompetitor, encodeCompetitor)
+import DisplayGroup exposing(DisplayGroup, decodeDisplayGroup, encodeDisplayGroup)
 
 type alias Event =
     { id : String
     , description : String
-    , type : String
+    , eventType : String
     , link : String
     , status : String
     , sport : String
@@ -51,7 +53,7 @@ encodeEvent record =
     Json.Encode.object
         [ ("id",  Json.Encode.string <| record.id)
         , ("description",  Json.Encode.string <| record.description)
-        , ("type",  Json.Encode.string <| record.type)
+        , ("type",  Json.Encode.string <| record.eventType)
         , ("link",  Json.Encode.string <| record.link)
         , ("status",  Json.Encode.string <| record.status)
         , ("sport",  Json.Encode.string <| record.sport)
@@ -64,6 +66,6 @@ encodeEvent record =
         , ("notes",  Json.Encode.string <| record.notes)
         , ("numMarkets",  Json.Encode.int <| record.numMarkets)
         , ("lastModified",  Json.Encode.int <| record.lastModified)
-        , ("competitors",  Json.Encode.list <| List.map encodeCompetitor <| record.competitors)
-        , ("displayGroups",  Json.Encode.list <| List.map encodeDisplayGroup <| record.displayGroups)
+        , ("competitors",  Json.Encode.list encodeCompetitor record.competitors)
+        , ("displayGroups",  Json.Encode.list encodeDisplayGroup record.displayGroups)
         ]
