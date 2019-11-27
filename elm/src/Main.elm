@@ -12,6 +12,13 @@ import Json.Decode exposing (Decoder, field, string, index, decodeString)
 
 import Competition exposing(Competition, decodeCompetition, encodeCompetition)
 
+{-
+TODO:
+  - format json into tables
+  - route to game_id endpoints
+-}
+
+
 -- MAIN
 
 
@@ -95,7 +102,7 @@ viewMoneylines model =
     Success fullJson ->
       div []
         [ button [ onClick MorePlease ] [ text "diff sport" ]
-        , button [ onClick MorePlease ] [ text  fullJson ]
+        , button [ onClick MorePlease ] [ text fullJson ]
         ]
         
 
