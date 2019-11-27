@@ -1,8 +1,8 @@
 module Competitor exposing(Competitor, decodeCompetitor, encodeCompetitor)
 
-import Json.Encode
-import Json.Decode
-import Json.Decode.Pipeline
+import Json.Encode as E
+import Json.Decode as D
+import Json.Decode.Pipeline exposing(required)
 
 type alias Competitor =
     { id : String
@@ -10,17 +10,17 @@ type alias Competitor =
     , home : Bool
     }
 
-decodeCompetitor : Json.Decode.Decoder Competitor
+decodeCompetitor : D.Decoder Competitor
 decodeCompetitor =
-    Json.Decode.succeed Competitor
-        |> Json.Decode.Pipeline.required "id" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "name" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "home" (Json.Decode.bool)
+    D.succeed Competitor
+        |> required "id" (D.string)
+        |> required "name" (D.string)
+        |> required "home" (D.bool)
 
-encodeCompetitor : Competitor -> Json.Encode.Value
+encodeCompetitor : Competitor -> E.Value
 encodeCompetitor record =
-    Json.Encode.object
-        [ ("id",  Json.Encode.string <| record.id)
-        , ("name",  Json.Encode.string <| record.name)
-        , ("home",  Json.Encode.bool <| record.home)
+    E.object
+        [ ("id",  E.string <| record.id)
+        , ("name",  E.string <| record.name)
+        , ("home",  E.bool <| record.home)
         ]

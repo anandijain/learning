@@ -1,10 +1,8 @@
 module Market exposing(Market, decodeMarket, encodeMarket)
 
-
-import Json.Encode
-import Json.Decode
-import Json.Decode.Pipeline
-
+import Json.Encode as E
+import Json.Decode as D
+import Json.Decode.Pipeline exposing(required)
 
 import Outcome exposing(Outcome, decodeOutcome, encodeOutcome)
 import Period exposing(Period, decodePeriod, encodePeriod)
@@ -23,30 +21,30 @@ type alias Market =
     }
 
 
-decodeMarket : Json.Decode.Decoder Market
+decodeMarket : D.Decoder Market
 decodeMarket =
-    Json.Decode.succeed Market
-        |> Json.Decode.Pipeline.required "id" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "description" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "key" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "marketTypeId" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "status" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "singleOnly" (Json.Decode.bool)
-        |> Json.Decode.Pipeline.required "notes" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "period" (decodePeriod)
-        |> Json.Decode.Pipeline.required "outcomes" (Json.Decode.list decodeOutcome)
+    D.succeed Market
+        |> required "id" (D.string)
+        |> required "description" (D.string)
+        |> required "key" (D.string)
+        |> required "marketTypeId" (D.string)
+        |> required "status" (D.string)
+        |> required "singleOnly" (D.bool)
+        |> required "notes" (D.string)
+        |> required "period" (decodePeriod)
+        |> required "outcomes" (D.list decodeOutcome)
 
 
-encodeMarket : Market -> Json.Encode.Value
+encodeMarket : Market -> E.Value
 encodeMarket record =
-    Json.Encode.object
-        [ ("id",  Json.Encode.string <| record.id)
-        , ("description",  Json.Encode.string <| record.description)
-        , ("key",  Json.Encode.string <| record.key)
-        , ("marketTypeId",  Json.Encode.string <| record.marketTypeId)
-        , ("status",  Json.Encode.string <| record.status)
-        , ("singleOnly",  Json.Encode.bool <| record.singleOnly)
-        , ("notes",  Json.Encode.string <| record.notes)
+    E.object
+        [ ("id",  E.string <| record.id)
+        , ("description",  E.string <| record.description)
+        , ("key",  E.string <| record.key)
+        , ("marketTypeId",  E.string <| record.marketTypeId)
+        , ("status",  E.string <| record.status)
+        , ("singleOnly",  E.bool <| record.singleOnly)
+        , ("notes",  E.string <| record.notes)
         , ("period",  encodePeriod <| record.period)
-        , ("outcomes", Json.Encode.list encodeOutcome record.outcomes)  -- worrisome
+        , ("outcomes", E.list encodeOutcome record.outcomes)  -- worrisome
         ]

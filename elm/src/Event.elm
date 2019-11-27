@@ -1,8 +1,8 @@
 module Event exposing(Event, decodeEvent, encodeEvent)
 
-import Json.Encode
-import Json.Decode
-import Json.Decode.Pipeline
+import Json.Encode as E
+import Json.Decode as D
+import Json.Decode.Pipeline exposing(required)
 
 import Competitor exposing(Competitor, decodeCompetitor, encodeCompetitor)
 import DisplayGroup exposing(DisplayGroup, decodeDisplayGroup, encodeDisplayGroup)
@@ -27,45 +27,45 @@ type alias Event =
     , displayGroups : List DisplayGroup
     }
 
-decodeEvent : Json.Decode.Decoder Event
+decodeEvent : D.Decoder Event
 decodeEvent =
-    Json.Decode.succeed Event
-        |> Json.Decode.Pipeline.required "id" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "description" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "type" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "link" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "status" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "sport" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "startTime" (Json.Decode.int)
-        |> Json.Decode.Pipeline.required "live" (Json.Decode.bool)
-        |> Json.Decode.Pipeline.required "awayTeamFirst" (Json.Decode.bool)
-        |> Json.Decode.Pipeline.required "denySameGame" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "teaserAllowed" (Json.Decode.bool)
-        |> Json.Decode.Pipeline.required "competitionId" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "notes" (Json.Decode.string)
-        |> Json.Decode.Pipeline.required "numMarkets" (Json.Decode.int)
-        |> Json.Decode.Pipeline.required "lastModified" (Json.Decode.int)
-        |> Json.Decode.Pipeline.required "competitors" (Json.Decode.list decodeCompetitor)
-        |> Json.Decode.Pipeline.required "displayGroups" (Json.Decode.list decodeDisplayGroup)
+    D.succeed Event
+        |> required "id" (D.string)
+        |> required "description" (D.string)
+        |> required "type" (D.string)
+        |> required "link" (D.string)
+        |> required "status" (D.string)
+        |> required "sport" (D.string)
+        |> required "startTime" (D.int)
+        |> required "live" (D.bool)
+        |> required "awayTeamFirst" (D.bool)
+        |> required "denySameGame" (D.string)
+        |> required "teaserAllowed" (D.bool)
+        |> required "competitionId" (D.string)
+        |> required "notes" (D.string)
+        |> required "numMarkets" (D.int)
+        |> required "lastModified" (D.int)
+        |> required "competitors" (D.list decodeCompetitor)
+        |> required "displayGroups" (D.list decodeDisplayGroup)
 
-encodeEvent : Event -> Json.Encode.Value
+encodeEvent : Event -> E.Value
 encodeEvent record =
-    Json.Encode.object
-        [ ("id",  Json.Encode.string <| record.id)
-        , ("description",  Json.Encode.string <| record.description)
-        , ("type",  Json.Encode.string <| record.eventType)
-        , ("link",  Json.Encode.string <| record.link)
-        , ("status",  Json.Encode.string <| record.status)
-        , ("sport",  Json.Encode.string <| record.sport)
-        , ("startTime",  Json.Encode.int <| record.startTime)
-        , ("live",  Json.Encode.bool <| record.live)
-        , ("awayTeamFirst",  Json.Encode.bool <| record.awayTeamFirst)
-        , ("denySameGame",  Json.Encode.string <| record.denySameGame)
-        , ("teaserAllowed",  Json.Encode.bool <| record.teaserAllowed)
-        , ("competitionId",  Json.Encode.string <| record.competitionId)
-        , ("notes",  Json.Encode.string <| record.notes)
-        , ("numMarkets",  Json.Encode.int <| record.numMarkets)
-        , ("lastModified",  Json.Encode.int <| record.lastModified)
-        , ("competitors",  Json.Encode.list encodeCompetitor record.competitors)
-        , ("displayGroups",  Json.Encode.list encodeDisplayGroup record.displayGroups)
+    E.object
+        [ ("id",  E.string <| record.id)
+        , ("description",  E.string <| record.description)
+        , ("type",  E.string <| record.eventType)
+        , ("link",  E.string <| record.link)
+        , ("status",  E.string <| record.status)
+        , ("sport",  E.string <| record.sport)
+        , ("startTime",  E.int <| record.startTime)
+        , ("live",  E.bool <| record.live)
+        , ("awayTeamFirst",  E.bool <| record.awayTeamFirst)
+        , ("denySameGame",  E.string <| record.denySameGame)
+        , ("teaserAllowed",  E.bool <| record.teaserAllowed)
+        , ("competitionId",  E.string <| record.competitionId)
+        , ("notes",  E.string <| record.notes)
+        , ("numMarkets",  E.int <| record.numMarkets)
+        , ("lastModified",  E.int <| record.lastModified)
+        , ("competitors",  E.list encodeCompetitor record.competitors)
+        , ("displayGroups",  E.list encodeDisplayGroup record.displayGroups)
         ]

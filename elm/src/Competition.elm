@@ -1,8 +1,8 @@
 module Competition exposing(Competition, decodeCompetition, encodeCompetition)
 
-import Json.Encode
-import Json.Decode
-import Json.Decode.Pipeline
+import Json.Encode as E
+import Json.Decode as D
+import Json.Decode.Pipeline exposing(required)
 
 import Path exposing(Path, decodePath, encodePath)
 import Event exposing(Event, decodeEvent, encodeEvent)
@@ -12,15 +12,15 @@ type alias Competition =
     , events : List Event.Event
     }
 
-decodeCompetition : Json.Decode.Decoder Competition
+decodeCompetition : D.Decoder Competition
 decodeCompetition =
-    Json.Decode.succeed Competition
-        |> Json.Decode.Pipeline.required "path" (Json.Decode.list decodePath)
-        |> Json.Decode.Pipeline.required "events" (Json.Decode.list decodeEvent)
+    D.succeed Competition
+        |> required "path" (D.list decodePath)
+        |> required "events" (D.list decodeEvent)
 
-encodeCompetition : Competition -> Json.Encode.Value
+encodeCompetition : Competition -> E.Value
 encodeCompetition record =
-    Json.Encode.object
-        [ ("path",  Json.Encode.list encodePath record.path)
-        , ("events",  Json.Encode.list encodeEvent record.events)
+    E.object
+        [ ("path",  E.list encodePath record.path)
+        , ("events",  E.list encodeEvent record.events)
         ]
