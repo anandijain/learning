@@ -5,8 +5,7 @@ import Http
 import Html.Events exposing (onClick)
 import Html exposing (..)
 import Html.Attributes exposing(..)
-import Maybe
-import Dict
+import Random
 
 import Json.Decode exposing (Decoder, field, string, index, decodeString)
 
@@ -36,7 +35,7 @@ main =
 type Model
   = Failure
   | Loading
-  | Success String
+  | Success String  -- suffix
 
 
 init : () -> (Model, Cmd Msg)
@@ -44,18 +43,22 @@ init _ =
   (Loading, getSport)
 
 
+type alias SportModel =
+  { sport : Sport
+  }
+
 -- UPDATE
 
 
 type Msg
-  = MorePlease
+  = NextSport
   | GotJson (Result Http.Error String)
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    MorePlease ->
+    nextSport ->
       (Loading, getSport)
 
     GotJson result ->
@@ -67,6 +70,18 @@ update msg model =
           (Failure, Cmd.none)
 
 
+sportGenerator : Random.Generator
+sportGenerator =
+  Random.uniform "basketball/nba"
+    [ "baseball/mlb"
+    , "football/nfl"
+    , "hockey/nhl"
+    , "esports"
+    , "tennis"
+    , "volleyball"
+    , "badminton"
+    , "table-tennis"
+    ]
 
 -- SUBSCRIPTIONS
 
@@ -84,45 +99,45 @@ view : Model -> Html Msg
 view model =
   div []
     [ h2 [] [ text "Moneylines" ]
-    , viewMoneylines model
+    , viewSport model
     ]
 
 
-viewMoneylines : Model -> Html Msg
-viewMoneylines model =
-  case model of
+viewSport : Model -> Html Msg
+viewSport model =
+  case model.status of
     Failure ->
       div []
         [ text "could not load"
-        , button [ onClick MorePlease ] [ text "different sport" ]
+        , button [ onClick getSport ] [ text "next sport" ]
         ]
     Loading ->
       text "Loading..."
 
-    Success fullJson ->
-      div []
-        [ button [ onClick MorePlease ] [ text "diff sport" ]
-        , button [ onClick MorePlease ] [ text fullJson ]
-        ]
-        
+    Success fullJson -> onSuccess fullJson
+
+
+onSuccess : String -> Html Msg
+onSuccess textData =
+  div []
+    [ button [ onClick nextSport ] [ text "next sport" ]
+    , button [ onClick nextSport ] [ text textData ]
+    ]
+
 
 -- HTTP
-
-
-
--- simpleDecoder : Decoder String
--- simpleDecoder =
---   field "events"
-
 
 
 getSport : Cmd Msg
 getSport = 
   Http.get
-    { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball/nba"
+    { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/"
     , expect = Http.expectString GotJson
     }
 
-getId : Decoder String
-getId =
-  index 0 (field "events" (index 0 (field "id" string)))
+
+
+
+
+
+

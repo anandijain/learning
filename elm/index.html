@@ -6129,6 +6129,34 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $author$project$Main$onSuccess = function (textData) {
+	return A2(
+		$elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$button,
+				_List_fromArray(
+					[
+						$elm$html$Html$Events$onClick($author$project$Main$MorePlease)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('diff sport')
+					])),
+				A2(
+				$elm$html$Html$button,
+				_List_fromArray(
+					[
+						$elm$html$Html$Events$onClick($author$project$Main$MorePlease)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(textData)
+					]))
+			]));
+};
 var $author$project$Main$viewMoneylines = function (model) {
 	switch (model.$) {
 		case 'Failure':
@@ -6153,32 +6181,7 @@ var $author$project$Main$viewMoneylines = function (model) {
 			return $elm$html$Html$text('Loading...');
 		default:
 			var fullJson = model.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick($author$project$Main$MorePlease)
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('diff sport')
-							])),
-						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick($author$project$Main$MorePlease)
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text(fullJson)
-							]))
-					]));
+			return $author$project$Main$onSuccess(fullJson);
 	}
 };
 var $author$project$Main$view = function (model) {
