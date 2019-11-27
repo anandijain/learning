@@ -85,16 +85,19 @@ viewMoneylines : Model -> Html Msg
 viewMoneylines model =
   case model of
     Failure ->
-      text "could not load"
-
+      div []
+        [ text "could not load"
+        , button [ onClick MorePlease ] [ text "different sport" ]
+        ]
     Loading ->
       text "Loading..."
 
     Success fullJson ->
-       text fullJson 
+      div []
+        [ button [ onClick MorePlease ] [ text "diff sport" ]
+        , button [ onClick MorePlease ] [ text  fullJson ]
+        ]
         
-
-
 
 -- HTTP
 
@@ -110,7 +113,7 @@ getSport : Cmd Msg
 getSport = 
   Http.get
     { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball/nba"
-    , expect = Http.expectJson GotJson getId
+    , expect = Http.expectString GotJson
     }
 
 getId : Decoder String
