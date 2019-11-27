@@ -21,7 +21,7 @@ TODO:
 -- MAIN
 
 
-main =
+document =
   Browser.element
     { init = init
     , update = update
