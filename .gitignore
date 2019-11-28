@@ -5,6 +5,7 @@
 *.png
 *.log
 *.js
+*.html
 
 .ipynb_checkpoints/
 __pycache__/
@@ -16,4 +17,3 @@ assets/
 
 
 neuro/local/
-
