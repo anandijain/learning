@@ -1,10 +1,10 @@
-module Decoders.Outcome exposing(Outcome, decodeOutcome, encodeOutcome)
+module Decoders.Outcome exposing (Outcome, decodeOutcome, encodeOutcome)
 
-import Json.Encode as E
+import Decoders.Price exposing (Price, decodePrice, encodePrice)
 import Json.Decode as D
-import Json.Decode.Pipeline exposing(required)
+import Json.Decode.Pipeline exposing (required)
+import Json.Encode as E
 
-import Decoders.Price exposing(Price, decodePrice, encodePrice)
 
 type alias Outcome =
     { id : String
@@ -19,22 +19,21 @@ type alias Outcome =
 decodeOutcome : D.Decoder Outcome
 decodeOutcome =
     D.succeed Outcome
-        |> required "id" (D.string)
-        |> required "description" (D.string)
-        |> required "status" (D.string)
-        |> required "type" (D.string)
-        |> required "competitorId" (D.string)
-        |> required "price" (decodePrice)
+        |> required "id" D.string
+        |> required "description" D.string
+        |> required "status" D.string
+        |> required "type" D.string
+        |> required "competitorId" D.string
+        |> required "price" decodePrice
 
 
 encodeOutcome : Outcome -> E.Value
 encodeOutcome record =
     E.object
-        [ ("id",  E.string <| record.id)
-        , ("description",  E.string <| record.description)
-        , ("status",  E.string <| record.status)
-        , ("type",  E.string <| record.outcomeType)
-        , ("competitorId",  E.string <| record.competitorId)
-        , ("price",  encodePrice <| record.price)
+        [ ( "id", E.string <| record.id )
+        , ( "description", E.string <| record.description )
+        , ( "status", E.string <| record.status )
+        , ( "type", E.string <| record.outcomeType )
+        , ( "competitorId", E.string <| record.competitorId )
+        , ( "price", encodePrice <| record.price )
         ]
-
