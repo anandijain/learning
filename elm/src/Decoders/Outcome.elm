@@ -1,10 +1,10 @@
-module Outcome exposing(Outcome, decodeOutcome, encodeOutcome)
+module Decoders.Outcome exposing(Outcome, decodeOutcome, encodeOutcome)
 
 import Json.Encode as E
 import Json.Decode as D
 import Json.Decode.Pipeline exposing(required)
 
-import Price exposing(Price, decodePrice, encodePrice)
+import Decoders.Price exposing(Price, decodePrice, encodePrice)
 
 type alias Outcome =
     { id : String

@@ -1,4 +1,4 @@
-module Period exposing(Period, decodePeriod, encodePeriod)
+module Decoders.Period exposing(Period, decodePeriod, encodePeriod)
 
 import Json.Encode as E
 import Json.Decode as D
