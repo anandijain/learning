@@ -5,15 +5,20 @@ import Browser exposing (Document, UrlRequest)
 import Browser.Navigation as Nav
 
 import Http
+import HttpBuilder
+import HttpBuilder exposing (Task)
 
 import Html exposing (..)
 import Html.Attributes exposing(..)
 import Html.Events exposing (onClick)
 import Url exposing(Url)
+import RemoteData exposing(WebData)
 
 import Json.Decode exposing (Decoder, field, string, index, decodeString)
 
-import Competition exposing(Competition, decodeCompetition, encodeCompetition)
+import Decoders.Competition exposing(Competition, decodeCompetition, encodeCompetition)
+
+
 
 {-
 TODO:
@@ -45,20 +50,54 @@ main =
 
 
 type alias Model =
-  { key : Nav.Key
-  , url : Url.Url
+  { competitions : WebData (List Competition)
   }
 
 
--- init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
--- init flags url key =
---   ( Model key url, Cmd.none )
+-- init : Maybe Viewer -> Url -> Nav.Key -> ( Model, Cmd Msg )
+-- init maybeViewer url navKey =
+--     changeRouteTo (Route.fromUrl url)
+--         (Redirect (Session.fromViewer navKey maybeViewer))
 
 
-init : Maybe Viewer -> Url -> Nav.Key -> ( Model, Cmd Msg )
-init maybeViewer url navKey =
-    changeRouteTo (Route.fromUrl url)
-        (Redirect (Session.fromViewer navKey maybeViewer))
+init : ( Model, Cmd Msg )
+init = 
+  let
+    model = {
+      competitions = RemoteData.Loading
+      }
+
+  in 
+  model 
+    ! [ getCompetitions
+        |> Task
+    
+    ]
+  ( {}, Cmd.none )
+
+
+-- Requests --
+
+
+-- getSport : Cmd Msg
+-- getSport = 
+--   Http.get
+--     { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball/nba"
+--     , expect = Http.expectString GotJson
+--     }
+
+decodeCompetitions : D.Decoder (List Competition)
+decodeCompetitions =
+    D.map (List.map Tuple.second) <| required "competitions" (D.list decodeCompetition)
+
+ 
+
+getCompetitions : Task.Task Never (WebData (List Competition))
+getCompetitions = 
+  HttpBuilder.get("https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball")
+    |> HttpBuilder.withExpect (Http.expectJson decodeCompetition)
+    |> HttpBuilder.toTask
+    |> RemoteData.fromTask 
 
 
 
@@ -152,17 +191,6 @@ onSuccess textData =
     [ button [ onClick NextSport ] [ text "next sport" ]
     , button [ onClick NextSport ] [ text textData ]
     ]
-
-
--- HTTP
-
-getSport : Cmd Msg
-getSport = 
-  Http.get
-    { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball/nba"
-    , expect = Http.expectString GotJson
-    }
-
 
 
 

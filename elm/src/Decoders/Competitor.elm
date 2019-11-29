@@ -1,4 +1,4 @@
-module Competitor exposing(Competitor, decodeCompetitor, encodeCompetitor)
+module Decoders.Competitor exposing(Competitor, decodeCompetitor, encodeCompetitor)
 
 import Json.Encode as E
 import Json.Decode as D

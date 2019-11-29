@@ -1,11 +1,11 @@
-module Event exposing(Event, decodeEvent, encodeEvent)
+module Decoders.Event exposing(Event, decodeEvent, encodeEvent)
 
 import Json.Encode as E
 import Json.Decode as D
 import Json.Decode.Pipeline exposing(required)
 
-import Competitor exposing(Competitor, decodeCompetitor, encodeCompetitor)
-import DisplayGroup exposing(DisplayGroup, decodeDisplayGroup, encodeDisplayGroup)
+import Decoders.Competitor exposing(Competitor, decodeCompetitor, encodeCompetitor)
+import Decoders.DisplayGroup exposing(DisplayGroup, decodeDisplayGroup, encodeDisplayGroup)
 
 type alias Event =
     { id : String

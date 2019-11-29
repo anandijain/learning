@@ -1,11 +1,11 @@
-module Market exposing(Market, decodeMarket, encodeMarket)
+module Decoders.Market exposing(Market, decodeMarket, encodeMarket)
 
 import Json.Encode as E
 import Json.Decode as D
 import Json.Decode.Pipeline exposing(required)
 
-import Outcome exposing(Outcome, decodeOutcome, encodeOutcome)
-import Period exposing(Period, decodePeriod, encodePeriod)
+import Decoders.Outcome exposing(Outcome, decodeOutcome, encodeOutcome)
+import Decoders.Period exposing(Period, decodePeriod, encodePeriod)
 
 
 type alias Market =

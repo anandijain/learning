@@ -1,4 +1,4 @@
-module Price exposing(Price, decodePrice, encodePrice)
+module Decoders.Price exposing(Price, decodePrice, encodePrice)
 
 import Json.Encode as E
 import Json.Decode as D

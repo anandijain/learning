@@ -1,10 +1,10 @@
-module DisplayGroup exposing(DisplayGroup, decodeDisplayGroup, encodeDisplayGroup)
+module Decoders.DisplayGroup exposing(DisplayGroup, decodeDisplayGroup, encodeDisplayGroup)
 
 import Json.Encode as E
 import Json.Decode as D
 import Json.Decode.Pipeline exposing(required)
 
-import Market exposing(Market, decodeMarket, encodeMarket)
+import Decoders.Market exposing(Market, decodeMarket, encodeMarket)
 
 type alias DisplayGroup =
     { id : String
