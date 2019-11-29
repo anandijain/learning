@@ -1,57 +1,50 @@
 module Main exposing (..)
 
-import Browser
-import Browser exposing (Document, UrlRequest)
-import Browser.Navigation as Nav
-
+import Browser exposing (sandbox)
+import Decoders.Competition exposing (Competition, decodeCompetition, encodeCompetition)
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Http
 import HttpBuilder
-import HttpBuilder exposing (Task)
-
-import Html exposing (..)
-import Html.Attributes exposing(..)
-import Html.Events exposing (onClick)
-import Url exposing(Url)
-import RemoteData exposing(WebData)
-
-import Json.Decode exposing (Decoder, field, string, index, decodeString)
-
-import Decoders.Competition exposing(Competition, decodeCompetition, encodeCompetition)
+import Json.Decode as D exposing (Decoder, decodeString, field, index, string)
+import Json.Decode.Pipeline as P
+import Json.Encode as E
+import RemoteData exposing (WebData)
+import Task
 
 
 
 {-
-TODO:
-  - format json into tables
-    - String -> Competition using Json.Decode
-    - mimic bov.parse_event to take List Event into row :: List String
-    - use cases to serialize row :: List String -> List Maybe Number
-  - route to game_id endpoints
+   TODO:
+     - format json into tables
+       - String -> Competition using Json.Decode
+       - mimic bov.parse_event to take List Event into row :: List String
+       - use cases to serialize row :: List String -> List Maybe Number
+     - route to game_id endpoints
 -}
-
-
 -- MAIN
 
 
-main : Program () Model Msg
+main : Program Never Model Msg
 main =
-  application
-    { init = init
-    , view = view
-    , update = update
-    , subscriptions = subscriptions
-    , onUrlChange = UrlChanged
-    , onUrlRequest = LinkClicked
-    }
+    Browser.sandbox
+        { view = view
+        , init = init
+        , update = update
+        , subscriptions = always Sub.none
+        }
 
 
 
 -- MODEL
 
 
-type alias Model =
-  { competitions : WebData (List Competition)
-  }
+type Model
+    = Failure
+    | Loading
+    | Success (List Competition)
+
 
 
 -- init : Maybe Viewer -> Url -> Nav.Key -> ( Model, Cmd Msg )
@@ -60,74 +53,59 @@ type alias Model =
 --         (Redirect (Session.fromViewer navKey maybeViewer))
 
 
-init : ( Model, Cmd Msg )
-init = 
-  let
-    model = {
-      competitions = RemoteData.Loading
-      }
-
-  in 
-  model 
-    ! [ getCompetitions
-        |> Task
-    
-    ]
-  ( {}, Cmd.none )
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( Loading, getCompetitions )
 
 
--- Requests --
 
+---- Requests ----
 
--- getSport : Cmd Msg
--- getSport = 
---   Http.get
---     { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball/nba"
---     , expect = Http.expectString GotJson
---     }
 
 decodeCompetitions : D.Decoder (List Competition)
 decodeCompetitions =
-    D.map (List.map Tuple.second) <| required "competitions" (D.list decodeCompetition)
 
- 
-
-getCompetitions : Task.Task Never (WebData (List Competition))
-getCompetitions = 
-  HttpBuilder.get("https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball")
-    |> HttpBuilder.withExpect (Http.expectJson decodeCompetition)
-    |> HttpBuilder.toTask
-    |> RemoteData.fromTask 
+    -- map decodeCompetition (D.list )
+    
+    -- D.succeed (List Competition)
+    --     |> required "competitions" (D.list decodeCompetition)
 
 
+getCompetitions : Cmd Msg
+getCompetitions =
+    Http.get
+        { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball"
+        , expect = Http.expectJson GotCompetitions decodeCompetitions
+        }
 
--- UPDATE
 
 
--- type Msg
---   = NextSport
---   | GotJson (Result Http.Error String)
+-- "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball"
+--     |> HttpBuilder.get
+--     |> HttpBuilder.withExpect (Http.expectJson GotCompetitions decodeCompetition)
+--     |> HttpBuilder.request
+---- UPDATE ----
 
 
 type Msg
-    = ChangedUrl Url
-    | ClickedLink UrlRequest
-    | GotHomeMsg Home.Msg
+    = Refresh
+    | GotCompetitions (Result Http.Error (List Competition))
 
 
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    NextSport ->
-      (Loading, getSport)
+    case msg of
+        Refresh ->
+            ( Loading, getCompetitions )
 
-    GotJson result ->
-      case result of
-        Ok fullJson ->
-          (Success fullJson, Cmd.none)
+        GotCompetitions result ->
+            case result of
+                Ok comps ->
+                    ( Success comps, Cmd.none )
 
-        Err _ ->
-          (Failure, Cmd.none)
+                Err _ ->
+                    ( Failure, Cmd.none )
+
 
 
 -- SUBSCRIPTIONS
@@ -135,65 +113,30 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.none
+    Sub.none
 
 
 
 -- VIEW
 
-view : Model -> Document Msg
+
+view : Model -> Html Msg
 view model =
-  { title = "URL Interceptor"
-  , body =
-      [ text "The current URL is: "
-      , b [] [ text (Url.toString model.url) ]
-      , ul []
-          [ viewLink "/home"
-          , viewLink "/index.html"
-          , viewLink "/nba"
-          , viewLink "/nfl"
-          , viewLink "/nhl"
-          ]
-      ]
-  }
+    case model of
+        Failure ->
+            div []
+                [ text "I could not load a random cat for some reason. "
+                , button [ onClick Refresh ] [ text "Try Again!" ]
+                ]
 
+        Loading ->
+            text "Loading..."
 
-viewLink : String -> Html msg
-viewLink path =
-  li [] [ a [ href path ] [ text path ] ]
+        Success comps ->
+            div []
+                [ button [ onClick Refresh, style "display" "block" ] [ text "More Please!" ]
+                , pre [ comps ] []
+                ]
 
--- view : Model -> Html Msg
--- view model =
---   div []
---     [ h2 [] [ text "Moneylines" ]
---     , viewSport model
---     ]
-
-
-
--- viewSport : Model -> Html Msg
--- viewSport model =
---   case model of
---     Failure ->
---       div []
---         [ text "could not load"
---         , button [ onClick NextSport ] [ text "next sport" ]
---         ]
---     Loading ->
---       text "Loading..."
-
---     Success fullJson -> onSuccess fullJson
-
-
-onSuccess : String -> Html Msg
-onSuccess textData =
-  div []
-    [ button [ onClick NextSport ] [ text "next sport" ]
-    , button [ onClick NextSport ] [ text textData ]
-    ]
-
-
-
-
-
-
+        _ ->
+            "other"
