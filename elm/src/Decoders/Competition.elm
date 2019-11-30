@@ -12,6 +12,22 @@ import Path exposing (Path, decodePath, encodePath)
 --     { competitions : List Competition
 --     }
 
+json = """{
+    "competitors": [
+        {
+            "id": "6006148-548",
+            "name": "Dallas Mavericks",
+            "home": true
+        },
+        {
+            "id": "6006148-11757497",
+            "name": "Los Angeles Clippers",
+            "home": false
+        }
+    ]
+}"""
+
+-- decodeCompetition Competition json
 
 type alias Competition =
     { path : List Path
