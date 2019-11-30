@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import Browser exposing (sandbox)
 import Decoders.Competition exposing (Competition, decodeCompetition, encodeCompetition)
+import Dict
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -11,6 +12,7 @@ import Json.Decode as D exposing (Decoder, decodeString, field, index, string)
 import Json.Decode.Pipeline as P
 import Json.Encode as E
 import RemoteData exposing (WebData)
+import String.Conversions exposing (fromList, fromRecord)
 import Task
 
 
@@ -26,13 +28,12 @@ import Task
 -- MAIN
 
 
-main : Program Never Model Msg
 main =
-    Browser.sandbox
-        { view = view
-        , init = init
+    Browser.element
+        { init = init
         , update = update
-        , subscriptions = always Sub.none
+        , subscriptions = subscriptions
+        , view = view
         }
 
 
@@ -62,28 +63,25 @@ init _ =
 ---- Requests ----
 
 
-decodeCompetitions : D.Decoder (List Competition)
-decodeCompetitions =
+type alias Competitions =
+    List Competition
 
-    -- map decodeCompetition (D.list )
-    
-    -- D.succeed (List Competition)
-    --     |> required "competitions" (D.list decodeCompetition)
+
+decodeCompetitions : D.Decoder Competitions
+decodeCompetitions =
+    D.succeed Competitions
+        |> required D.list decodeCompetition
 
 
 getCompetitions : Cmd Msg
 getCompetitions =
     Http.get
-        { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball"
+        { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball/nba"
         , expect = Http.expectJson GotCompetitions decodeCompetitions
         }
 
 
 
--- "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball"
---     |> HttpBuilder.get
---     |> HttpBuilder.withExpect (Http.expectJson GotCompetitions decodeCompetition)
---     |> HttpBuilder.request
 ---- UPDATE ----
 
 
@@ -125,7 +123,7 @@ view model =
     case model of
         Failure ->
             div []
-                [ text "I could not load a random cat for some reason. "
+                [ text "couldn't load "
                 , button [ onClick Refresh ] [ text "Try Again!" ]
                 ]
 
@@ -134,9 +132,20 @@ view model =
 
         Success comps ->
             div []
-                [ button [ onClick Refresh, style "display" "block" ] [ text "More Please!" ]
-                , pre [ comps ] []
+                [ div []
+                    [ button [ onClick Refresh, style "display" "block" ] [ text "More Please!" ] ]
+                , div []
+                    [ ul [ class "events" ]
+                        [ li [] (List.map text (List.map .id (List.concatMap .events comps))) ]
+                    ]
                 ]
 
-        _ ->
-            "other"
+
+
+-- viewComp : List Competition -> Html Msg
+-- viewComp comp =
+--     [ ul [ class "events" ]
+--         li [] (List.map text (List.concatMap .id (List.concatMap .events comp)))
+--     ]
+-- map viewEvent comp.events
+-- viewEvent : Event -> Html Msg
