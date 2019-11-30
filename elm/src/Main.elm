@@ -44,7 +44,7 @@ main =
 type Model
     = Failure
     | Loading
-    | Success (List Competition)
+    | Success String
 
 
 
@@ -61,23 +61,21 @@ init _ =
 
 
 ---- Requests ----
+-- type alias Competitions =
+--     { competitions : List Competition
+--     }
 
 
-type alias Competitions =
-    List Competition
-
-
-decodeCompetitions : D.Decoder Competitions
+decodeCompetitions : D.Decoder (List Competition)
 decodeCompetitions =
-    D.succeed Competitions
-        |> required D.list decodeCompetition
+    D.list decodeCompetition
 
 
 getCompetitions : Cmd Msg
 getCompetitions =
     Http.get
         { url = "https://www.bovada.lv/services/sports/event/v2/events/A/description/basketball/nba"
-        , expect = Http.expectJson GotCompetitions decodeCompetitions
+        , expect = Http.expectString GotCompetitions -- decodeCompetitions
         }
 
 
@@ -87,7 +85,7 @@ getCompetitions =
 
 type Msg
     = Refresh
-    | GotCompetitions (Result Http.Error (List Competition))
+    | GotCompetitions (Result Http.Error String)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -135,9 +133,14 @@ view model =
                 [ div []
                     [ button [ onClick Refresh, style "display" "block" ] [ text "More Please!" ] ]
                 , div []
-                    [ ul [ class "events" ]
-                        [ li [] (List.map text (List.map .id (List.concatMap .events comps))) ]
-                    ]
+                    [ text comps ]
+
+                -- [ ul [ class "events" ]
+                --     [ li [] (List.map text (List.map .id (List.concatMap .events comps))) ]
+                -- ]
+                -- [ ul [ class "events" ]
+                --     [ li [] (List.map text  comps) ]
+                -- ]
                 ]
 
 
