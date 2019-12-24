@@ -6,7 +6,7 @@
 *.log
 *.js
 *.html
-
+.vscode/
 .ipynb_checkpoints/
 __pycache__/
 
