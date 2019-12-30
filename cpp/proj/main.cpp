@@ -14,6 +14,7 @@ class Person{
             name = aName;
             major = aMajor;
             gpa = aGPA;
+            
         }
 };
 
@@ -38,7 +39,13 @@ int main(int argc, char *argv[])
         cout << argc << endl;
         cout << "num of args must be multiple of 3 w remainder 1" << endl;
         return 0;
+    } else if (argc == 1)
+    {
+        Person Anand = Person("Anand", "Computer Science", 2.7);
+        writePerson(Anand, true);
+        return 0;
     }
+    
     // Person[] people;
     bool tf = true;
     for (int i = 3; i < argc; i+= 3){
