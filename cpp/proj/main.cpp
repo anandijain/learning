@@ -5,6 +5,8 @@
 using namespace std;
 
 class Person{
+    private:
+        string id;
     public:
         string name;
         string major;
