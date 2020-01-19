@@ -22,7 +22,7 @@ device = torch.device("cpu")
 print(device)
 SAMPLE_RATE = 44100
 WINDOW_LEN = SAMPLE_RATE * 5
-LOG_INTERVAL = 500
+LOG_INTERVAL = 5
 BATCH_SIZE = 128
 BOTTLENECK = 50
 
@@ -35,6 +35,7 @@ def loss_function(recon_x, x, mu, logvar):
     KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
     return BCE + KLD
 
+loss_fn = nn.MSELoss()
 
 def train(train_loader, epoch):
     model.train()
@@ -43,10 +44,8 @@ def train(train_loader, epoch):
         data = data.to(device)
         optimizer.zero_grad()
         recon_batch, mu, logvar = model(data)
-        try:
-            loss = loss_function(recon_batch, data, mu, logvar)
-        except:
-            continue
+        loss = loss_function(recon_batch, data, mu, logvar)
+        # loss = loss_fn()
         writer.add_scalar('train_loss', loss)
         loss.backward()
         train_loss += loss.item()

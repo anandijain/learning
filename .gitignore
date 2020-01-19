@@ -8,7 +8,7 @@
 *.js
 *.html
 *.pth
-
+*model.pth
 
 .vscode/
 .ipynb_checkpoints/

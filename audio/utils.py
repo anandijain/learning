@@ -2,7 +2,7 @@ import os
 import torch
 import torchaudio
 from torch.utils.data import Dataset, DataLoader
-
+import numpy as np
 DIRECTORY = "/home/sippycups/Music/2018/"
 FILE_NAMES = os.listdir(DIRECTORY)
 
@@ -41,6 +41,8 @@ class Waveys(Dataset):
 
     def __getitem__(self, idx):
         x = self.w[idx*self.window:(idx + 1)*self.window]
+        if np.nan in x:
+            print('oh no')
         return x.view(1, -1)
 
 
