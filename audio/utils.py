@@ -29,10 +29,10 @@ def data_windows(n: int = 100000):
 
 class Waveys(Dataset):
     def __init__(self, window, fn='81 - 2018 - 09 2 18 18.wav'):
-        wave = wavey(fn=fn)
+        wave = torchaudio.load(filepath=fn)
         self.w = wave[0][0]
         self.sample_rate = wave[1]
-        print(self.sample_rate)
+        # print(self.sample_rate)
         self.length = len(self.w) // window - 1
         self.window = window
 
@@ -41,9 +41,6 @@ class Waveys(Dataset):
 
     def __getitem__(self, idx):
         x = self.w[idx*self.window:(idx + 1)*self.window]
-
-        # warning
-        # x = self.w[10*self.window:11*self.window]
         return x.view(1, -1)
 
 
