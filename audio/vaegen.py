@@ -17,10 +17,11 @@ import utils
 
 writer = SummaryWriter()
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu"
 print(device)
 SAMPLE_RATE = 44100
-WINDOW_LEN = SAMPLE_RATE  # // 2
+WINDOW_LEN = SAMPLE_RATE * 5 
 LOG_INTERVAL = 500
 BATCH_SIZE = 128
 BOTTLENECK = 50
