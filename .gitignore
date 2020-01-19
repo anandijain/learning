@@ -7,6 +7,9 @@
 *.wav
 *.js
 *.html
+*.pth
+
+
 .vscode/
 .ipynb_checkpoints/
 __pycache__/
@@ -14,6 +17,6 @@ __pycache__/
 
 random/py3.8/
 data/
-
+runs/
 
 neuro/local/
