@@ -17,11 +17,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-<<<<<<< HEAD
 import utils
-=======
-import utils 
->>>>>>> e60167c381df48112b1ddea943d77929a617e14f
 
 from flask import Flask, Response, request, render_template
 

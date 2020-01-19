@@ -15,6 +15,11 @@ def wavey(fn=FILE_NAMES[0]):
     return torchaudio.load(DIRECTORY + fn)
 
 
+def init_run(fn, )
+
+
+    return tensor, relative_path, sample_rate
+
 def data_windows(n: int = 100000):
     m = len(FILE_NAMES)
     d = {}
