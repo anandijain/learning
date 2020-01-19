@@ -87,10 +87,13 @@ def weights_init(m):
 def train(load_trained=False, write_gen=True):
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     # device = torch.device('cpu')
-
+    time_dir = time.asctime()
     if write_gen:
         if not os.path.isdir(FAKES_PATH):
             os.mkdir(FAKES_PATH)
+            os.mkdir(time_dir)
+
+    WAV_WRITE_PATH = FAKES_PATH + time_dir + '/'
 
     ngpu = 1
     workers = 4
@@ -153,10 +156,8 @@ def train(load_trained=False, write_gen=True):
 
             fake = netG(noise)
             label.fill_(fake_label)
-            # print(f'fake :{fake}')
-
             output = netD(fake.detach()).view(-1)
-            print(f'fake_desc out: {output}')
+
             errD_fake = criterion(output, label)
             errD_fake.backward()
             D_G_z1 = output.mean().item()
@@ -170,13 +171,13 @@ def train(load_trained=False, write_gen=True):
             errG.backward()
             D_G_z2 = output.mean().item()
             optimizerG.step()
-
+            
             with torch.no_grad():
                 fake = netG(fixed_noise).detach().cpu()
                 if write_gen:
-                    write(FAKES_PATH + 'fake_' + str(epoch) + '_' +
+                    write(WAV_WRITE_PATH + 'fake_' + str(epoch) + '_' +
                           str(i) + '.wav', 44100, fake.detach().cpu().numpy().T)
-                          
+                    
                     # write(FAKES_PATH + 'real_' + str(epoch) + '_' + str(i) +
                     #       '.wav', 44100, real_cpu.detach().cpu().numpy().T)
 
@@ -184,6 +185,8 @@ def train(load_trained=False, write_gen=True):
                 print('[%d/%d][%d/%d]\tLoss_D: %.4f\tLoss_G: %.4f\tD(x): %.4f\tD(G(z)): %.4f / %.4f'
                       % (epoch, num_epochs, i, len(dataloader),
                          errD.item(), errG.item(), D_x, D_G_z1, D_G_z2))
+
+                print(f'fake: {fake}')
 
             G_losses.append(errG.item())
             D_losses.append(errD.item())
