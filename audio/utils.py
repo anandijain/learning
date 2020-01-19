@@ -3,7 +3,7 @@ import torch
 import torchaudio
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
-DIRECTORY = "/home/sippycups/Music/2018/"
+DIRECTORY = "/home/sippycups/Music/2019/"
 FILE_NAMES = os.listdir(DIRECTORY)
 
 
@@ -28,22 +28,25 @@ def data_windows(n: int = 100000):
 
 
 class Waveys(Dataset):
-    def __init__(self, window, fn='81 - 2018 - 09 2 18 18.wav'):
+    def __init__(self, window, fn='5 14 19 matt anand ilan.wav'):
         wave = torchaudio.load(filepath=fn)
-        self.w = wave[0][0]
+        self.w = wave[0]
         self.sample_rate = wave[1]
         # print(self.sample_rate)
-        self.length = len(self.w) // window - 1
+        self.length = len(self.w[0]) // window - 1
         self.window = window
 
     def __len__(self):
         return self.length
 
     def __getitem__(self, idx):
-        x = self.w[idx*self.window:(idx + 1)*self.window]
+        l = self.w[0][idx*self.window:(idx + 1)*self.window]
+        r = self.w[1][idx*self.window:(idx + 1)*self.window]
+        x = torch.cat([l, r])
+        # print(x)
         if np.nan in x:
             print('oh no')
-        return x.view(1, -1)
+        return l.view(1, -1)
 
 
 class Files(Dataset):
