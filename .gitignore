@@ -4,6 +4,7 @@
 *.mp4
 *.png
 *.log
+*.wav
 *.js
 *.html
 .vscode/

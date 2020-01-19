@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-import utils 
+import utils
 
 from flask import Flask, Response, request, render_template
 
@@ -32,22 +32,22 @@ def hello_world():
     return str(utils.FILE_NAMES)
 
 
-@app.route('/sgrams/<int:i>')
+@app.route("/sgrams/<int:i>")
 def display_sgram(i):
     song_name = utils.FILE_NAMES[i]
-    print(f'song_name: {song_name}')
+    print(f"song_name: {song_name}")
     waveform = utils.wavey(song_name)
     specgram = utils.sgram(waveform)
 
     fig = Figure(figsize=(20, 10), dpi=500)
     axis = fig.add_subplot(1, 1, 1, title=str(song_name))
-    axis.imshow(specgram.log2()[0, :, :].numpy(), cmap='rainbow')
+    axis.imshow(specgram.log2()[0, :, :].numpy(), cmap="rainbow")
     output = io.BytesIO()
     FigureCanvasAgg(fig).print_png(output)
     return Response(output.getvalue(), mimetype="image/png")
 
 
-@app.route('/waves/<int:i>')
+@app.route("/waves/<int:i>")
 def display_wave(i):
     song_name = utils.FILE_NAMES[i]
     wave = utils.wavey(song_name)
