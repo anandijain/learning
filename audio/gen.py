@@ -17,14 +17,14 @@ import matplotlib.pyplot as plt
 import utils
 import gan
 
-GEN_PATH = 'gen.pth'
-DISC_PATH = 'disc.pth'
+GEN_PATH = 'gen_smol.pth'
+DISC_PATH = 'disc_smol.pth'
 DIRECTORY = "/home/sippycups/Music/2018/"
 FILE_NAMES = os.listdir(DIRECTORY)
 
 FAKES_PATH = 'samples/'
 
-WINDOW_LEN = 40000
+WINDOW_LEN = 1024
 GEN_LATENT = WINDOW_LEN // 100
 
 def weights_init(m):
@@ -53,16 +53,16 @@ def prep(load_trained=True, write_gen=True):
 
     ngpu = 1
     workers = 4
-    batch_size = 128
+    batch_size = 1
     lr = 0.001
     beta1 = 0.5
 
-    dataset = utils.Waveys()
+    dataset = utils.Waveys(window=WINDOW_LEN)
     dataloader = DataLoader(dataset, batch_size=batch_size,
                             shuffle=True, num_workers=workers)
 
-    netG = gan.Generator().to(device)
-    netD = gan.Discriminator().to(device)
+    netG = gan.Generator(GEN_LATENT, WINDOW_LEN).to(device)
+    netD = gan.Discriminator(WINDOW_LEN).to(device)
 
     if device.type == 'cuda':
         netG = nn.DataParallel(netG, list(range(ngpu)))
@@ -73,6 +73,10 @@ def prep(load_trained=True, write_gen=True):
             netG.load_state_dict(torch.load(GEN_PATH))
             netD.load_state_dict(torch.load(DISC_PATH))
         except RuntimeError:
+            print('applying new weights')
+            netG.apply(weights_init)
+            netD.apply(weights_init)
+        except FileNotFoundError:
             print('applying new weights')
             netG.apply(weights_init)
             netD.apply(weights_init)
@@ -124,12 +128,11 @@ def train_epoch(d=None, load_trained=True, write_gen=True):
     iters = 0
 
     for i, data in enumerate(dataloader, 0):
-        print(f'i: {i}')
         netD.zero_grad()
 
         real_cpu = data[0].to(device)
-
         b_size = real_cpu.size(0)
+
         label = torch.full((b_size,), real_label, device=device)
         output = netD(real_cpu).view(-1)
 
@@ -166,11 +169,13 @@ def train_epoch(d=None, load_trained=True, write_gen=True):
                   % (i, len(dataloader),
                      errD.item(), errG.item(), D_x, D_G_z1, D_G_z2))
 
+        if i % 500 == 0:
+            print(f'real: {real_cpu}')
             print(f'fake: {fake}')
 
         G_losses.append(errG.item())
         D_losses.append(errD.item())
-        fakes.append(fake.detach().cpu().numpy().T)
+        fakes.append(fake.detach().cpu())
         iters += 1
 
     torch.save(netG.state_dict(), GEN_PATH)
@@ -179,7 +184,7 @@ def train_epoch(d=None, load_trained=True, write_gen=True):
     return fakes, G_losses, D_losses
 
 
-def train(epochs=250):
+def train(epochs=1000):
     d = prep()
     print("Starting Training Loop...")
     for i in range(epochs):

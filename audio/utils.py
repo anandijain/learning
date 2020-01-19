@@ -5,7 +5,6 @@ from torch.utils.data import Dataset, DataLoader
 
 DIRECTORY = "/home/sippycups/Music/2018/"
 FILE_NAMES = os.listdir(DIRECTORY)
-WINDOW_LEN = 10000
 
 
 def sgram(wave):
@@ -29,7 +28,7 @@ def data_windows(n: int = 100000):
 
 
 class Waveys(Dataset):
-    def __init__(self, fn='81 - 2018 - 09 2 18 18.wav', window=WINDOW_LEN):
+    def __init__(self, window, fn='81 - 2018 - 09 2 18 18.wav'):
         wave = wavey(fn=fn)
         self.w = wave[0][0]
         self.sample_rate = wave[1]
@@ -41,10 +40,10 @@ class Waveys(Dataset):
         return self.length
 
     def __getitem__(self, idx):
-        # x = self.w[idx*self.window:(idx + 1)*self.window]
+        x = self.w[idx*self.window:(idx + 1)*self.window]
 
         # warning
-        x = self.w[10*self.window:11*self.window]
+        # x = self.w[10*self.window:11*self.window]
         return x.view(1, -1)
 
 
