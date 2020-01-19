@@ -15,6 +15,7 @@ from scipy.io.wavfile import write
 import matplotlib.pyplot as plt
 
 import utils
+import gan
 
 GEN_PATH = 'gen.pth'
 DISC_PATH = 'disc.pth'
@@ -25,56 +26,6 @@ FAKES_PATH = 'samples/'
 
 WINDOW_LEN = 40000
 GEN_LATENT = WINDOW_LEN // 100
-
-
-class Generator(nn.Module):
-    def __init__(self, window=WINDOW_LEN):
-        super(Generator, self).__init__()
-        self.l1 = nn.Linear(GEN_LATENT, GEN_LATENT)
-        # self.l2 = nn.Linear(GEN_LATENT, WINDOW_LEN // 10)
-        # self.l3 = nn.Linear(WINDOW_LEN // 10, GEN_LATENT)
-        self.l4 = nn.Linear(GEN_LATENT, WINDOW_LEN)
-
-    def forward(self, x):
-        x = F.relu(self.l1(x))
-        # x = F.relu(self.l2(x))
-        # x = F.relu(self.l3(x))
-        x = F.relu(self.l4(x))
-        return x
-
-
-class Discriminator(nn.Module):
-    def __init__(self, window=WINDOW_LEN):
-        super(Discriminator, self).__init__()
-        self.l1 = nn.Linear(WINDOW_LEN, WINDOW_LEN // 16)
-        # self.l2 = nn.Linear(WINDOW_LEN // 4, WINDOW_LEN // 16)
-        # self.l3 = nn.Linear(WINDOW_LEN // 16, WINDOW_LEN // 16)
-        self.l4 = nn.Linear(WINDOW_LEN // 16, 1)
-
-    def forward(self, x):
-        x = F.relu(self.l1(x))
-        # x = F.relu(self.l2(x))
-        # x = F.relu(self.l3(x))
-        x = F.relu(self.l4(x))
-        return F.softmax(x, dim=0)
-
-
-class Waveys(Dataset):
-    def __init__(self, window=WINDOW_LEN):
-        wave = utils.wavey(filename='81 - 2018 - 09 2 18 18.wav')
-        self.w = wave[0][0]
-        self.sample_rate = wave[1]
-        print(self.sample_rate)
-        self.length = len(self.w) // window - 1
-        self.window = window
-
-    def __len__(self):
-        return self.length
-
-    def __getitem__(self, idx):
-        x = self.w[idx*self.window:(idx + 1)*self.window]
-        return x.view(1, -1)
-
 
 def weights_init(m):
     classname = m.__class__.__name__
@@ -106,12 +57,12 @@ def prep(load_trained=True, write_gen=True):
     lr = 0.001
     beta1 = 0.5
 
-    dataset = Waveys()
+    dataset = utils.Waveys()
     dataloader = DataLoader(dataset, batch_size=batch_size,
                             shuffle=True, num_workers=workers)
 
-    netG = Generator().to(device)
-    netD = Discriminator().to(device)
+    netG = gan.Generator().to(device)
+    netD = gan.Discriminator().to(device)
 
     if device.type == 'cuda':
         netG = nn.DataParallel(netG, list(range(ngpu)))
@@ -210,15 +161,6 @@ def train_epoch(d=None, load_trained=True, write_gen=True):
 
         writer.add_scalar('errG',  errG, iters)
 
-        with torch.no_grad():
-            fake = netG(fixed_noise).detach().cpu()
-            if write_gen:
-                write(WAV_WRITE_PATH + 'fake_' +
-                      str(i) + '.wav', 44100, fake.detach().cpu().numpy().T)
-
-                # write(FAKES_PATH + 'real_' + str(epoch) + '_' + str(i) +
-                #       '.wav', 44100, real_cpu.detach().cpu().numpy().T)
-
         if i % 50 == 0:
             print('[%d/%d]\tLoss_D: %.4f\tLoss_G: %.4f\tD(x): %.4f\tD(G(z)): %.4f / %.4f'
                   % (i, len(dataloader),
@@ -228,7 +170,7 @@ def train_epoch(d=None, load_trained=True, write_gen=True):
 
         G_losses.append(errG.item())
         D_losses.append(errD.item())
-        fakes.append(fake)
+        fakes.append(fake.detach().cpu().numpy().T)
         iters += 1
 
     torch.save(netG.state_dict(), GEN_PATH)
@@ -241,11 +183,13 @@ def train(epochs=250):
     d = prep()
     print("Starting Training Loop...")
     for i in range(epochs):
-        # print(f'megapoch {i}')
-        data, G_losses, D_losses = train_epoch(d=d)
-    return data, G_losses, D_losses
+        fakes, G_losses, D_losses = train_epoch(d=d)
+        for fake in fakes:
+            torchaudio.save(d['wav_write_path'] + 'fake_' +
+                            str(i) + '.wav', fake, 44100)
+    return fakes, G_losses, D_losses
 
 
 if __name__ == "__main__":
     
-    d, G, D = train()
+    f, G, D = train()
