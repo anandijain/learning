@@ -8,8 +8,17 @@ index:
     - vaegen.py: given a wav file, trains a vae to reproduce the song for given lengths
     - gan.py: (not working really) trying to generate raw audio signal
 
-gen usage:
+# gen usage:
 
-```python
+* first clone repo
+* move wav file into learning/audio/
+* train vae
 
-import vaegen
+# code snippet
+
+    ```python
+
+    import vaegen
+    vaegen.train([YOUR WAV FILE], epochs=5, save=True)
+
+    ```

@@ -57,7 +57,7 @@ def prep(load_trained=True, write_gen=True):
     lr = 0.001
     beta1 = 0.5
 
-    dataset = utils.Waveys(window=WINDOW_LEN)
+    dataset = utils.WaveSet(window=WINDOW_LEN)
     dataloader = DataLoader(dataset, batch_size=batch_size,
                             shuffle=True, num_workers=workers)
 

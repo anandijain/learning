@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 
 class VAE(nn.Module):
-    def __init__(self, dim, middle=800, bottleneck=50):
+    def __init__(self, dim, middle=400, bottleneck=100):
         super(VAE, self).__init__()
         self.dim = dim
         self.fc1 = nn.Linear(dim, middle)
@@ -30,3 +30,30 @@ class VAE(nn.Module):
         mu, logvar = self.encode(x)
         z = self.reparameterize(mu, logvar)
         return self.decode(z), mu, logvar
+
+
+class DenseVAE(nn.Module):
+    def __init__(self, dim, middle=400, bottleneck=100):
+        super(DenseVAE, self).__init__()
+        self.dim = dim
+        self.middle = middle
+        self.bottleneck = bottleneck
+        self.l1 = nn.Linear(dim, middle)
+        self.l2 = nn.Linear(middle, bottleneck)
+        self.l3 = nn.Linear(bottleneck, middle)
+        self.l4 = nn.Linear(middle, middle)
+        self.l5 = nn.Linear(middle, dim)
+
+    def decode(self, z):
+        z = torch.tanh(self.l3(z))
+        z = torch.tanh(self.l4(z))
+        z = self.l5(z)
+        print(z.shape)
+        return torch.sigmoid(z)
+
+    def forward(self, x):
+        x = torch.tanh(self.l1(x))
+        x = torch.tanh(self.l2(x))
+        x = torch.tanh(self.l3(x))
+        x = torch.sigmoid(self.l4(x))
+        return x
