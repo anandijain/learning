@@ -23,11 +23,25 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # device = torch.device("cpu")
 print(device)
 
+#CUTOFF_FREQ = 12000
 LOG_INTERVAL = 100
-BATCH_SIZE = 32
-WINDOW_SECONDS = 2 # n
-MIDDLE = 100
-BOTTLENECK = 50
+
+BATCH_SIZE = 64
+WINDOW_SECONDS = 1  # n
+MIDDLE = 600  # 11025 # 22050 # 44100
+BOTTLENECK = 500
+EPOCHS = 100
+START_SAVING_AT = 0
+
+# works on gpu
+CONFIG_1 = {
+    'WINDOW_SECONDS': 2,  # n
+    'MIDDLE': 300,
+    'BOTTLENECK': 200,
+}
+
+MODEL_FN = f'n_{WINDOW_SECONDS}_mid_{MIDDLE}_bot_{BOTTLENECK}.pth'
+FILE_NAME = '/home/sippycups/Music/misc/81 - misc - 18 9 13 17.wav'
 
 
 def train_epoch(d, epoch: int, save=False):
@@ -50,7 +64,6 @@ def train_epoch(d, epoch: int, save=False):
         loss = utils.loss_function(recon_batch, data, mu, logvar)
         loss.backward()
         idx = len(dataset) * epoch + batch_idx
-        print(f'idx :{idx}')
 
         d['writer'].add_scalar('train_loss', loss.item(), global_step=idx)
 
@@ -92,6 +105,11 @@ def prep(fn: str):
 
     model = vae.VAE(dim=window_len*2, bottleneck=BOTTLENECK,
                     middle=MIDDLE).to(device)
+    try:
+        model.load_state_dict(torch.load(MODEL_FN))
+        print(f'loaded: {MODEL_FN}')
+    except FileNotFoundError:
+        pass
     print(model)
     optimizer = optim.Adam(model.parameters())
     writer = SummaryWriter(
@@ -109,28 +127,38 @@ def prep(fn: str):
     return d
 
 
-def train(fn='9_25_19.wav', epochs=50, save=True, save_model=True):
+def train(fn=FILE_NAME, epochs=EPOCHS, start_saving_at=START_SAVING_AT, save=True, save_model=True, lopass=False):
     d = prep(fn)
     short_fn = utils.full_fn_to_name(fn)
     y_hats = []
     for epoch in range(1, epochs + 1):  # [epochs, 2, n]
-        y_hats.append(train_epoch(d, epoch))
+        print(f'epoch: {epoch} {short_fn}')
+        if epoch < start_saving_at:
+            train_epoch(d, epoch)
+        else:
+            y_hat = train_epoch(d, epoch)
+            # takes too long
+            # if lopass:
+            #     y_hat = torchaudio.functional.lowpass_biquad(
+            #         y_hat.view(1, 2, -1), d['sr'], CUTOFF_FREQ)
+            #       print(f'lopassed: {y_hat}')
+            y_hats.append(y_hat.view(2, -1))
 
     song = torch.cat(y_hats, dim=1)
     print(song)
 
     if save:
-        torchaudio.save(
-            d['path'] + f'gen_{short_fn}_n_{WINDOW_SECONDS}.wav', song, d['sr'])
+        save_wavfn = f'gen_{short_fn}_n_{WINDOW_SECONDS}_mid_{MIDDLE}_bot_{BOTTLENECK}.wav'
+
+        torchaudio.save(d['path'] + save_wavfn, song, d['sr'])
     if save_model:
-        torch.save(d["m"].state_dict(), short_fn + '.pth')
+        torch.save(d["m"].state_dict(), MODEL_FN)
     return song
 
 
 def gen_folder(folder="/home/sippycups/Music/2019/"):
     # broken
     fns = glob.glob(f'{folder}/**.wav')
-    print()
     for i, wavfn in enumerate(fns):
         print(f'{i}: {wavfn}')
         try:

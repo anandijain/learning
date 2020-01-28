@@ -25,7 +25,8 @@ FILE_NAMES = os.listdir(DIRECTORY)
 FAKES_PATH = 'samples/'
 
 WINDOW_LEN = 1024
-GEN_LATENT = WINDOW_LEN // 100
+# GEN_LATENT = WINDOW_LEN // 100
+GEN_LATENT = 1024
 
 def weights_init(m):
     classname = m.__class__.__name__
