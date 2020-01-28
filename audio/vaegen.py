@@ -1,6 +1,7 @@
 """
 
 """
+import glob
 import os
 import time
 
@@ -22,10 +23,12 @@ import vae
 device = torch.device("cpu")
 print(device)
 
-LOG_INTERVAL = 10
-BATCH_SIZE = 16
-BOTTLENECK = 100
-WINDOW_SECONDS = 4
+LOG_INTERVAL = 100
+BATCH_SIZE = 32
+WINDOW_SECONDS = 4 # n
+MIDDLE = 200
+BOTTLENECK = 50
+
 
 def train_epoch(d, epoch: int, save=False):
 
@@ -35,7 +38,7 @@ def train_epoch(d, epoch: int, save=False):
     train_loader = d['loader']
     sample_rate = d['sr']
     path = d['path']
-    
+
     model.train()
     train_loss = 0
     for batch_idx, data in enumerate(train_loader):
@@ -54,14 +57,14 @@ def train_epoch(d, epoch: int, save=False):
         train_loss += loss.item()
         optimizer.step()
 
-        if batch_idx % LOG_INTERVAL == 0:
-            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                epoch, batch_idx * len(data), len(train_loader.dataset),
-                100. * batch_idx / len(train_loader),
-                loss.item() / len(data)))
+        # if batch_idx % LOG_INTERVAL == 0:
+        #     print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+        #         epoch, batch_idx * len(data), len(train_loader.dataset),
+        #         100. * batch_idx / len(train_loader),
+        #         loss.item() / len(data)))
 
-    print('====> Epoch: {} Average loss: {:.4f}'.format(
-          epoch, train_loss / len(train_loader.dataset)))
+    # print('====> Epoch: {} Average loss: {:.4f}'.format(
+    #       epoch, train_loss / len(train_loader.dataset)))
 
     with torch.no_grad():
         sample = torch.randn(1, BOTTLENECK).to(device)
@@ -71,14 +74,14 @@ def train_epoch(d, epoch: int, save=False):
 
 
 def prep(fn: str):
+    short_fn = utils.full_fn_to_name(fn)
 
-    path = 'samples/' + fn + '/'
+    path = 'samples/' + short_fn + '/'
 
     try:
         os.makedirs(path)
     except FileExistsError:
         print(f'warning: going to overwrite {path}')
-
 
     dataset = utils.WaveSet(fn, WINDOW_SECONDS)
     print(f'len(dataset): {len(dataset)} (num of windows)')
@@ -87,10 +90,12 @@ def prep(fn: str):
 
     train_loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 
-    model = vae.VAE(dim=window_len*2, bottleneck=BOTTLENECK, middle=200).to(device)
+    model = vae.VAE(dim=window_len*2, bottleneck=BOTTLENECK,
+                    middle=MIDDLE).to(device)
     print(model)
     optimizer = optim.Adam(model.parameters())
-    writer = SummaryWriter(f"runs/{fn}_n_{WINDOW_SECONDS}_{time.asctime()}")
+    writer = SummaryWriter(
+        f"runs/{short_fn}_n_{WINDOW_SECONDS}_{time.asctime()}")
 
     d = {
         'm': model,
@@ -99,24 +104,43 @@ def prep(fn: str):
         'loader': train_loader,
         'sr': sample_rate,
         'path': path,
-        'writer' : writer
+        'writer': writer
     }
     return d
 
 
-def train(fn='5_8_18_2', epochs=50, save=True):
+def train(fn='8_16_18.wav', epochs=100, save=True, save_model=True):
     d = prep(fn)
-
-    y_hats = [train_epoch(d, epoch)
-              for epoch in range(1, epochs + 1)]  # [epochs, 2, n]
+    short_fn = utils.full_fn_to_name(fn)
+    y_hats = []
+    for epoch in range(1, epochs + 1):  # [epochs, 2, n]
+        y_hats.append(train_epoch(d, epoch))
 
     song = torch.cat(y_hats, dim=1)
     print(song)
 
     if save:
-        torchaudio.save(d['path'] + f'gen_{fn}_n_{WINDOW_SECONDS}.wav', song, d['sr'])
+        torchaudio.save(
+            d['path'] + f'gen_{short_fn}_n_{WINDOW_SECONDS}.wav', song, d['sr'])
+    if save_model:
+        torch.save(d["model"].state_dict(), short_fn + '.pth')
+    return song
+
+
+def gen_folder(folder="/home/sippycups/Music/2019/"):
+    # broken
+    fns = glob.glob(f'{folder}/**.wav')
+    print()
+    for i, wavfn in enumerate(fns):
+        print(f'{i}: {wavfn}')
+        try:
+            train(wavfn)
+        except RuntimeError:
+            continue
+       # if i == 5:
+        #    break
 
 
 if __name__ == "__main__":
-
     train()
+    # gen_folder()
