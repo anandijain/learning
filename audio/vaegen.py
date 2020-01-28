@@ -19,14 +19,14 @@ import vae
 
 
 # larger window sizes wont usually work on my GPU because of the RAM
-# device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-device = torch.device("cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cpu")
 print(device)
 
 LOG_INTERVAL = 100
 BATCH_SIZE = 32
-WINDOW_SECONDS = 4 # n
-MIDDLE = 200
+WINDOW_SECONDS = 2 # n
+MIDDLE = 100
 BOTTLENECK = 50
 
 
@@ -109,7 +109,7 @@ def prep(fn: str):
     return d
 
 
-def train(fn='8_16_18.wav', epochs=100, save=True, save_model=True):
+def train(fn='9_25_19.wav', epochs=50, save=True, save_model=True):
     d = prep(fn)
     short_fn = utils.full_fn_to_name(fn)
     y_hats = []
@@ -123,7 +123,7 @@ def train(fn='8_16_18.wav', epochs=100, save=True, save_model=True):
         torchaudio.save(
             d['path'] + f'gen_{short_fn}_n_{WINDOW_SECONDS}.wav', song, d['sr'])
     if save_model:
-        torch.save(d["model"].state_dict(), short_fn + '.pth')
+        torch.save(d["m"].state_dict(), short_fn + '.pth')
     return song
 
 
