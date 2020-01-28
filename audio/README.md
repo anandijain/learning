@@ -14,11 +14,9 @@ index:
 * move wav file into learning/audio/
 * train vae
 
-# code snippet
+## code snippet
 
-    ```python
-
-    import vaegen
-    vaegen.train([YOUR WAV FILE], epochs=5, save=True)
-
-    ```
+```python
+import vaegen
+vaegen.train([YOUR WAV FILE], epochs=5, save=True)
+```
