@@ -20,3 +20,8 @@ index:
 import vaegen
 vaegen.train([YOUR WAV FILE], epochs=5, save=True)
 ```
+
+# todo
+
+* other generative models
+* preprocessing network to determine bpm and scale window size as a factor of beats/measures.

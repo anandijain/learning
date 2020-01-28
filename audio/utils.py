@@ -15,7 +15,7 @@ class WaveSet(Dataset):
         """
         seconds is int that is multiplied by sample rate 
         """
-        wave = torchaudio.load(filepath=fn)
+        wave = torchaudio.load(filepath=fn + '.wav')
         self.w = wave[0]
         self.sample_rate = wave[1]
         window_len = seconds * self.sample_rate

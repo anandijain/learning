@@ -17,16 +17,15 @@ import utils
 import vae
 
 
-writer = SummaryWriter()
-
+# larger window sizes wont usually work on my GPU because of the RAM
 # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 device = torch.device("cpu")
 print(device)
 
-LOG_INTERVAL = 500
+LOG_INTERVAL = 10
 BATCH_SIZE = 16
 BOTTLENECK = 100
-
+WINDOW_SECONDS = 4
 
 def train_epoch(d, epoch: int, save=False):
 
@@ -37,21 +36,21 @@ def train_epoch(d, epoch: int, save=False):
     sample_rate = d['sr']
     path = d['path']
     
-    loss_fn = nn.MSELoss()
     model.train()
     train_loss = 0
     for batch_idx, data in enumerate(train_loader):
         data = data.to(device)
         optimizer.zero_grad()
-        recon_batch, mu, logvar = model(data)
-        # recon_batch = model(data)
-        # print(recon_batch)
 
-        # loss = loss_fn(recon_batch, data)
+        recon_batch, mu, logvar = model(data)
+
         loss = utils.loss_function(recon_batch, data, mu, logvar)
         loss.backward()
+        idx = len(dataset) * epoch + batch_idx
+        print(f'idx :{idx}')
 
-        writer.add_scalar('train_loss', loss)
+        d['writer'].add_scalar('train_loss', loss.item(), global_step=idx)
+
         train_loss += loss.item()
         optimizer.step()
 
@@ -73,25 +72,25 @@ def train_epoch(d, epoch: int, save=False):
 
 def prep(fn: str):
 
-    song_folder = fn.split('.')[0]
-    path = 'samples/' + song_folder + '/'
+    path = 'samples/' + fn + '/'
 
     try:
         os.makedirs(path)
     except FileExistsError:
         print(f'warning: going to overwrite {path}')
 
-    seconds = 2
-    dataset = utils.WaveSet(fn, seconds)
 
+    dataset = utils.WaveSet(fn, WINDOW_SECONDS)
+    print(f'len(dataset): {len(dataset)} (num of windows)')
     window_len = dataset.window_len
     sample_rate = dataset.sample_rate
 
-    train_loader = DataLoader(dataset, batch_size=BATCH_SIZE)
+    train_loader = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
 
-    model = vae.VAE(dim=window_len*2, bottleneck=BOTTLENECK).to(device)
+    model = vae.VAE(dim=window_len*2, bottleneck=BOTTLENECK, middle=200).to(device)
     print(model)
     optimizer = optim.Adam(model.parameters())
+    writer = SummaryWriter(f"runs/{fn}_n_{WINDOW_SECONDS}_{time.asctime()}")
 
     d = {
         'm': model,
@@ -100,11 +99,12 @@ def prep(fn: str):
         'loader': train_loader,
         'sr': sample_rate,
         'path': path,
+        'writer' : writer
     }
     return d
 
 
-def train(fn='test.wav', epochs=10, save=True):
+def train(fn='5_8_18_2', epochs=50, save=True):
     d = prep(fn)
 
     y_hats = [train_epoch(d, epoch)
@@ -114,7 +114,7 @@ def train(fn='test.wav', epochs=10, save=True):
     print(song)
 
     if save:
-        torchaudio.save(d['path'] + f'gen_{fn}' + '.wav', song, d['sr'])
+        torchaudio.save(d['path'] + f'gen_{fn}_n_{WINDOW_SECONDS}.wav', song, d['sr'])
 
 
 if __name__ == "__main__":
