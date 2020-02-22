@@ -85,21 +85,23 @@ site: anandj.net\\
 
 \section{COURSES}
 \par
-\normalfont{\textbullet{Algorithms}}
-\normalfont{\textbullet{Discrete Math}}
 \normalfont{\textbullet{Abstract Linear Algebra}}
-\normalfont{\textbullet{Mathematical Logic}}
-\normalfont{\textbullet{Inventing Interactive Devices}}
-\normalfont{\textbullet{Electronics}}
+\normalfont{\textbullet{Algorithms}}
 \normalfont{\textbullet{Computer Systems}}
+\normalfont{\textbullet{Discrete Math}}\\
+\normalfont{\textbullet{Electronics}}
+\normalfont{\textbullet{Inventing Interactive Devices}}
+\normalfont{\textbullet{Mathematical Logic}}\\
+\normalfont{\textbullet{Molecular Engineering}}
+\normalfont{\textbullet{Quantum Computation}}
 
 %-------------------------------------------------------------------------------
 %	COMPUTER SKILLS SECTION
 %-------------------------------------------------------------------------------
 \section{SKILLS}
-\textbf{Languages:} Python, Julia, Go, Bash, C/C++\\
+\textbf{Languages:} Python, Julia, Go, Bash, C/C++, SQL\\
 \textbf{Packages:} PyTorch, Gym, TensorFlow, Scikit-Learn, Pandas, Flask \\
-\textbf{Spoken:} Fluent English. Classroom Hindi and Spanish
+\textbf{Spoken:} Fluent English. Classroom Hindi, Spanish, and Mandarin
 
 %-------------------------------------------------------------------------------
 % Modify the format of each position
@@ -117,38 +119,46 @@ site: anandj.net\\
 \textbullet{Worked with peers and mentors to create a high level API for fast prototyping and ensemble training of neural networks for astronomy datasets, primarily in PyTorch}
 \begin{itemize}
     \item \textbf{Tools:} TorchDiffEq, DifferentialEquations.jl, PyTorch, TensorFlow, Matplotlib, Astropy, Python, Julia
+    \item \textbf{Link :} github.com/deepskies/cosmoNODE and /dsutils
+
 \end{itemize}
+
 \section{PROJECTS}
-\textbf{Sips: Sports Data Tool on Google Cloud\hfill Oct 2018 - Now}\\
-\textbullet{Attempting to deploy data scrapers that gather information about sports and the odds market, feed this data into different neural network architectures and evaluate model performance.\\}
-\textbullet{Using Linux VMs on Google Cloud, I run Python scripts to track REST APIs for odds and sports statistics websites with BeautifulSoup}\\
-\textbullet{Trained TensorFlow win/loss classification and LSTM time-series prediction neural network models on Sips data}\\
-\textbullet{Wrote Flask app to visualize odds using Matplotlib}
-\begin{itemize}
-\item \textbf{Tools:} Python, Requests, Beautiful Soup, TensorFlow, Flask, Matplotlib
-\end{itemize}
-\begin{itemize}
-\item \textbf{Link :} github.com/anandijain/sips
-\end{itemize}
-\textbf{Gym-Sips: Reinforcement Learning Environment\hfill Feb 2019 - Now}\\
-\textbullet{Custom reinforcement learning environments using the OpenAI Gym package for the output data of sips}\\
-\textbullet{Agent takes actions to buy the home team or the away team moneyline, and receives reward at the end of the game}\\
-\textbullet{Agent learns risk mitigating hedging strategies}
+
+\textbf{codebyhand: applying handwriting recognition}\\ 
+\textbullet{Goal: Use handwriting in IDE and match with code suggestions}\\
+\textbullet{Trained convolutional net on Extended MNIST (EMNIST) dataset}\\
+\textbullet{Wrote `paint` program that live infers character after each stroke}\\
+\textbullet{Saves new labeled data to disk in Pytorch ImageFolder format for retraining}\\
+\textbullet{Todo: character bounding box detection and inference using stroke direction and order}
 
 \begin{itemize}
-\item \textbf{Tools:} Python, Gym, TensorFlow, TF-Agents
+\item \textbf{Tools:} pytorch, torchvision, torchtext, tkinter 
 \end{itemize}
 \begin{itemize}
-\item \textbf{Link :} github.com/anandijain/gym-sips
+\item \textbf{Link :} github.com/anandijain/codebyhand
+\end{itemize}
+
+\textbf{sippyart: variational-autoencoders for music generation}\\ 
+\textbullet{Preface: I've been making music on my computer for a few years and have uploaded a few hundred tracks by chronology}\\
+\textbullet{Goal: Learn generative models like GANs and autoencoders}\\
+\textbullet{Built tool to recreate images and 1-2 second sections of audio using convolutional variational autoencoders}\\
+\textbullet{Model learns to recreate melody better than rhythm, examples in README}\\
+\textbullet{Todo: Make sequential embedding from one audio segment to the next using LSTM with the encoded }
+\begin{itemize}
+\item \textbf{Tools:} pytorch, torchaudio, torchvision
+\end{itemize}
+\begin{itemize}
+\item \textbf{Link :} github.com/anandijain/sippyart
 \end{itemize}
 
 \section{ACTIVITIES}
 
-\textbf{UCQuantum (.org) - Founder/President}
-\hfill \textbf{Aug 2019 - Now}\\
-\textbullet{Unofficial club applying to become an official RSO for UChicago undergrads interested in quantum computing}\\
-\textbullet{We have 50 Facebook group members and 10 active members}\\
-\textbullet{We are planning to host talks, hackathons, and lab tours with faculty on campus}\\
+\textbf{UCQuantum (.org) - Founder/President}\hfill \textbf{Aug 2019 - Now}\\
+\textbullet{Undergraduate Student Organization of $\sim$50 facebook group members, $\sim$10 active}\\
+\textbullet{Working through Michael Nielsen and Isaac Chuang's Textbook}\\
+\textbullet{Toured Prof. David Schuster's superconducting qubit lab}\\
+\textbullet{Planning a hackathon in spring to make Prof. Schuster's computers compatible with QuTiP and qiskit}\\
 %-------------------------------------------------------------------------------
 
 \end{resume}
