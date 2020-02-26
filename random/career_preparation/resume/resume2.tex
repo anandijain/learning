@@ -1,0 +1,162 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Graduate Curriculum Vitae
+% LaTeX Template
+% Version 1.2 (3/28/15)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Rensselaer Polytechnic Institute 
+% (http://www.rpi.edu/dept/arc/training/latex/resumes/)
+%
+% Modified by:
+% Daniel L Marks <xleafr@gmail.com> 3/28/2015
+%
+% Important note:
+% This template requires the res.cls file to be in the same directory as the
+% .tex file. The res.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%-------------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% You can have multiple style options the legal options ones are:
+%
+%   centered:	the name and address are centered at the top of the page 
+%				(default)
+%
+%   line:		the name is the left with a horizontal line then the address to
+%				the right
+%
+%   overlapped:	the section titles overlap the body text (default)
+%
+%   margin:		the section titles are to the left of the body text
+%		
+%   11pt:		use 11 point fonts instead of 10 point fonts
+%
+%   12pt:		use 12 point fonts instead of 10 point fonts
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[margin]{res}  
+
+% Default font is the helvetica postscript font
+\usepackage{helvet}
+
+% Increase text height
+\textheight=700pt
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+%	NAME AND ADDRESS SECTION
+%-------------------------------------------------------------------------------
+\name{Anand Jain}
+
+% Note that addresses can be used for other contact information:
+% -phone numbers
+% -email addresses
+% -linked-in profile
+
+\address{
+github, linkedin : anandijain\\
+site: anandj.net\\
+}
+\address{anandj@uchicago.edu \\(408)597-4214\\}
+
+% Uncomment to add a third address
+%\address{Address 3 line 1\\Address 3 line 2\\Address 3 line 3}
+%-------------------------------------------------------------------------------
+
+\begin{resume}
+
+%-------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%-------------------------------------------------------------------------------
+\section{EDUCATION}
+\textbf{University of Chicago}
+{\sl B.S.}, Computer Science. \hfill \textbf{Expected Jun 2021}\\
+\textbf{Santa Clara High School} \hfill \textbf{2017}
+
+\section{COURSES}
+\par
+\normalfont{\textbullet{Abstract Linear Algebra}}
+\normalfont{\textbullet{Algorithms}}
+\normalfont{\textbullet{Computer Systems}}
+\normalfont{\textbullet{Discrete Math}}\\
+\normalfont{\textbullet{Electronics}}
+\normalfont{\textbullet{Inventing Interactive Devices}}
+\normalfont{\textbullet{Mathematical Logic}}\\
+\normalfont{\textbullet{Molecular Engineering}}
+\normalfont{\textbullet{Quantum Computation}}
+
+%-------------------------------------------------------------------------------
+%	COMPUTER SKILLS SECTION
+%-------------------------------------------------------------------------------
+\section{SKILLS}
+\textbf{Languages:} Python, Julia, Go, Bash, C/C++, SQL\\
+\textbf{Packages:} PyTorch, Gym, TensorFlow, Scikit-Learn, Pandas, Flask \\
+\textbf{Spoken:} Fluent English. Classroom Hindi, Spanish, and Mandarin
+
+%-------------------------------------------------------------------------------
+% Modify the format of each position
+\begin{format}
+\title{l}\\
+\dates{l}\location{r}\\
+\body\\
+\end{format}
+%-------------------------------------------------------------------------------
+\section{EXPERIENCE}
+\textbf{Fermilab - LSST Machine Learning Intern\hfill Jun - Aug 2019}\\
+\textbullet{Researched applications of neural differential equations in astronomy for the Large Synoptic Survey Telescope (LSST)\\}
+\textbullet{Used PLAsTiCC Astronomical Kaggle dataset to train a neural network to approximate the differential equation of different objects' light curves (brightness over time)}\\
+\textbullet{Presented poster of my work on Neural-ODEs at 2019 LSST Conference in Arizona}\\
+\textbullet{Worked with peers and mentors to create a high level API for fast prototyping and ensemble training of neural networks for astronomy datasets, primarily in PyTorch}
+\begin{itemize}
+    \item \textbf{Tools:} TorchDiffEq, DifferentialEquations.jl, PyTorch, TensorFlow, Matplotlib, Astropy, Python, Julia
+    \item \textbf{Link :} github.com/deepskies/cosmoNODE and /dsutils
+
+\end{itemize}
+
+\section{PROJECTS}
+
+\textbf{gym-sips: machine learning in sports betting on google cloud}\\ 
+\textbullet{Collected $\sim$1000 games of NFL, NHL, NBA, and MLB odds and scores on Linux VMs}\\
+\textbullet{Trained/tested LSTM model to predict odds and scores on $\sim$$5\times 10^{5}$ rows of 20 features}\\
+\textbullet{Created a discrete and continuous action space gym environment where agent either picks one team to place money on or allocates some amount to each}\\
+\textbullet{Tested the PPO, SAC, and DDPG algorithms from OpenAI's Spinning Up in RL}\\
+\textbullet{Agent learns to hedge across time and returns a positive reward on test set}
+
+\begin{itemize}
+\item \textbf{Tools:} pytorch, gym, spinningup
+\end{itemize}
+\begin{itemize}
+\item \textbf{Link :} github.com/anandijain/sips and /gym-sips
+\end{itemize}
+\textbf{sippyart: variational-autoencoders for music generation}\\ 
+\textbullet{Goal: Learn generative models like GANs and autoencoders}\\
+\textbullet{Built tool to recreate images and 1-2 second sections of audio using convolutional variational autoencoders}\\
+\textbullet{Model learns to recreate melody better than rhythm, examples in README}\\
+\textbullet{Todo: Make sequential embedding from one audio segment to the next using LSTM}
+\begin{itemize}
+\item \textbf{Tools:} pytorch, torchaudio, torchvision
+\end{itemize}
+\begin{itemize}
+\item \textbf{Link :} github.com/anandijain/sippyart
+\end{itemize}
+
+\section{ACTIVITIES}
+
+\textbf{UCQuantum (.org) - Founder/President}\hfill \textbf{Aug 2019 - Now}\\
+\textbullet{Undergraduate Student Organization of $\sim$50 facebook group members, $\sim$10 active}\\
+\textbullet{Toured Prof. David Schuster's lab and learned about cooling to superconducing temperatures and software interfaces to quantum computers}\\
+\textbullet{Planning a hackathon in spring to make Prof. Schuster's computers compatible with QuTiP and qiskit}
+%-------------------------------------------------------------------------------
+
+\end{resume}
+\(\)\end{document}
