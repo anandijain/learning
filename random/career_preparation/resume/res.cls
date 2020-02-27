@@ -773,6 +773,7 @@
 %    location	 dates
 %    body
 % with everything in the left of its column
+\renewcommand{\familydefault}{\sfdefault}
 
 \@secpenalty = -500
 \topmargin 0pt

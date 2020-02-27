@@ -46,7 +46,8 @@
 \documentclass[margin]{res}  
 
 % Default font is the helvetica postscript font
-\usepackage{helvet}
+% \usepackage{avant}
+% \setupbodyfont[ss]
 
 % Increase text height
 \textheight=700pt
@@ -130,7 +131,7 @@ site: anandj.net\\
 \textbullet{Trained/tested LSTM model to predict odds and scores on $\sim$$5\times 10^{5}$ rows of 20 features}\\
 \textbullet{Created a discrete and continuous action space gym environment where agent either picks one team to place money on or allocates some amount to each}\\
 \textbullet{Tested the PPO, SAC, and DDPG algorithms from OpenAI's Spinning Up in RL}\\
-\textbullet{Agent learns to hedge across time and returns a positive reward on test set}
+\textbullet{Agent learns to hedge across time and returns a positive net reward on test set}
 
 \begin{itemize}
 \item \textbf{Tools:} pytorch, gym, spinningup
@@ -139,10 +140,8 @@ site: anandj.net\\
 \item \textbf{Link :} github.com/anandijain/sips and /gym-sips
 \end{itemize}
 \textbf{sippyart: variational-autoencoders for music generation}\\ 
-\textbullet{Goal: Learn generative models like GANs and autoencoders}\\
-\textbullet{Built tool to recreate images and 1-2 second sections of audio using convolutional variational autoencoders}\\
+\textbullet{Built tool to recreate images and 1-2 second sections of audio using convolutional variational autoencoders running on GPU}\\
 \textbullet{Model learns to recreate melody better than rhythm, examples in README}\\
-\textbullet{Todo: Make sequential embedding from one audio segment to the next using LSTM}
 \begin{itemize}
 \item \textbf{Tools:} pytorch, torchaudio, torchvision
 \end{itemize}
