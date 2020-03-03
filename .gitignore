@@ -8,6 +8,7 @@
 *.js
 *.html
 *.pth
+*.obj
 *model.pth
 
 .vscode/
