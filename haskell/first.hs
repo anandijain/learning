@@ -1,4 +1,3 @@
-doubleMe x = x + x
-
-
-doubleThem x y = doubleMe x + doubleMe y
+curl -X GET -H "Content-type: application/json" -H "Accept: application/json"
+"https://api.citrixonline.com/oauth/access_token?grant_type=password&user_id=test@test.com&password=xyz&client_id=123"
+curl -o curltest.html 'https://www.bovada.lv/services/sports/event/v2/events/A/description/volleyball/brazil' -H 'DNT: 1' -H 'Upgrade-Insecure-Requests: 1' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36' -H 'Sec-Fetch-Dest: document' --compressed

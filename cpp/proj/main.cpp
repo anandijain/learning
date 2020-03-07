@@ -4,6 +4,11 @@
 
 using namespace std;
 
+struct Node {
+    Person p;
+    struct Node* next;
+}
+
 class Person{
     private:
         string id;
