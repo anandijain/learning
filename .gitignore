@@ -9,6 +9,10 @@
 *.html
 *.pth
 *.obj
+*.gz
+*.aux
+*.fdb_latexmk
+
 *model.pth
 
 .vscode/
