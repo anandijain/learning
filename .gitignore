@@ -20,7 +20,8 @@
 __pycache__/
 
 
-random/py3.8/
+random/pythonstuff/viz/
+
 data/
 runs/
 
