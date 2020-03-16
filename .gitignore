@@ -5,14 +5,13 @@
 *.png
 *.log
 *.wav
-*.js
-*.html
 *.pth
 *.obj
 *.gz
 *.aux
+*.csv
 *.fdb_latexmk
-
+package-lock.json
 *model.pth
 
 .vscode/
@@ -24,5 +23,5 @@ random/pythonstuff/viz/viz/
 
 data/
 runs/
-
+node_modules/
 neuro/local/
