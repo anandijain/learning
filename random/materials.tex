@@ -1,0 +1,241 @@
+\documentclass[letterpaper]{article}
+
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[margin=1in]{geometry}
+\usepackage[medium]{titlesec}
+\usepackage{amsmath,amssymb,mhchem}
+
+\begin{document}
+\title{Material Science Final}
+\author{Anand Jain \\ anandj@uchicago.edu}
+\maketitle
+\paragraph{}
+    \textbf{On my honor, I have neither given nor received any unauthorized aid on this exam. By signing my name below, I understand that violations of this honor code will result in suspension of academic status or expulsion from the University of Chicago’s community.  \\
+    Sign or Type your name here: Anand Jain}
+\section{Alpha Phase Plutonium}
+    \paragraph{}
+        \textit{
+            \textbf{a.} 
+            What's the nature of the bonding between Plutonium atoms?
+        }
+    \paragraph{}
+        The electron configuration of isolated Plutonium is [Rn] 5f$^{6}$ 7s$^{2}$. 
+        As indicated by the close groups of two atoms in the unit cell picture, there are Pu-Pu bonds.
+        The bonding is covalent in the valence f subshell. The electron configuration
+
+
+    \paragraph{}
+    \textit{
+        \textbf{b.} 
+        Calculate the mass density of the alpha-phase Plutonium metal in units of g/cm3.
+        }
+
+    \paragraph{}
+        The mass density of metallic $\alpha$ Plutonium is given by $\rho$ = $\dfrac{nA}{V_{c}N_{A}}$.
+        We can calculate $V_{c}$ by using the formula for monoclinic unit cell volume: 
+        
+        $V_{c} = abc\sin{(\beta)} = 6.1835e^{-8} * 4.8244e^{-8} * 1.0973e^{-7} * \sin{(180 - 78.2)} = 3.11526e^{-22}\frac{cm^{3}}{cell}$
+        
+        $\rho = (16\frac{atoms}{cell} * 244 \frac{g}{mol}) * (6.022e^{23}\frac{atoms}{mol} * 3.11526e^{-22}\frac{cm^{3}}{cell})^{-1}$
+
+        $ = \frac{3904}{187.60} =$ \textbf{~ 20.8 $\frac{g}{cm^{3}}$} 
+        
+        This is close to the result online of $19.86\frac{g}{cm^{3}}$.
+
+    \paragraph{}
+        \textit{
+            \textbf{c.} 
+            The isotope \ce{^{239}Pu} will decay into an alpha particle \ce{^{4}_{2}He} and another element.
+            What is this other element? What are its atomic number and atomic mass?
+        }
+
+    \paragraph{}
+        The decay product is Uranium, with an atomic number of 92, and a mass of 235 u.
+        $$
+        \ce{^{239}_{94}Pu} \rightarrow \ce{^{4}_{2}He} + \ce{^{235}_{92}U}
+        $$
+        
+\section{H in H$_{2}$S vs H$_{3}$S}
+    \paragraph{}
+    \textit{
+        \textbf{a.} 
+        What is the nature of the H-S bond? Is it ionic or covalent?
+        }
+        
+    \paragraph{}
+
+        In H$_{2}$S, unlike H$_{2}$O, does not have a large electronegativity difference between H and B (0.38 vs 1.24, respectively).
+        Additionally, sulfur's valence electrons are further away from the nucleus ([Ne] 3s$^{2}$ 3p$^{4}$ vs [He]2s$^{2}$ 2p$^{4}$).
+        This makes intermolecular hydrogen bonding forces unable to form.
+        The bonding exhibited is covalent.
+        For H$_{3}$S
+
+    \paragraph{}
+    \textit{
+        \textbf{b.} 
+        Why is it relatively easy to form a solid crystal out of H$_{2}$O (ice), but immensely difficult to form a solid crystal out of H$_{2}$S?
+        }
+    \paragraph{}
+
+    As stated in (a.), the further radius of protons to valence electrons prevents polar intermolecular forces from being impactful, unlike water.
+    The lack of these weak intermolecular forces in H$_{3}$S, prevents an open (weak) tetrahedral structure like in water.
+    These weak forces are what causes ice to be less dense than liquid water 
+
+
+    \paragraph{}
+    \textit{
+        \textbf{c.} 
+        What is the crystal system of H$_{3}$S (cubic/hexagonal/tetragonal etc.)? What is the specific lattice structure within this crystal system?
+        }
+    \paragraph{}
+
+        The H$_{3}$S structure is a cubic cystal system. The lattice is composed of two perovskite sublattices SH$^{-}$ and H$_{3}$S.
+        
+    
+    \paragraph{}
+        \textit{
+            \textbf{d.} 
+            Can you comment on why ice (solid H$_{2}$O) is insulating, but H$_{3}$S is metallic?
+            }
+
+        As stated, ice is less dense than it's liquid counterpart, due to weak intermolecular forces.
+        H$_{3}$S is non-polar, and exhibits increased density, causing metallic.
+
+\section{KCl vs KBr}
+    \paragraph{}
+    \textit{
+        \textbf{a.} 
+        What is the crystal system and the specific lattice structure of KCl and KBr?
+        }
+    \paragraph{}
+
+The crystal system of KCl is, like NaCl, a face centered cubic structure.
+
+KCl: There are two inter-penetrating BCC latices, of K$^{+}$ and Cl$^{-}$
+KBr: There are two inter-penetrating FCC latices, of K$^{+}$ and Br$^{-}$
+    
+    \paragraph{}
+    \textit{
+        \textbf{b.} 
+        We know that the X-ray wavelength is 1.54\AA. Can you use the XRD data to estimate the lattice constant of KCl, and KBr, respectively?
+        }
+    
+    Yes, since it is cubic we have $\alpha = \beta = \gamma$. $n\lambda = 2d\sin{(\theta)}$ where $d :=$ interplane spacing, by Bragg's.
+    $d = \frac{\lambda}{2\sin{(\theta)}} = \frac{0.154 nm}{2\sin{(35)}}$
+
+
+    \paragraph{}
+    \paragraph{}
+    \textit{
+        \textbf{c.} 
+        Why do KCl only exhibit peaks with even h, k, and l numbers?
+        }
+        
+    This indicates that KCl is BCC structure, as BCC requrires h, k, and l to be even.
+    As opposed to FCC, where they can either be all odd or all even.
+
+\section{Cold work on metals}
+    \paragraph{}
+    \textit{
+        \textbf{a.} 
+        If we directly stretch the rod to obtain a diameter of 7.5 mm, what would be the yield strength, tensile strength, and ductility? 
+        }
+
+        By hooks law, $\sigma = E * \epsilon$
+        $\Delta{l} = \frac{\sigma * l_{0}}{E}$
+        $\Delta{l} = \frac{450 MPa * 2.5 mm }{97 GPa}$
+        $\Delta{l} = 11.5979381 microns$
+        
+    \paragraph{}
+    \textit{
+        \textbf{b.} 
+        How much percentage of cold work is needed for the required tensile strength and ductility?
+        }
+
+    We need 25 pct cold work to get at least 450 MPa and a ductility higher than 10 pct.
+
+    \paragraph{}
+    \textit{
+        \textbf{c.} 
+        Describe how you would achieve the tensile strength, ductility, and final diameter.
+        }
+
+
+\section{Lead-tin phase diagram}
+    \paragraph{}
+    \textit{
+        \textbf{a.} 
+        Identify the liquidus line and solidus line for the $\alpha$ phase. 
+        Identify the liquidus line and solidus line for the $\beta$ phase.
+        }
+        
+    \paragraph{}
+
+The $\alpha$ phase liquidus line is the line on the top that starts at the left at (0 wt$\%$ Sn, 327 C,) to (61.9 wt$\%$ Sn, 183 C).
+This is clear, as the only phase that exists above the line is liquid and borders the a mixed phase with $\alpha$.
+
+For $\alpha$ phase solidus line is where only phase $\alpha$ exists and borders liquid mixture: (0 wt$\%$, 327 C) to (18.3 wt$\%$, 183 C).
+
+By the same logic:
+
+The $\beta$ liquidus is from (61 wt$\%$, 183 C) to (100 wt$\%$ Sn, 232 C)
+
+The $\beta$ solidus is from (100 wt$\%$, 232 C) to (97.8 wt$\%$ Sn, 183 C)
+
+    \paragraph{}
+    \textit{
+        \textbf{b.} 
+        Describe the microstructure changes as you very slowly cool down a Pb-Sn system at 50 wt$\%$ Sn composition from 300 deg Celsius. 
+        Draw diagrams to illustrate your microstructures at 300 deg Celsius, 200 deg Celsius, and 100 deg Celsius.
+        }
+
+
+    \paragraph{}
+    \paragraph{}
+    \textit{
+        \textbf{c.} 
+        If you are to make a low-temperature solder, what compositions would you use for Pb and Sn? Why?
+        }
+
+        I would choose 61.9 wt$\%$ Sn and 38.1 wt$\%$ Pb, where the melting temperature is at 183 C.
+        This is lower than either Pb or Sn. Additionally, it is a eutectic point, meaning it freezes and melts at the same time.
+        This is an advantageous property because it is faster to solidify for circuitry, and has a a low melting temperature for re-melting.
+        If it was found that the eutectic point maybe was too cool and under certain conditions would melt during usage (hot car, etc), 
+        then I would choose to bias towards lead, as it is a steeper slope to a higher melting temperature, however, then we would have 
+        the $\alpha$ + L phase.
+
+
+\section{Semiconductor behaviors}
+    \paragraph{}
+    \textit{
+        \textbf{a.} 
+        Describe the three temperature regions for electron concentration. 
+        Qualitatively explain the temperature dependence for these three temperature regions.
+        }
+
+    \paragraph{}
+
+Firstly, the semiconductor is doped with electrons, meaning the majority carrier are P-type (holes).
+For an extrinsic semiconductor, there are three regions, the freeze out, the extrinsic, and the intrinsic, in e$^{-}$ concentration / temperature.
+The extrinsic region is where the e$^{-}$ concentration is constant and e$^{-}$s in the conduction band are excited by P type impurities. 
+Most all impurities will be ionized as the e$^{-}$ concentration is about equal to P content. 
+
+Freeze out, however, occurs as the amount of energy required for excitation of a donated electron into the conduction band is too large to overcome the lack of thermal energy.
+The intrinsic region is where the amount of thermal energy causes easy excitation of electrons into the conduction band from P-donors.
+This causes the concentration of electrons to overwhelm the concentration of holes.
+
+    \paragraph{}
+    \textit{
+        \textbf{b.} 
+        Imagine that we need to work in the outer space with a temperature usually $<$ -200 deg Celsius. 
+        What challenges will there be to build a classical computer using doped semiconductors like this one? 
+        Do you have any suggestions for how to make a computer that works for that cold environment? 
+        }
+    
+        \paragraph{}
+The most obvious challenge will be making sure that the classical computer is in an environment that will allow for the semiconductor to be in the extrinsic region, such that the donors actually donate electrons to the conduction band.
+
+    
+
+\textbf{Thank you for an awesome quarter}
+\end{document}

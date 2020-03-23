@@ -1,26 +1,43 @@
-\documentclass[11pt,a4paper]{letter} % 10pt font size default, 11pt and 12pt are also possible
+\documentclass[11pt]{letter} % 10pt font size default, 11pt and 12pt are also possible
 \renewcommand*\familydefault{\sfdefault} 
+\usepackage[margin=1in]{geometry}
 
 % \address{610 Jackson St. \\ Santa Clara, CA 95050 \\ (408)597-4214 } % Your address and phone number
 \address{6103 S University Ave. \\ Chicago, IL 60637 \\ (408)597-4214 } % Your address and phone number
 
 \begin{document}
 
-\begin{letter}{QURIP Internship} 
+\begin{letter}{}
 
 \opening{\textbf{Dear QURIP,}}
 
-Almost every quantum scientist knows Feynmans’ holy quote, "Nature isn't classical, dammit, and if you want to make a simulation of nature, you'd better make it quantum mechanical".
+Last spring, I started a club (ucquantum.org) for students interested in quantum information at UChicago, advised by Prof. Andrew Cleland.
+I felt that there was a need for an academic club specifically for quantum technologies and NISQ computing.
+This fall we began hosting weekly meetings and reaching out to various departments to find interested students.
+Despite initially being slow going, our bimonthly newsletter covering news and Quantum research at UChicago has about 60 subscribers and we have a group of about 10 come each week.
+The most rewarding part about this experience has been getting to explain superposition and entanglement to people.
+ 
+Once we had learned the basics, we started planning events and reaching out to professors for when we got approved.
+We toured Prof. David Schuster's superconducting qubit lab and spoke to a few professors about their work.
+UChicago Quantum Society was approved to be an official club at the beginning of March.
+I'm particularly excited about being able to host hackathons and panels with professors, unfortunately, students are off campus next quarter.
+ 
+I believe that participating in QURIP will give me insights into how to better teach and engage people with the field.
+I'm hoping to use these experiences to be a more effective club president.
+ 
+As a computer science major, I have been interested in the software used to control quantum devices.
+I have used many of the quantum "languages" briefly (QISKit, Cirq, Quirk, etc), but after taking a course on Quantum Computation this quarter, I wanted to write my own quantum programming interface to learn how someone might make a fully featured simulator.
+ 
+MyQuantum is a Julia-lang package that implements the common 1-bit operators (X, Y, Z, H), arbitrary controlled gate, and an arbitrary single-qubit rotation that can be composed with a control.
+I also wrote functions to test if normalized, hermitian, unitary, added documentation, and unit tests.
+I am looking to extend what I currently have to use as a pre-hackathon learners repo, to get people familiar with code and notation, but not be too advanced.
+ 
+I am incredibly excited about the future of quantum computing and feel I have the necessary qualifications
+to be a valuable team member in researching NISQ devices.
 
-In senior year of high school, I was taking AP Computer Science Principles and we had to do two presentations. I did my first presentation on convolutional neural networks and my second on quantum computing. 
-I didn’t realize until I learned more about complexity theory and big-O notation in college how amazing quantum systems are. 
-This profound and numinous field of study is racing to Landauer's limit and has given me an exponentially greater appreciation for the beauty of nature.
-
-I'm hoping to contribute some meaningful addition to helping us use NISQ devices to improve lives around the world.
-As founder of the UChicago Quantum Society, I am hoping to bring back insights in how to communicate scientific works to general audiences and help grow the community of the quantum-curious.
-
-
-\closing{Sincerely, \\ Anand Jain \\ University of Chicago 2021 \\ anandj@uchicago.edu}
+\begin{flushright}
+    Sincerely, \\ Anand Jain \\ University of Chicago 2021 \\ anandj@uchicago.edu
+\end{flushright} 
 
 \end{letter}
  

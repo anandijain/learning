@@ -25,3 +25,4 @@ data/
 runs/
 node_modules/
 neuro/local/
+rust/rocket/
