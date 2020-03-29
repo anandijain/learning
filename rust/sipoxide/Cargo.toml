@@ -10,5 +10,6 @@ edition = "2018"
 http = "0.2.1"
 serde = { version = "1.0.105" }
 tokio = { version = "0.2", features = ["full"] }
+reqwest = "0.10.4"
 serde_json = "1.0"
 serde_derive = "1.0.105"

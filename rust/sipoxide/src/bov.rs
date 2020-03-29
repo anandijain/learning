@@ -1,13 +1,13 @@
 extern crate serde;
 use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Root {
     pub path: Vec<Path>,
     pub events: Vec<Event>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Path {
     pub id: String,
     pub link: Option<String>,
@@ -20,7 +20,7 @@ pub struct Path {
     pub current: bool,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Event {
     pub id: String,
     pub description: String,
@@ -42,14 +42,14 @@ pub struct Event {
     pub display_groups: Option<Vec<DisplayGroup>>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Competitor {
     pub id: String,
     pub name: String,
     pub home: bool,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct DisplayGroup {
     pub id: String,
     pub description: String,
@@ -59,7 +59,7 @@ pub struct DisplayGroup {
     pub order: i128,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Market {
     pub id: String,
     pub description_key: String,
@@ -74,7 +74,7 @@ pub struct Market {
     pub sort_type: Option<String>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Period {
     pub id: String,
     pub description: String,
@@ -83,7 +83,7 @@ pub struct Period {
     pub main: bool,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Outcome {
     pub id: String,
     pub description: String,
@@ -94,7 +94,7 @@ pub struct Outcome {
     pub competitor_id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Price {
     pub id: String,
     pub american: String,
