@@ -2,17 +2,11 @@
 extern crate serde_derive;
 extern crate csv;
 extern crate serde;
-// extern crate reqwest;
-// use reqwest::Error;
-use http::{Request, Response};
-use serde::de;
 use std::error::Error;
-use std::fmt;
-use std::fs;
 
 mod bov;
 
-fn parseAndWrite(json_data: String) -> Result<(), Box<Error>> {
+fn parse_and_write(json_data: String) -> Result<(), Box<dyn Error>> {
     let write_fn = "./data/root.csv";
 
     let mut wtr = csv::Writer::from_path(write_fn)?;
@@ -85,7 +79,7 @@ async fn main() -> Result<(), reqwest::Error> {
 
     let body = res.text().await?;
 
-    parseAndWrite(body.to_string());
+    parse_and_write(body.to_string());
 
     Ok(())
 }
