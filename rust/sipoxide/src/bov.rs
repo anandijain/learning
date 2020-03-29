@@ -1,6 +1,19 @@
 extern crate serde;
 // use serde::{Serialize, Deserialize};
 
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct Record {
+    id: String,
+    sport: String,
+    event_desc: String,
+    dg_desc: String,
+    mkt_desc: String,
+    oc_desc: String,
+    price: String,
+    hc: Option<String>,
+}
+
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Root {

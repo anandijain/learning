@@ -1,11 +1,15 @@
 #[macro_use]
 extern crate serde_derive;
 extern crate serde;
+extern crate csv;
 // extern crate reqwest;
 // use reqwest::Error;
 use std::fmt;
 use std::fmt::Debug;
 use std::fs;
+use std::error::Error;
+use std::io;
+use std::process;
 
 mod bov;
 
@@ -98,11 +102,13 @@ impl ToString for bov::Price {
 //         };
 //     }
 // }
-// impl fmt::Display for bov::Root {
-//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-//         write!(f, "{}", self.events)        
-//     }
-// }
+
+
+impl fmt::Display for bov::Root {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:#?}", self.events)        
+    }
+}
 
 impl fmt::Display for bov::Event {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -133,61 +139,70 @@ impl fmt::Display for bov::Outcome {
 //     }
 
 
-fn parse() {
+fn parseAndWrite() -> Result<(), Box<Error>> {
+
+    let write_fn = "./data/root.csv"; 
+
+    let mut wtr = csv::Writer::from_path(write_fn)?;
+
+    wtr.write_record(&["id", "sport", "event_desc", "dg_desc", "mkt_desc", "oc_desc", "price", "hc"])?;
+
     let contents = fs::read_to_string("./data/root.json")
         .expect("Something went wrong reading the file")
         .to_string();
 
+
     let ds: Vec<bov::Root> = serde_json::from_str(&contents).unwrap();
-    // let ds: Vec<bov::DisplayGroup> = serde_json::from_str(&contents).unwrap();
-    // let ds: bov::Event = serde_json::from_str(&contents).unwrap();
-    // println!("{}", ds.description);
-    // println!("{:#?}", ds.display_groups);
-    // println!("{}", ds[0].id);
+
     let mut n: u64 = 0;
     for s in ds.iter() {
         // s is a Root
-        println!("{}", s.to_string());
+        // println!("{:#?}", s);
         for e in s.events.iter() {
-            // match e.display_groups {
-            //     Some(dgs) => {
-            //         println!("{:?}", dgs.iter().to_string().format(", "));
-            //     },
-            //     _ => {
-            //         println!("no dgs");
-            //     },
-            // };
-            // if let Some(dgs) = &e.display_groups {
-            //     for dg in dgs.iter() {
-            //         for m in dg.markets.iter() {
-            //             for oc in m.outcomes.iter() {
-            //                 println!("{} {} {} {}", e.id, e.description, dg.description, oc.price.decimal);
-            //             }
-            //         }
-            //         println!("{}", dg);
-            //     }
-            // } else {
-            //     println!("FUCK {} {} {}", e.id, e.description, e.sport);
-            // }
+            println!("num competitors {}", e.competitors.len()); 
             for dg in e.display_groups.iter() {
                 for m in dg.markets.iter() {
                     for oc in m.outcomes.iter() {
-                        println!("{} {} {} {}", e.id, e.description, dg.description, oc.price.decimal);
+                        if let Some(hc) = &oc.price.handicap {
+                            wtr.write_record(&[
+                            &e.id, 
+                            &e.sport, 
+                            &e.description, 
+                            &dg.description, 
+                            &m.description, 
+                            &oc.description, 
+                            &oc.price.decimal, 
+                            &hc.to_string()])?;
+                        } else {
+                            wtr.write_record(&[
+
+                            &e.id, 
+                            &e.sport, 
+                            &e.description, 
+                            &dg.description, 
+                            &m.description, 
+                            &oc.description, 
+                            &oc.price.decimal,
+                            &"".to_string()])?;
+                        }
                     }
                 }
-                println!("{}", dg);
+
             }
 
         }
 
-        n += s.count_events()
+        n += s.count_events();
     }
-
     println!("# games: {}", n);
+
+    wtr.flush()?;
+    Ok(())
 }
 
+
 fn main() {
-    parse()
+    parseAndWrite();
 }
 
 // fn grab() {
