@@ -1,5 +1,6 @@
 extern crate serde;
 // use serde::{Serialize, Deserialize};
+use std::fmt;
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -21,6 +22,11 @@ pub struct Root {
     pub events: Vec<Event>,
 }
 
+impl fmt::Display for Root {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:#?}", self.events)
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
@@ -60,6 +66,12 @@ pub struct Event {
     pub display_groups: Vec<DisplayGroup>,
 }
 
+impl fmt::Display for Event {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:#?}", self.display_groups)
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Competitor {
@@ -79,6 +91,19 @@ pub struct DisplayGroup {
     pub order: i128,
 }
 
+impl fmt::Display for DisplayGroup {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "DG_START{} {} {} {:#?}",
+            self.id,
+            self.description,
+            self.order,
+            self.markets.iter()
+        )
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Market {
@@ -93,6 +118,12 @@ pub struct Market {
     pub period: Period,
     pub outcomes: Vec<Outcome>,
     pub sort_type: Option<String>,
+}
+
+impl fmt::Display for Market {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:#?}", self.outcomes)
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -117,6 +148,12 @@ pub struct Outcome {
     pub competitor_id: Option<String>,
 }
 
+impl fmt::Display for Outcome {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.price.to_string())
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct Price {
@@ -129,4 +166,10 @@ pub struct Price {
     pub hongkong: String,
     pub handicap: Option<String>,
     pub handicap2: Option<String>,
+}
+
+impl fmt::Display for Price {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.decimal.to_string())
+    }
 }
