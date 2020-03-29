@@ -1,11 +1,12 @@
 extern crate serde;
-use serde::{Serialize, Deserialize};
+// use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Root {
     pub path: Vec<Path>,
     pub events: Vec<Event>,
 }
+
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Path {
