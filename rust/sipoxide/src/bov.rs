@@ -37,10 +37,11 @@ pub struct Event {
     pub teaser_allowed: Option<bool>,
     pub competition_id: Option<String>,
     pub notes: String,
-    pub num_markets: Option<i128>,
+    pub num_markets: Option<u64>,
     pub last_modified: Option<i128>,
     pub competitors: Vec<Competitor>,
     pub display_groups: Option<Vec<DisplayGroup>>,
+    // pub display_groups: Vec<DisplayGroup>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -54,8 +55,8 @@ pub struct Competitor {
 pub struct DisplayGroup {
     pub id: String,
     pub description: String,
-    pub default_type: bool,
-    pub alternate_type: bool,
+    pub default_type: Option<bool>,
+    pub alternate_type: Option<bool>,
     pub markets: Vec<Market>,
     pub order: i128,
 }
@@ -63,12 +64,12 @@ pub struct DisplayGroup {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Market {
     pub id: String,
-    pub description_key: String,
+    pub description_key: Option<String>,
     pub description: String,
     pub key: String,
-    pub market_type_id: String,
+    pub market_type_id: Option<String>,
     pub status: String,
-    pub single_only: bool,
+    pub single_only: Option<bool>,
     pub notes: String,
     pub period: Period,
     pub outcomes: Vec<Outcome>,
@@ -105,4 +106,5 @@ pub struct Price {
     pub indonesian: String,
     pub hongkong: String,
     pub handicap: Option<String>,
+    pub handicap2: Option<String>,
 }

@@ -3,39 +3,40 @@ extern crate serde_derive;
 extern crate serde;
 // extern crate reqwest;
 // use reqwest::Error;
-
+use std::fmt;
+use std::fmt::Debug;
 use std::fs;
 
 mod bov;
 
-impl bov::Outcome {
-    fn repr(&self) {
-        println!("oc {} {}", self.description, self.price.decimal);
-        // self.price.repr()
-    }
-}
-impl bov::Market {
-    fn repr(&self) {
-        println!("{}", self.description);
-        for o in self.outcomes.iter() {
-            o.repr();
-        }
-    }
-}
-impl bov::DisplayGroup {
-    fn repr(&self) {
-        for m in self.markets.iter() {
-            m.repr();
-        }
-    }
-}
+// impl bov::Outcome {
+//     fn repr(&self) {
+//         println!("oc {} {}", self.description, self.price.decimal);
+//         // self.price.repr()
+//     }
+// }
+// impl bov::Market {
+//     fn repr(&self) {
+//         println!("{}", self.description);
+//         for o in self.outcomes.iter() {
+//             o.repr();
+//         }
+//     }
+// }
+// impl bov::DisplayGroup {
+//     fn repr(&self) {
+//         for m in self.markets.iter() {
+//             m.repr();
+//         }
+//     }
+// }
 
 impl bov::Root {
-    fn repr(&self) {
-        for e in self.events.iter() {
-            e.repr();
-        }
-    }
+    // fn repr(&self) {
+    //     for e in self.events.iter() {
+    //         e.repr();
+    //     }
+    // }
 
     fn count_events(&self) -> u64 {
         let mut n: u64 = 0;
@@ -46,77 +47,158 @@ impl bov::Root {
     }
 }
 
-impl ToString for bov::Competitor {
+// impl ToString for bov::Competitor {
+//     fn to_string(&self) -> String {
+//         return format!("Competitor {} {} {}", self.id, self.name, self.home);
+//     }
+// }
+// impl ToString for bov::Outcome {
+//     fn to_string(&self) -> String {
+//         return format!("oc {} {}", self.description, self.price.decimal);
+//     }
+// }
+// impl ToString for bov::Market {
+//     fn to_string(&self) -> String {
+//         return format!("mkt {} {}", self.id, self.description);
+//     }
+// }
+impl ToString for bov::Price {
     fn to_string(&self) -> String {
-        return format!("Competitor {} {} {}", self.id, self.name, self.home);
-    }
-}
-impl ToString for bov::Outcome {
-    fn to_string(&self) -> String {
-        return format!("oc {} {}", self.description, self.price.decimal);
-    }
-}
-impl ToString for bov::Market {
-    fn to_string(&self) -> String {
-        return format!("mkt {} {}", self.id, self.description);
-    }
-}
-impl ToString for bov::DisplayGroup {
-    fn to_string(&self) -> String {
-        return format!("oc {} {}", self.id, self.description);
-    }
-}
-impl ToString for bov::Event {
-    fn to_string(&self) -> String {
-        return format!("ev {} {} {}", self.id, self.description, self.status);
+        return format!("mkt {} {} {}", self.id, self.american, self.decimal);
     }
 }
 
-impl bov::Event {
-    fn repr(&self) {
-        println!("{} {} {}", self.id, self.description, self.sport);
-        for c in self.competitors.iter() {
-            println!("{}", c.to_string());
-        }
-        match &self.display_groups {
-            Some(dgs) => dgs.iter().map(|x| x.repr()).collect::<Vec<_>>(),
-            None => vec![],
-        };
+// impl ToString for bov::DisplayGroup {
+//     fn to_string(&self) -> String {
+//         return format!("Dg {} {}", self.id, self.description);
+//     }
+// }
+
+
+// impl ToString for bov::Event {
+//     fn to_string(&self) -> String {
+//         // return format!("ev {} {} {} {:?}", self.id, self.sport, self.description, self.display_groups);
+//         let res: String = match &self.display_groups {
+//             Some(dgs) => format!("{:?}", dgs),
+//             None => format!("no dgs for {}", self.id),
+//         };
+//         return res
+//     }
+// }
+
+// impl bov::Event {
+//     fn repr(&self) {
+//         println!("{} {} {}", self.id, self.description, self.sport);
+//         for c in self.competitors.iter() {
+//             println!("{}", c.to_string());
+//         }
+//         match &self.display_groups {
+//             Some(dgs) => println!("{:?}", *dgs),
+//             None => println!("{}", self.id),
+//         };
+//     }
+// }
+// impl fmt::Display for bov::Root {
+//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+//         write!(f, "{}", self.events)        
+//     }
+// }
+
+impl fmt::Display for bov::Event {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:#?}", self.display_groups)        
     }
 }
+
+impl fmt::Display for bov::DisplayGroup {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:#?}", self.markets)
+    }
+}
+
+impl fmt::Display for bov::Market {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:#?}", self.outcomes) 
+    }
+}
+impl fmt::Display for bov::Outcome {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.price.to_string())
+    }
+}
+
+// fn basic_event_repr(e: &bov::Event) -> String {
+//     match e.display_groups {
+//         Some(n)
+//     }
+
 
 fn parse() {
-    let contents = fs::read_to_string("./data/root.json")
+    let contents = fs::read_to_string("./data/dgs.json")
         .expect("Something went wrong reading the file")
         .to_string();
 
-    let ds: Vec<bov::Root> = serde_json::from_str(&contents).unwrap();
-    let mut n: u64 = 0;
+    // let ds: Vec<bov::Root> = serde_json::from_str(&contents).unwrap();
+    let ds: Vec<bov::DisplayGroup> = serde_json::from_str(&contents).unwrap();
+    println!("{}", ds[0].id);
+    // let mut n: u64 = 0;
+    // println!("{}", ds[0]
+    // .events[0]
+    // .display_groups[0].expect("fuck")
+    // .markets[0].expect("fuck")
+    // .outcomes[0].expect("fuck")
+    // .price.decimal).expect("fuck");
     for s in ds.iter() {
-        // s.repr();
-        for e in s.events.iter() {
-            let (dgs, errors): (Vec<_>, Vec<_>) = e.display_groups
-                .into_iter()
-                .map(|s| s.parse::<bov::DisplayGroup>())
-                .partition(Result::is_ok);
-            let dgs: Vec<_> = dgs.into_iter().map(Result::unwrap).collect();
-            let errors: Vec<_> = errors.into_iter().map(Result::unwrap_err).collect();
-            println!("dgs: {:?}", dgs);
-            println!("Errors: {:?}", errors);
+        // s is a 
+        println!("{}", s.to_string());
+        // for e in s.events.iter() {
+            // match e.display_groups {
+            //     Some(dgs) => {
+            //         println!("{:?}", dgs.iter().to_string().format(", "));
+            //     },
+            //     _ => {
+            //         println!("no dgs");
+            //     },
+            // };
+            // if let Some(dgs) = &e.display_groups {
+            //     for dg in dgs.iter() {
+            //         for m in dg.markets.iter() {
+            //             for oc in m.outcomes.iter() {
+            //                 println!("{} {} {} {}", e.id, e.description, dg.description, oc.price.decimal);
+            //             }
+            //         }
+            //         println!("{}", dg);
+            //     }
+            // } else {
+            //     println!("FUCK {} {} {}", e.id, e.description, e.sport);
+            // }
+            // for dg in e.display_groups.iter() {
+            //     for m in dg.markets.iter() {
+            //         for oc in m.outcomes.iter() {
+            //             println!("{} {} {} {}", e.id, e.description, dg.description, oc.price.decimal);
+            //         }
+            //     }
+            //     println!("{}", dg);
+            // }
+            // match 
+            // if e.display_groups.is_some() {
+            //     println!("{}", e.display_groups[0].)
+            // } else
 
-            println!("e {}", e.to_string());
-            for dg in dgs {
-                println!("dg {}", dg.id);
-                for m in dg.markets.iter() {
-                    println!("{:?}", m.to_string());
-                }
-            }
-        }
+            // println!("e {}", e);
+            // e.repr();
+            // for dg in e.display_groups.iter() {
+            //     println!("dg {}", dg.id);
+            //     for m in dg.markets.iter() {
+            //         println!("{:?}", m.to_string());
+            //     }
+            // }
+        // }
 
-        n += s.count_events()
+        // n += s.count_events()
     }
 
-    println!("# games: {}", n);
+    // println!("# games: {}", n);
 }
 
 fn main() {
