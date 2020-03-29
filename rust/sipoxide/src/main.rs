@@ -157,18 +157,18 @@ fn parse() {
             //         println!("no dgs");
             //     },
             // };
-            if let Some(dgs) = &e.display_groups {
-                for dg in dgs.iter() {
-                    for m in dg.markets.iter() {
-                        for oc in m.outcomes.iter() {
-                            println!("{} {} {} {}", e.id, e.description, dg.description, oc.price.decimal);
-                        }
-                    }
-                    println!("{}", dg);
-                }
-            } else {
-                println!("FUCK {} {} {}", e.id, e.description, e.sport);
-            }
+            // if let Some(dgs) = &e.display_groups {
+            //     for dg in dgs.iter() {
+            //         for m in dg.markets.iter() {
+            //             for oc in m.outcomes.iter() {
+            //                 println!("{} {} {} {}", e.id, e.description, dg.description, oc.price.decimal);
+            //             }
+            //         }
+            //         println!("{}", dg);
+            //     }
+            // } else {
+            //     println!("FUCK {} {} {}", e.id, e.description, e.sport);
+            // }
             for dg in e.display_groups.iter() {
                 for m in dg.markets.iter() {
                     for oc in m.outcomes.iter() {
@@ -177,19 +177,7 @@ fn parse() {
                 }
                 println!("{}", dg);
             }
-            // match 
-            // if e.display_groups.is_some() {
-            //     println!("{}", e.display_groups[0].)
-            // } else
 
-            // println!("e {}", e);
-            // e.repr();
-            // for dg in e.display_groups.iter() {
-            //     println!("dg {}", dg.id);
-            //     for m in dg.markets.iter() {
-            //         println!("{:?}", m.to_string());
-            //     }
-            // }
         }
 
         n += s.count_events()
