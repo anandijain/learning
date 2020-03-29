@@ -138,20 +138,14 @@ fn parse() {
         .expect("Something went wrong reading the file")
         .to_string();
 
-    // let ds: Vec<bov::Root> = serde_json::from_str(&contents).unwrap();
-    let ds: Vec<bov::DisplayGroup> = serde_json::from_str(&contents).unwrap();
-    println!("{}", ds[0].id);
-    // let mut n: u64 = 0;
-    // println!("{}", ds[0]
-    // .events[0]
-    // .display_groups[0].expect("fuck")
-    // .markets[0].expect("fuck")
-    // .outcomes[0].expect("fuck")
-    // .price.decimal).expect("fuck");
+    let ds: Vec<bov::Root> = serde_json::from_str(&contents).unwrap();
+    // let ds: Vec<bov::DisplayGroup> = serde_json::from_str(&contents).unwrap();
+    // println!("{}", ds[0].id);
+    let mut n: u64 = 0;
     for s in ds.iter() {
-        // s is a 
-        println!("{}", s.to_string());
-        // for e in s.events.iter() {
+        // s is a Root
+        // println!("{}", s.to_string());
+        for e in s.events.iter() {
             // match e.display_groups {
             //     Some(dgs) => {
             //         println!("{:?}", dgs.iter().to_string().format(", "));
@@ -160,18 +154,18 @@ fn parse() {
             //         println!("no dgs");
             //     },
             // };
-            // if let Some(dgs) = &e.display_groups {
-            //     for dg in dgs.iter() {
-            //         for m in dg.markets.iter() {
-            //             for oc in m.outcomes.iter() {
-            //                 println!("{} {} {} {}", e.id, e.description, dg.description, oc.price.decimal);
-            //             }
-            //         }
-            //         println!("{}", dg);
-            //     }
-            // } else {
-            //     println!("FUCK {} {} {}", e.id, e.description, e.sport);
-            // }
+            if let Some(dgs) = &e.display_groups {
+                for dg in dgs.iter() {
+                    for m in dg.markets.iter() {
+                        for oc in m.outcomes.iter() {
+                            println!("{} {} {} {}", e.id, e.description, dg.description, oc.price.decimal);
+                        }
+                    }
+                    println!("{}", dg);
+                }
+            } else {
+                println!("FUCK {} {} {}", e.id, e.description, e.sport);
+            }
             // for dg in e.display_groups.iter() {
             //     for m in dg.markets.iter() {
             //         for oc in m.outcomes.iter() {
@@ -193,12 +187,12 @@ fn parse() {
             //         println!("{:?}", m.to_string());
             //     }
             // }
-        // }
+        }
 
-        // n += s.count_events()
+        n += s.count_events()
     }
 
-    // println!("# games: {}", n);
+    println!("# games: {}", n);
 }
 
 fn main() {
