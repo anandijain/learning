@@ -112,7 +112,7 @@ impl fmt::Display for bov::Event {
 
 impl fmt::Display for bov::DisplayGroup {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:#?}", self.markets)
+        write!(f, "DG_START{} {} {} {:#?}", self.id, self.description, self.order, self.markets.iter())
     }
 }
 
@@ -134,17 +134,20 @@ impl fmt::Display for bov::Outcome {
 
 
 fn parse() {
-    let contents = fs::read_to_string("./data/dgs.json")
+    let contents = fs::read_to_string("./data/root.json")
         .expect("Something went wrong reading the file")
         .to_string();
 
     let ds: Vec<bov::Root> = serde_json::from_str(&contents).unwrap();
     // let ds: Vec<bov::DisplayGroup> = serde_json::from_str(&contents).unwrap();
+    // let ds: bov::Event = serde_json::from_str(&contents).unwrap();
+    // println!("{}", ds.description);
+    // println!("{:#?}", ds.display_groups);
     // println!("{}", ds[0].id);
     let mut n: u64 = 0;
     for s in ds.iter() {
         // s is a Root
-        // println!("{}", s.to_string());
+        println!("{}", s.to_string());
         for e in s.events.iter() {
             // match e.display_groups {
             //     Some(dgs) => {
@@ -166,14 +169,14 @@ fn parse() {
             } else {
                 println!("FUCK {} {} {}", e.id, e.description, e.sport);
             }
-            // for dg in e.display_groups.iter() {
-            //     for m in dg.markets.iter() {
-            //         for oc in m.outcomes.iter() {
-            //             println!("{} {} {} {}", e.id, e.description, dg.description, oc.price.decimal);
-            //         }
-            //     }
-            //     println!("{}", dg);
-            // }
+            for dg in e.display_groups.iter() {
+                for m in dg.markets.iter() {
+                    for oc in m.outcomes.iter() {
+                        println!("{} {} {} {}", e.id, e.description, dg.description, oc.price.decimal);
+                    }
+                }
+                println!("{}", dg);
+            }
             // match 
             // if e.display_groups.is_some() {
             //     println!("{}", e.display_groups[0].)

@@ -2,6 +2,7 @@ extern crate serde;
 // use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct Root {
     pub path: Vec<Path>,
     pub events: Vec<Event>,
@@ -9,6 +10,7 @@ pub struct Root {
 
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct Path {
     pub id: String,
     pub link: Option<String>,
@@ -22,6 +24,7 @@ pub struct Path {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct Event {
     pub id: String,
     pub description: String,
@@ -40,11 +43,12 @@ pub struct Event {
     pub num_markets: Option<u64>,
     pub last_modified: Option<i128>,
     pub competitors: Vec<Competitor>,
-    pub display_groups: Option<Vec<DisplayGroup>>,
-    // pub display_groups: Vec<DisplayGroup>,
+    // pub display_groups: Option<Vec<DisplayGroup>>,
+    pub display_groups: Vec<DisplayGroup>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct Competitor {
     pub id: String,
     pub name: String,
@@ -52,6 +56,7 @@ pub struct Competitor {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct DisplayGroup {
     pub id: String,
     pub description: String,
@@ -62,6 +67,7 @@ pub struct DisplayGroup {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct Market {
     pub id: String,
     pub description_key: Option<String>,
@@ -77,6 +83,7 @@ pub struct Market {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct Period {
     pub id: String,
     pub description: String,
@@ -86,6 +93,7 @@ pub struct Period {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct Outcome {
     pub id: String,
     pub description: String,
@@ -97,6 +105,7 @@ pub struct Outcome {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct Price {
     pub id: String,
     pub american: String,
