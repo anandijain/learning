@@ -1,5 +1,4 @@
 extern crate serde;
-// use serde::{Serialize, Deserialize};
 use std::fmt;
 
 #[derive(Debug, Deserialize)]
