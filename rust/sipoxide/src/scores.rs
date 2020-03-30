@@ -25,9 +25,9 @@ pub struct Root {
 impl fmt::Display for Root {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if let Some(cur_score) = &self.latest_score {
-            write!(f, "{}, {}, {}, {}, {} {}", self.event_id, self.sport, self.game_status, self.last_updated, self.clock, cur_score)
+            write!(f, "{}, {}, {}, {}, {} {} {} {}", self.event_id, self.sport, self.game_status, self.last_updated, self.clock.period_number, self.clock.relative_game_time_in_secs self.clock.is_ticking, cur_score)
         } else {
-            write!(f, "{}, {}, {}, {}, {}", self.event_id, self.sport, self.game_status, self.last_updated, self.clock)
+            write!(f, "{}, {}, {}, {}, {} {} {}", self.event_id, self.sport, self.game_status, self.last_updated, self.clock.period_number, self.clock.relative_game_time_in_secs self.clock.is_ticking)
         }
     }
 }

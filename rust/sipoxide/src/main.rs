@@ -26,7 +26,9 @@ fn json_file_to_csv(read_fn: String, write_fn: String) -> Result<(), Box<dyn Err
                 elt.sport.to_string(),
                 elt.game_status.to_string(),
                 elt.last_updated.to_string(),
-                elt.clock.to_string(),
+                elt.clock.period_number.to_string(),
+                elt.clock.relative_game_time_in_secs.to_string(),
+                elt.clock.is_ticking.to_string(),
                 ls.visitor.to_string(),
                 ls.home.to_string(),
             ];
@@ -38,7 +40,9 @@ fn json_file_to_csv(read_fn: String, write_fn: String) -> Result<(), Box<dyn Err
                 elt.sport.to_string(),
                 elt.game_status.to_string(),
                 elt.last_updated.to_string(),
-                elt.clock.to_string(),
+                elt.clock.period_number.to_string(),
+                elt.clock.relative_game_time_in_secs.to_string(),
+                elt.clock.is_ticking.to_string(),
                 "".to_string(),
                 "".to_string(),
             ];
