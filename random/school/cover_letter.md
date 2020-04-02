@@ -20,6 +20,12 @@ Person::Union{Bourgeois, Proletariat}
 
 1. 
 
+One of the biggest challenges I have with evaluating texts' is connecting each part of their model, not evaluating each part individually, but the framework as a whole.
+
+Breaking down written logic into mathematical notation is one way that I think greatly improves my ability to comprehend the material.
+
+
+
 The primary conflict that I faced this quarter was wrestling with the implications that Smith and Marx's economic models have.
 
 Deriving 
