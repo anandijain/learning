@@ -19,6 +19,18 @@ of his own labour, which is over and above his own consumption,
 for such parts of the produce of other men’s labour as he has occa- 
 sion for. 
     * 22: Every man thus lives by exchanging, or becomes in some measure a merchant, and the society itself grows to be what is properly a commercial society,
+	* 28: The word value, it is to be observed, has two different meanings, 
+and sometimes expresses the utility of some particular object, and 
+sometimes the power of purchasing other goods which the posses- 
+sion of that object conveys. The one may be called ‘Value in use;” 
+the other, “value in exchange.” The things which have the greatest 
+value in use have frequently little or no value in exchange; and on 
+the contrary, those which have the greatest value in exchange have 
+frequently little or no value in use. Nothing is more useful than wa- 
+ter: but it will purchase scarce any thing; scarce any thing can be 
+had in exchange for it. A diamond, on the contrary, has scarce any 
+value in use; but a very great quantity of other goods may fre- 
+quently be had in exchange for it.
 	* 29 And, lastly, what are the different circumstances which some- 
 times raise some or all of these different parts of price above, and 
 sometimes sink them below their natural or ordinary rate; or, what 
@@ -53,6 +65,22 @@ vendible commodity which can replace the value of their wages
 and maintenance. The labour, on the contrary, of artificers, 
 manufacturers, and merchants naturally does fix and realise 
 itself in some such vendible commodity.
+	* 58: The quantity brought thither will soon be 
+sufficient to supply the effectual demand. All the different parts of 
+its price will soon sink to their natural rate, and the whole price to 
+its natural price. 
+The natural price, therefore, is, as it were, the central price, to 
+which the prices of all commodities are continually gravitating. 
+Different accidents may sometimes keep them suspended a good 
+deal above it, and sometimes force them down even somewhat be- 
+low it. But whatever may be the obstacles which hinder them from 
+settling in this center of repose and continuance, they are con- 
+stantly tending towards it. 
+The whole quantity of industry annually employed in order to 
+bring any commodity to market, naturally suits itself in this man- 
+ner to the effectual demand. It naturally aims at bringing always 
+that precise quantity thither which may be sufficient to supply, and 
+no more than supply, that demand.
 	* Smith 59 though the market price of every particular commodity is 
 in this manner continually gravitating, if one may say so, towards 
 the natural price, yet sometimes particular accidents, sometimes 
@@ -76,6 +104,14 @@ own interest he frequently promotes that of the society more
 effectually than when he really intends to promote it. I have never 
 known much good done by those who affected to trade for the pub- 
 lic good.
+	* Smith 508: The natural effort of every individual to better his own condition, 
+when suffered to exert itself with freedom and security, is so power- 
+ful a principle, that it is alone, and without any assistance, not only 
+capable of carrying on the society to wealth and prosperity, but of 
+surmounting a hundred impertinent obstructions with which the 
+folly of human laws too often incumbers its operations; though the 
+effect of these obstructions is always more or less either to encroach 
+upon its freedom, or to diminish its security.
 	* 651: All systems either of preference or of restraint, therefore, being 
 thus completely taken away, the obvious and simple system of nat- 
 ural liberty establishes itself of its own accord. Every man, as long 
@@ -108,6 +144,15 @@ than repay it to a great society.
     * Marx 35: A commodity is, in the first place, an object outside us, a thing that by its properties satisfies human wants of some sort or another.
 	* 35: To discover the various uses of things is the work of history.
     * Marx 36: When treating of use-value, we always assume to be dealing with definite quantities, such as dozens of watches, yards of linen, or tons of iron.
+	* Marx 36: Use-values become a reality only by use or consumption: they 
+also constitute the substance of all wealth, whatever may be the 
+social form of that wealth. In the form of society we are about to 
+consider, they are, in addition, the material depositories of ex- 
+change-value. 
+Exchange-value, at first sight, presents itself as a quantita- 
+tive relation, as the proportion in which values in use of one sort 
+are exchanged for those of another sort, 3 a relation constantly 
+changing with time and place.
 	* 38: but as exchange-values they are merely different quantities, and
 		consequently do not contain an atom of use-value, note: quantities of exchange is separate
     * Marx 39: The labour, however, that forms the substance of value,
@@ -138,6 +183,10 @@ use-values for others, social use-values.
 if the labour-time required for its production also remained
 constant. But the latter changes with every variation in the
 productiveness of labour. 
+	* 42: This division of labour is a necessary 
+condition for the production of commodities, but it does not 
+follow, conversely, that the production of commodities is a 
+necessary condition for the division of labour.
     * Marx 46: The same change in productive power, which
 	increases the fruitfulness of labour, and, in consequence, the
 	quantity of use-values produced by that labour, will diminish
@@ -164,6 +213,44 @@ ously.
 money, the latter being their universal equivalent, they, with
 regard to the latter as the universal commodity, play the parts
 of particular commodities. 
+	* 101 Price is the money-name of the labour realised in a commodity. 
+Hence the expression of the equivalence of a commodity with 
+the sum of money constituting its price, is a tautology, 8 just 
+as in general the expression of the relative value of a commodity 
+is a statement of the equivalence of two commodities. But although 
+price, being the exponent of the magnitude of a commodity's 
+value, is the exponent of its exchange-ratio with money, it does 
+not follow that the exponent of this exchange-ratio is necessarily 
+the exponent of the magnitude of the commodity's value.
+	* 101-102 Sup- 
+pose two equal quantities of socially necessary labour to be respec- 
+tively represented by 1 quarter of wheat and £2 (nearly */ 2 oz. 
+of gold), £2 is the expression in money of the magnitude of the 
+value of the quarter of wheat, or is its price. If now circumstances 
+allow of this price being raised to £3, or compel it to be reduced 
+to £1, then although £1 and £3 may be too small or too great 
+properly to express the magnitude of the wheat's value, neverthe- 
+less they are its prices, for they are, in the first place, the form 
+under which its value appears, i.e., money; and in the second 
+place, the exponents of its exchange-ratio with money.
+	* 
+	* 169: Nature does not produce on the one side owners of 
+money or commodities, and on the other men possessing nothing 
+but their own labour-power. This relation has no natural basis, 
+neither is its social basis one that is common to all historical 
+periods. It is clearly the result of a past historical development, 
+the product of many economic revolutions, of the extinction of a 
+whole series of older forms of social production. 
+	171: the value of labour- 
+power is the value of the means of subsistence necessary for the 
+m
+	* Marx 174: The 
+alienation of labour-power and its actual appropriation by the 
+buyer, its employment as a use-value, are separated by an inter- 
+val of time. But in those cases in which the formal alienation by 
+sale of the use-value of a commodity, is not simultaneous with 
+its actual delivery to the buyer, the money of the latter usually 
+functions as means of payment.
     * Marx 210: The value of a commodity, it is true, is determined by the quan-
 tity of labour contained in it, but this quantity is itself limited
 by social conditions. If the time socially necessary for the pro-
@@ -185,7 +272,19 @@ greater or less, in proportion to the value of the necessaries that he
 daily requires on an average, or, what amounts to the same thing,
 in proportion to the labour-time required on an average to produce
 them.
-    * Marx 218: the values of the variable capital
+	* 217: Necessary, as regards the la- 
+bourer, because independent of the particular social form of his 
+labour; necessary, as regards capital, and the world of capital- 
+ists, because on the continued existence of the labourer depends 
+their existence also. 
+	* 217 During the second period of the labour-process, that in 
+which his labour is no longer necessary labour, the workman, 
+it is true, labours, expends labour-power; but his labour, being 
+no longer necessary labour, he creates no value for himself. He 
+creates surplus-value which, for the capitalist, has all the charms 
+of a creation out of nothing. 
+	* 217
+    * Marx 217: the values of the variable capital
 and of the labour-power purchased by that capital are equal,
 and the value of this labour-power determines the necessary
 portion of the working-day; and since, on the other hand, the
@@ -204,6 +303,38 @@ to lengthen the other part of the day, during which he is at liberty
 to work gratis for the capitalist. 
 	* 323 The labour realised in value, is labour of an average social quality;
 		is consequently the expenditure of average labour-power.
+	* 350: The fall in the val- 
+ue of labour-power, caused by the disappearance or diminution 
+of the expenses of apprenticeship, implies a direct increase of sur- 
+plus-value for the benefit of capital; for everything that shortens 
+the necessary labour-time required for the reproduction of labour- 
+power, extends the domain of surplus-labour. 
+	* 351: Division of labour in a society, and the corresponding tying 
+down of individuals to a particular calling, develops itself, just as 
+does the division of labour in manufacture, from opposite starting- 
+points. Within a family, 2 and after further development within a 
+tribe, there springs up naturally a division of labour, caused by 
+differences of sex and age, a division that is consequently based 
+on a purely physiological foundation, which division enlarges its 
+materials by the expansion of the community, by the increase of 
+population, and more especially, by the conflicts between differ- 
+ent tribes, and the subjugation of one tribe by another. On the other 
+hand, as I have before remarked, the exchange of products springs 
+up at the points where different families, tribes, communities, 
+come in contact; for, in the beginning of civilisation, it is not pri- 
+vate individuals but families, tribes, &c, that meet on an inde- 
+pendent footing. Different communities find different means of 
+production, and different means of subsistence in their natural en- 
+vironment.
+	* 351-352: Hence, their modes of production, and of living, and 
+their products are different. It is this spontaneously developed
+difference which, when different communities come in contact, 
+calls forth the mutual exchange of products, and the consequent 
+gradual conversion of those products into commodities. Exchange 
+does not create the differences between the spheres of production, 
+but brings what are already different into relation,
+	* 353:  the production and the circulation of commodities are 
+the general pre-requisites of the capitalist mode of production,
 	* 376 The union of all these simple instruments, set in motion by a single
 motor, constitutes a machine. Babbage
 	* 406 Machinery produces relative surplus-value; not only by di-
@@ -216,6 +347,16 @@ greater efficacy, by raising the social value of the article produced
 above its individual value, and thus enabling the capitalist to
 replace the value of a day's labour-power by a smaller portion of
 the value of a day's product.
+	* 406 As the use of machinery becomes more general in a partic- 
+ular industry, the social value of the product sinks down to its 
+individual value, and the law that surplus-value does not arise 
+from the labour-power that has been replaced by the machinery, 
+but from the labour-power actually employed in working with 
+the machinery, asserts itself. Surplus-value arises from variable 
+capital alone, and we saw that the amount of surplus-value depends 
+on two factors, viz., the rate of surplus-value and the number of 
+the workmen simultaneously employed.
+	* 407 Given the length of the working day
 	* 429 It took both time and experience be-
 fore the workpeople learnt to distinguish between machinery and
 its employment by capital, and to direct their attacks, not against
@@ -232,6 +373,12 @@ machinery.
 and of solving the problems thus proposed by the application of
 mechanics, of chemistry, and of the whole range of the natural
 sciences, becomes the determining principle everywhere. 
+	* 524 He therefore confounds together 
+the laws of the rate of surplus-value and the laws of the rate of 
+profit. The rate of profit is, as we have already said, the ratio 
+of the surplus-value to the total capital advanced; the rate of 
+surplus-value is the ratio of the surplus-value to the variable 
+part of that capital.
 	* 530 Only by suppressing the
 capitalist form of production could the length of the working-day
 be reduced to the necessary labour-time. But, even in that case,
@@ -284,5 +431,87 @@ capitals invested in it were fused into a single capital. 1 In a
 given society the limit would be reached only when the entire
 social capital was united in the hands of either a single capitalist
 or a single capitalist company.
-    * 
+	* 640: The demand for labour is not identical with 
+increase of capital, nor supply of labour with increase of the work- 
+ing-class. It is not a case of two independent forces working on 
+one another. Les des sont pipes. Capital works on both sides at 
+the same time. If its accumulation, on the one hand, increases 
+the demand for labour, it increases on the other the supply of 
+labourers by the "setting free" of them, whilst at the same time 
+the pressure of the unemployed compels those that are employed 
+to furnish more labour, and therefore makes the supply of labour, 
+to a certain extent, independent of the supply of labourers. The 
+action of the law of supply and demand of labour on this basis 
+completes the despotism of capital. As soon, therefore, as the 
+labourers learn the secret, how it comes to pass that in the same 
+measure as they work more, as they produce more wealth for 
+others, and as the productive power of their labour increases, so 
+in the same measure even their function as a means of the self- 
+expansion of capital becomes more and more precarious for them; 
+as soon as they discover that the degree of intensity of the compe- 
+tition among themselves depends wholly on the pressure of the 
+relative surplus-population; as soon as, by Trades' Unions, &c, 
+they try to organise a regular co-operation between employed and 
+unemployed in order to destroy or to weaken the ruinous effects 
+of this natural law of capitalistic production on their class, so 
+soon capital and its sycophant, Political Economy, cry out at the 
+infringement of the "eternal" and so to say "sacred" law of supply 
+and demand. Every combination of employed and unemployed 
+disturbs the "harmonious" action of this law. But, on the other 
+hand, as soon as (in the colonies, e.g.) adverse circumstances pre- 
+vent the creation of an industrial reserve army and, with it, the 
+absolute dependence of the working-class upon the capitalist 
+class, capital, along with its commonplace Sancho Panza, rebels 
+against the "sacred" law of supply and demand, and tries to check 
+its inconvenient action by forcible means and State interference. 
+	* 764 One capitalist always kills many. Hand 
+in hand with this centralisation, or this expropriation of many 
+capitalists by few, develop, on an ever-extending scale, the co- 
+operative form of the labour-process, the conscious technical 
+application of science, the methodical cultivation of the soil, the 
+transformation of the instruments of labour into instruments of 
+labour only usable in common, the economising of all means of 
+production by their use as the means of production of combined, 
+socialised labour, the entanglement of all peoples in the net of 
+the world-market, and with this, the international character of 
+the capitalistic regime. Along with the constantly diminishing 
+number of the magnates of capital, who usurp and monopolise all 
+advantages of this process of transformation, grows the mass 
+of misery, oppression, slavery, degradation, exploitation; but 
+with this too grows the revolt of the working-class, a class always 
+increasing in numbers, and disciplined, united, organised by the 
+very mechanism of the process of capitalist production itself. 
+The monopoly of capital becomes a fetter upon the mode of pro- 
+duction, which has sprung up and flourished along with, and under 
+it. Centralisation of the means of production and socialisation of 
+labour at last reach a point where they become incompatible with 
+their capitalist integument. Thus integument is burst asunder. 
+The knell of capitalist private property sounds. The expropriators 
+are expropriated. 
+The capitalist mode of appropriation, the result of the capi- 
+talist mode of production, produces capitalist private property. 
+This is the first negation of individual private property, as founded 
+on the labour of the proprietor. But capitalist production begets, 
+with the inexorability of a law of Nature, its own negation. It is 
+the negation of negation. This does not re-establish private prop- 
+erty for the producer, but gives him individual property based 
+on the acquisitions of the capitalist era: i.e., on co-operation 
+and the possession in common of the land and of the means of pro- 
+duction, 
+    * 764: The advance of industry, whose involuntary promoter is the bour- 
+geoisie, replaces the isolation of the labourers, due to competition, by their 
+revolutionary combination, due to association. The development of Modern 
+Industry, therefore, cuts from under its feet, the very foundation on which 
+the bourgeoisie produces and appropriates products. What the bourgeoisie, 
+therefore, produces, above all, are its own grave-diggers. Its fall and the vic- 
+tory of the proletariat are equally inevitable... Of all the classes, that stand 
+face to face with the bourgeoisie to-day, the proletariat alone is a really revo- 
+lutionary class. The other classes perish and disappear in the face of Modern 
+Industry, the proletariat is its special and essential product... The lower mid- 
+dle-classes, the small manufacturers, the shopkeepers, the artisan, the peasant, 
+all these fight against the bourgeoisie, to save from extinction their existence 
+as fractions of the middle-ciass ... they are reactionary, for they try to roll 
+back the wheel of history. Karl Marx und Friedrich Engels, "Manifest der 
+Kommunistischen Partei," London, 1848, pp. 9, 11. 
+
 

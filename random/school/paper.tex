@@ -23,63 +23,73 @@
 \begin{document}
 \noindent Anand Jain \\ 
 Ali Feser \\
-3/27/20 \\
+4/4/20 \\
 Power, Identity, and Resistance-2 
 \begin{center}
-    MCM' and the Tendency of the Rate of Profit
+	Prompt 5: Limits   
 \end{center}
 In Capital, Marx asks how a capitalist can purchase something with a certain value and sell it at a higher value. 
 Marx claims that the defining characteristic of a capitalistic society is the ruling class' ability to valorize their capital, defined by the equation MCM'. 
 Captialist ownership of surplus value, the increasing proportion of constant capital to variable capital, and the declining rate of profit provide as the basis for Marx's claim that the capitalist mode of production will necessarily be replaced.
-I will define the model that Smith presents, contrast with Marx, and show that the structural contradictions in capitalism that Marx presents as necessitating a post-capitalist economy correctly follow from the calculation of $\lim_{t \to \infty}$, but fails to provide bounds on the timing of this eventuality. 
-Instead of viewing the declining rate of profit as a indicator of capitalisms inevitable demise, I demonstrate the tendency of the rate of profit to fall is the enabling factor that allows for surplus value to be redistributed, in the form of lower cost technology, enabling wage-laborers to enter the hussle. \par
-Definitions of value are the basis for economic theory and an essential distinction to both Smith and Marx is the distinction between the value of commodities and the price of commodities \textbf{distinction between price/value}. 
-Smith demonstrates this by explaining supply and demand, showing that commodity value to the owner, when not used for consumption, but for exchange \textbf{`is equal to the quantity of labour which it enables him to purchase or command', whereas to the buyer, the price `is the toil and trouble of acquiring it' (Smith 30).}
+I will define the model that Smith presents, contrast with Marx, and show that the structural contradictions in capitalism that Marx presents as necessitating a post-capitalist economy correctly follow from the calculation of $\lim_{t \to \infty}$, but the timing of this eventuality is unbounded.
+Instead of viewing the declining rate of profit as a indicator of capitalisms inevitable demise, I demonstrate the tendency of the rate of profit to fall is the enabling factor that allows for surplus value to be redistributed, in the form of lower cost technology, enabling wage-laborers to enter the hussle and prolonging the capitalist mode of production. \par 
+Definitions of value are the basis for economic theory and an essential distinction to both Smith and Marx is the distinction between the value of commodities and the price of commodities `value, \ldots, has two different meanings, and sometimes expresses the utility of some particular object, and sometimes the power of purchasing other goods' (Smith 28). 
+Marx states that this distinction is a fundemental precondition of the capitalist mode of production, `from that moment the distinction becomes firmly established between the utility of an object for the purposes of consumption, and its utility for the purposes of exchange. Its use-value becomes distinguished from its exchange-value' (Marx 88).
+Marx also writes that a commodity's use-value is `to all other persons an equivalent, but that only in so far as it has use-value for them' (Marx 88).
+Smith demonstrates this by explaining supply and demand, showing that commodity value to the owner, when not used for consumption, but for exchange `is equal to the quantity of labour which it enables him to purchase or command', whereas to the buyer, the price `is the toil and trouble of acquiring it' (Smith 30).
 A key feature of Smith's model claims maximal individual liberty is ideal for economic and technological growth because the function $optimal\_action(someone\_else)$ is incomputable.
-\textbf{By pursuing his own interest he frequently promotes that of the society more effectually than when he really intends to promote it (Smith 423).}
-Smith claims that services rarely have value after the service is complete and that it is exhcangable commodities that are valuable.
-\textbf{services which perish generally in the very instant of their performance, and does not fix or realise itself in any vendible commodity (Smith 39).}
-Smith describes a commodity by it's exchange value/worth, $W$, derived by the sum of the constant capital, variable capital, and surplus value, given by $c + L + s = W$. \textbf{quote}
-Ignoring economies of scale for this paper, I assume linearity with commodity quantity $q$ to arrive at $\forall q \in \mathbb{N}, \forall{cLs} \in \mathbb{R^{+}}, q(c + L + s) = qW = qc + qL + qs $.
+`By pursuing his own interest he frequently promotes that of the society more effectually than when he really intends to promote it' (Smith 423).
+Smith claims that services rarely have value after the service is complete and that it is exhcangable commodities that are valuable, `services which perish generally in the very instant of their performance, and does not fix or realise itself in any vendible commodity' (Smith 39). \par
+
 The nation's economy will be defined as a graph on a function $f(t) = G_t(V_t, E_t)$. 
 Defining this graph on a function allows for any vertex in set of vertices $V$, and for any edge in the set of edges $E$ to change continuously.
-Now to define what each vertex and edge is (person and instantaneous time trade respectively): We will assume, following Smith's claim that there are uncountably many complexities regarding human action that necesitate individual liberty. \textbf{quote} 
+Now to define what each vertex and edge is (person and instantaneous time trade respectively): We will assume, following Smith's claim that there are uncountably many complexities regarding human action that necesitate individual liberty. 
 We can define three important types that generate this model, commodities, people, and trades.
 A Commodity is a tuple containing: quantity/amount $q$, per-unit constant capital cost $c$, the per-unit variable capital cost $L$, and resulting per-unit surplus value $s$. 
 Let the set of all commodities (past and present) be an infinite ordered-set denoted $\boldsymbol{C}$ with cardinality $m = |\boldsymbol{C}|$.
+Smith describes a commodity's exchange value/worth, $W$, derived by the sum of the constant capital, variable capital, and surplus value, given by $c + L + s = W$. 
+Marx however, makes distinct the inherent exchange ratios in commodities, based on the socially necessary labor time to produce, with fluctuating market prices, `the values of the variable capital and of the labour-power purchased by that capital are equal' (Marx 218).
+Despite the origin of value, to Marx, being solely in the variable capital of society, defining a commodity as component parts $c$, $L$, and $s$ allows for explaining the relation between productivity and constant and variable capital.
+Ignoring economies of scale for this paper, I assume linearity with commodity quantity $q$ to arrive at $\forall q \in \mathbb{N}, \forall{cLs} \in \mathbb{R^{+}}, q(c + L + s) = qW = qc + qL + qs $.
 A Person $i$ at a given time $t$ is denoted $P_{it}$ defined by: a list of values for all commodities, called a Portfolio, $A_{it} = {{q, c, L, s}_{1}, {q, c, L, s}_{2},\ldots,{q, c, L, s}_{m}}$, an arbitrary uncountable bitstring (0s and 1s) $B_{it}$ that cannot be computed a priori by someone else and is assumed to be random, and a function, where given one's own bitstring, and a proposed trade $\hat{e_{ijt}}$, a binary decision is computed instantaneously, $g_{it} : (B_{it}, \hat{e_{ijt}}) \mapsto \{x | x \in  \{0, 1\}\}$. 
-A Trade at time $t$ is an instantaneous bidirected edge between the two Persons and N-Person trades are reduced to atomic instantaneous 2 Person Trades and no overdraws in Trades are allowed. 
-Exercising a use-value can be represented as a vertex with an edge to itself, called a loop, in which a trade with one's own commodites consumes their existence.
-Notationally: $q_{ijt_{a}} = V_{it_{a}}.A_{jq} =$ the quantity $q$ of commodity $j$ that person $i$ owns at time $a$, similarly for the constant capital, variable capital, and surplus value.
+A Trade at time $t$ is an instantaneous bidirected edge, defined by a transaction portfolio, between the two Persons.
+N-Person trades are reduced to atomic instantaneous 2 Person Trades and no overdraws in Trades are allowed. 
+Exercising a use-value can be represented as a vertex with an edge to itself, called a loop, in which a trade with one's own commodites fully or partially consumes the goods' existence. 
+Loops can also demonstrate commodity production and labor, where commodities and time are consumed to generate new commodities. 
+Notationally: $q_{ijt_{a}} =$ the quantity $q$ of commodity $j$ that person $i$ owns at time $a$, similarly for the constant capital, variable capital, and surplus value. \par
+
+This model is agnostic of currency, however, money is a fundemental invention for capitalist production, according to Marx, enabling the capitalist to valorize capital through employing labor and exchanging goods for more capital, all commodities are merely particular equivalents of money, the latter being their universal equivalent, they, with regard to the latter as the universal commodity, play the parts of particular commodities (Marx 89.)
+Note, Money::Commodity, but acts as a commodity that serves as a primary mode of conversion for commodities associated with a consumable use-value, as the use-value of money is to employ it and generate a surplus value, given by MCM'.
+We can see alienation as a consequence of labor in this model, in which the commodities produced from paid labor, are owned by the employer, the worker `does not directly produce the actual necessaries which he himself consumes' (Marx 216).
 An example of labor in this model: $P_i$ Trades with $P_j$ for assets $A$ and Trades, typically money, with $P_k$.
 $P_k$ expends their own assets through work/labour by a series of Trades with $P_i$ in which $A$ is augmented into a new commodity with surplus value, owned by $P_i$.  
-Note, Money::Commodity, but acts as a commodity that serves as a primary mode of conversion for commodities associated with a consumable use-value, as the use-value of money is to employ it and generate a surplus value, given by MCM', \textbf{all commodities are merely particular equivalents of money, the latter being their universal equivalent, they, with regard to the latter as the universal commodity, play the parts of particular commodities (Marx 89.)}
-This quote is a based off of the mean-value theorem (MVT); we can convert all commodities into a single value for monetary wealth by summing up $q(c+L+s)$ for all commodities, for a given set of people, trades, etc. This is a common theme for both Smith and Marx: the directional regression to a 
-If we let $\boldsymbol{V} :=\bigcup\limits_{t \leq t_a} V_t \in G_t$ and $\boldsymbol{E} :=\bigcup\limits_{t \leq t_a} E_t \in G_t$ maximal set of all people and trades, then we can define the wealth of a nation at time $t_a$ as $\sum\limits_i^n$ $\sum\limits_j^m$ $q_{ijt_{a}} * (c_{ijt_{a}} + L_{ijt_{a}} + s_{ijt_{a}})$. 
-The reason that it is not a sum over all $t < t_a$ is that the surplus value accumulated through production is stored in the costant capital of the current commodities owned by people. \textbf{quote}
+Money's basis as being the approximation of equivalent values and in conjunction, average labor-power, is based off of the mean-value theorem (MVT),
+Each commodity can thus be converted into a single value for monetary wealth by summing up $q(c+L+s)$ for all commodities, for a given set of people, trades, etc. This is a common theme for both Smith and Marx, however Marx would disregard the constant capital and surplus value, denoting solely labor as the basis of value, `labour realised in value, is labour of an average social quality; is consequently the expenditure of average labour-power' (Marx 323).
+We can define the wealth of a nation at time $t_a$ as $\sum\limits_i^n$ $\sum\limits_j^m$ $q_{ijt_{a}} * (c_{ijt_{a}} + L_{ijt_{a}} + s_{ijt_{a}})$. 
+The reason that it is not a sum over all $t < t_a$ is that the surplus value accumulated through production is stored in the costant capital (previous stored labor) of the current commodities owned by people. `The total labour-power of society, which is embodied in the sum total of the values of all commodities produced by that society' (Marx 39).
 This framework makes easy to interpret the valorization of capital.
 For example, if a Person $i$ at time $t$ with commodities/assets $A$ can employ their capital in a succession of Trades and conclude with more Commodities than starting, then they have valorized their capital via arbitrage.
- Profitting off of the discrepancies in prices is not a zero sum game, as the arbitrageur is forcing price stability by taking profits from commodity producers, who subsequently need to employ more constant capital to reduce the per-unit variable capital cost.
-We now want to extend this model to account for the class dynamics of MCM' that Marx presents as necessitating a post-capitalist mode of production and show that the discretization of individuals into homogeneous classes violates Smith's key assertion that it is impossible to calculate the optimal action for any given individual. 
-\textbf{quote on MCM' and classes}
-\textbf{something about supply demand and normal distributions}
-Marx claims that the worker is completely reduced to selling their labor for wages that are spent entirely on the means of subsistence and reproduction. \textbf{quote}
+Profitting off of the discrepancies in prices is not a zero sum game, as the arbitrageur is forcing price stability by taking profits from commodity producers, who subsequently need to employ more constant capital to reduce the per-unit variable capital cost. \par
+We now want to extend this model to account for the class dynamics of MCM' that Marx presents as necessitating a post-capitalist mode of production and show that the discretization of individuals into homogeneous classes violates Smith's key assertion that it is impossible to calculate the optimal action for any given individual.
+Marx claims that the worker is completely reduced to selling their labor for wages that are spent entirely on the means of subsistence and reproduction. 
 Let $\alpha$ be a set of assets defining the means of subsistence, and therefore a death condition given by: $\{A_i - x < 0| x \in \alpha \}$  
-We want to extend this model to explain labor/class relations, the labor theory of value, and the relative dimunition of the variable part of capital to constant capital.
+If it were the case that every worker was selling their labor at subsistence, then a post-capitalist economy would take hold, however, at no point can this be proven. 
 We can extend the type Person, with an attribute characterizing their class, where a Person is a wage-laborer $\beta$ or a capitalist $\gamma$, $P_i::\beta$ and $P_i::\gamma$ respectively.
-\textbf{Quote on use value being equivalent to exchange value}
+It is clear that if $\forall P::\gamma \in V_t$, $P$ satisfies the death/subsistence condition, then it is clear no opportunities for competition exist. 
+This would satisfy the condition that the optimal action for every worker would be to stop working.
+However, this ignores the distribution of wages/profit in both workers and capitalists, $\forall P \in V_t, \exists \Pr(class\_change) > 0$.
+This can be seen in capitalists overpaying workers relative to the natural price, as other capitalists advance technology, increasing labor-power and enabling a worker to begin their exploitation of others.
+Marx correctly demonstrates the increasing relative difficulty in a capitalist becoming working class, or vice versa, through his idea of capital centralization, where mechanization increases the supply of labor, by increasing the productivity of labor-power, and decreases per-unit cost of production, `demand for labour is not identical with increase of capital, nor supply of labour with increase of the working-class' (Marx 640).
 Marx identifies the apparent nonlinear behavior of the proportion of constant capital to variable capital as technology advances.
- \textbf{quote}
 However, it is not clear that this eventuality is one that will necessarily be witnessed.
-Zeno's paradox is a simple analogy for the amount of time it will take for the proportion of constant capital to entirely encompass that of variable capital, which is the real precondition for a post-capitalist mode of production.
-	We can only say what the behavior is of $\lim_{t \to \infty}$, but not when it will happen.
-% \end{itemize}
+Zeno's paradox is a simple analogy for the amount of time it will take for the proportion of constant capital to entirely encompass that of variable capital, which is the precondition for a post-capitalist mode of production, `in a given society the limit would be reached only when the entire social capital was united in the hands of either a single capitalist or a single capitalist company' (Marx 627).
+We can only say what the behavior is of $\lim_{t \to \infty}$, but not when it will happen.
 
+Link Sources: 
 \begin{itemize}
     \item \href{https://en.wikipedia.org/wiki/Graph_(abstract_data_type)}{Graphs}
-	\item \href{https://archive.org/details/HannahArendt/page/n1/mode/2up}{arendt fbi doc}
+	\item \href{https://archive.org/details/in.ernet.dli.2015.207956/page/n21/mode/2up}{Wealth of Nations}
+	\item \href{http://www.archive.org/details/capitalcritiqueoOOmarx}{Capital}
 \end{itemize}
-
-% \textbf{"though the market price of every particular commodity is in this manner continually gravitating, if one may say so, towards the natural price, yet sometimes particular accidents, sometimes natural causes, and sometimes particular regulations of police, may, in many commodities, keep up the market price, for a long time together, a good deal above the natural price (Smith 59).}
 \end{document}
 
